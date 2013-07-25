@@ -16,10 +16,10 @@ Language Feature
 Directory Layout
 ----------------
 
-    arts      -- C++ source of SEAM virtual machine
-    сompiler  -- SML/AML sources of Alice ML compiler
+    arts      -- Alice ML Run-Time System, SEAM VM C++ sources
+    сompiler  -- Alice ML Compiler, SML/AML sources
     doc       -- papers and manuals
-    libs      -- Alice ML base libraries
+    libs      -- Alice ML Base Libraries
 
 SEAM VM Authors
 ---------------
