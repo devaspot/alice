@@ -1,0 +1,2 @@
+Skeleton 5
+d2f5Cd"Type"d"General"d"Arity"d"Label"d"Stamp"Nac"INTERMEDIATE_AUX"h4ad"I"jgp1d"IntermediateGrammar"gp1c"INTERMEDIATE_GRAMMAR"ad"O"jgp1d"FlatGrammar"gp1c"FLAT_GRAMMAR"ad"IdKey"gp1c"HASHABLE"ad"IdSet"gp1c"IMP_SET"

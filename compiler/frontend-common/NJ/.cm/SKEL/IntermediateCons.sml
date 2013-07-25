@@ -1,0 +1,2 @@
+Skeleton 5
+d2f1d"General"ad"IntermediateCons"jh7egp1d"PervasiveType"egp1d"InfLib"Cegp1d"TypeLib"egp1d"PervasiveTypeLib"egp1d"PathLib"egp1d"LabelLib"egp1d"FixityLib"Cegp1d"TypeTranslation"egp1d"IntermediateGrammar"egp1d"IntermediateInfo"egp1d"TypedInfo"f5Cd"Int"d"Name"d"Type"d"String"d"Vector"Cd"Label"d"Stamp"d"TranslationEnv"d"LabelTranslation"d"Fixity"NNgp1c"INTERMEDIATE_CONS"

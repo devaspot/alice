@@ -1,0 +1,2 @@
+Skeleton 5
+d2f1d"General"ae"MkDerivedForms"i2aä¢Switches"gp1c"SWITCHES"f8d"Lab"d"VId"d"Url"Cd"List"d"Pair"d"SCon"d"Option"d"Source"Cÿ#d"LargeInt"d"SigId"d"StrId"d"TyCon"Njh2ad"G"gp1d"InputGrammar"ad"E"gp1d"ParsingError"gp1c"DERIVED_FORMS"

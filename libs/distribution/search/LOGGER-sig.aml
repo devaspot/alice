@@ -1,0 +1,17 @@
+(*
+ * Authors:
+ *   Thorsten Brunklaus <brunklaus@ps.uni-sb.de>
+ *
+ * Copyright:
+ *   Thorsten Brunklaus, 2001
+ *
+ * Last Change:
+ *   $Date: 2001-05-03 07:45:07 $ by $Author: bruni $
+ *   $Revision: 1.1 $
+ *
+ *)
+
+signature LOGGER =
+    sig
+	val log : string -> unit
+    end

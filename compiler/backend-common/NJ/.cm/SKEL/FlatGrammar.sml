@@ -1,0 +1,2 @@
+Skeleton 5
+d2f7d"Url"d"Name"Cd"Real"d"Type"d"WideChar"d"IntermediateGrammar"d"Source"Cd"General"d"LargeInt"d"LargeReal"d"LargeWord"d"Arity"Cd"Crash"d"Label"d"Stamp"d"WideString"d"Reflect"Nad"FlatGrammar"jh0gp1c"FLAT_GRAMMAR"

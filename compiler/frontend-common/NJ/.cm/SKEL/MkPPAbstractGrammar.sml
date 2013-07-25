@@ -1,0 +1,2 @@
+Skeleton 5
+d2f2d"General"ä¢PrettyPrint"ae"MkPPAbstractGrammar"i1aä¢AbstractGrammar"gp1c"ABSTRACT_GRAMMAR"jh4egp1ÿ6egp1ÿegp1d"PPMisc"f8d"Int"d"Url"d"Bool"Cd"Name"d"WideChar"d"Vector"d"LargeInt"d"LargeReal"Cd"LargeWord"d"Label"d"Stamp"d"WideString"d"Fixity"Ngp1c"PP_ABSTRACT_GRAMMAR"

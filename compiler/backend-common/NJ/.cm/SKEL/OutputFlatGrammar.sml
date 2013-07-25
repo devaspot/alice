@@ -1,0 +1,2 @@
+Skeleton 5
+d2f1d"General"ad"OutputFlatGrammar"jh3aä¢I"gp1d"FlatGrammar"egp1ÿ'f5Cd"Int"d"Url"d"List"d"Name"d"WideChar"Cd"String"d"Vector"d"LargeInt"d"StampSet"d"LargeReal"Cd"LargeWord"d"Arity"d"Label"d"Stamp"d"VectorSlice"Ngp1c"OUTPUT_FLAT_GRAMMAR"

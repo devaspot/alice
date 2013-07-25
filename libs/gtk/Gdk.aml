@@ -1,0 +1,1385 @@
+import structure NativeLibs  from "NativeLibs"
+import structure Core        from "Core"
+import structure GLib	from "GLib"
+import structure Pango	from "Pango"
+import structure Atk	from "Atk"
+import signature GDK	from "GDK-sig"
+structure NativeGdk = NativeLibs.NativeGdk
+structure Gdk :> GDK =
+struct
+    open Core
+    structure InterpType = 
+    struct
+        datatype t =
+            BILINEAR
+          | HYPER
+          | NEAREST
+          | TILES
+        val getType = NativeGdk.InterpTypeGetType
+        val toInt   = NativeGdk.InterpTypeToInt
+        val fromInt = NativeGdk.InterpTypeFromInt
+    end
+    structure PixbufError = 
+    struct
+        datatype t =
+            CORRUPT_IMAGE
+          | FAILED
+          | INSUFFICIENT_MEMORY
+          | UNKNOWN_TYPE
+          | UNSUPPORTED_OPERATION
+        val getType = NativeGdk.PixbufErrorGetType
+        val toInt   = NativeGdk.PixbufErrorToInt
+        val fromInt = NativeGdk.PixbufErrorFromInt
+    end
+    structure Colorspace = 
+    struct
+        datatype t =
+            B
+        val getType = NativeGdk.ColorspaceGetType
+        val toInt   = NativeGdk.ColorspaceToInt
+        val fromInt = NativeGdk.ColorspaceFromInt
+    end
+    structure PixbufAlphaMode = 
+    struct
+        datatype t =
+            BILEVEL
+          | FULL
+        val getType = NativeGdk.PixbufAlphaModeGetType
+        val toInt   = NativeGdk.PixbufAlphaModeToInt
+        val fromInt = NativeGdk.PixbufAlphaModeFromInt
+    end
+    structure WindowEdge = 
+    struct
+        datatype t =
+            EAST
+          | NORTH
+          | NORTH_EAST
+          | NORTH_WEST
+          | SOUTH
+          | SOUTH_EAST
+          | SOUTH_WEST
+          | WEST
+        val getType = NativeGdk.WindowEdgeGetType
+        val toInt   = NativeGdk.WindowEdgeToInt
+        val fromInt = NativeGdk.WindowEdgeFromInt
+    end
+    structure Gravity = 
+    struct
+        datatype t =
+            CENTER
+          | EAST
+          | NORTH
+          | NORTH_EAST
+          | NORTH_WEST
+          | SOUTH
+          | SOUTH_EAST
+          | SOUTH_WEST
+          | STATIC
+          | WEST
+        val getType = NativeGdk.GravityGetType
+        val toInt   = NativeGdk.GravityToInt
+        val fromInt = NativeGdk.GravityFromInt
+    end
+    structure WMFunction = 
+    struct
+        datatype flag =
+            ALL
+          | CLOSE
+          | MAXIMIZE
+          | MINIMIZE
+          | MOVE
+          | RESIZE
+        type t = flag list
+        val getType = NativeGdk.WMFunctionGetType
+        val toInt   = NativeGdk.WMFunctionToInt
+        val fromInt = NativeGdk.WMFunctionFromInt
+    end
+    structure WMDecoration = 
+    struct
+        datatype flag =
+            ALL
+          | BORDER
+          | MAXIMIZE
+          | MENU
+          | MINIMIZE
+          | RESIZEH
+          | TITLE
+        type t = flag list
+        val getType = NativeGdk.WMDecorationGetType
+        val toInt   = NativeGdk.WMDecorationToInt
+        val fromInt = NativeGdk.WMDecorationFromInt
+    end
+    structure WindowTypeHint = 
+    struct
+        datatype t =
+            DESKTOP
+          | DIALOG
+          | DOCK
+          | MENU
+          | NORMAL
+          | SPLASHSCREEN
+          | TOOLBAR
+          | UTILITY
+        val getType = NativeGdk.WindowTypeHintGetType
+        val toInt   = NativeGdk.WindowTypeHintToInt
+        val fromInt = NativeGdk.WindowTypeHintFromInt
+    end
+    structure WindowHints = 
+    struct
+        datatype flag =
+            ASPECT
+          | BASE_SIZE
+          | MAX_SIZE
+          | MIN_SIZE
+          | POS
+          | RESIZE_INC
+          | USER_POS
+          | USER_SIZE
+          | WIN_GRAVITY
+        type t = flag list
+        val getType = NativeGdk.WindowHintsGetType
+        val toInt   = NativeGdk.WindowHintsToInt
+        val fromInt = NativeGdk.WindowHintsFromInt
+    end
+    structure WindowAttributesType = 
+    struct
+        datatype flag =
+            COLORMAP
+          | CURSOR
+          | NOREDIR
+          | TITLE
+          | VISUAL
+          | WMCLASS
+          | X
+          | Y
+        type t = flag list
+        val getType = NativeGdk.WindowAttributesTypeGetType
+        val toInt   = NativeGdk.WindowAttributesTypeToInt
+        val fromInt = NativeGdk.WindowAttributesTypeFromInt
+    end
+    structure WindowType = 
+    struct
+        datatype t =
+            CHILD
+          | DIALOG
+          | FOREIGN
+          | ROOT
+          | TEMP
+          | TOPLEVEL
+        val getType = NativeGdk.WindowTypeGetType
+        val toInt   = NativeGdk.WindowTypeToInt
+        val fromInt = NativeGdk.WindowTypeFromInt
+    end
+    structure WindowClass = 
+    struct
+        datatype t =
+            NLY
+          | UTPUT
+        val getType = NativeGdk.WindowClassGetType
+        val toInt   = NativeGdk.WindowClassToInt
+        val fromInt = NativeGdk.WindowClassFromInt
+    end
+    structure VisualType = 
+    struct
+        datatype t =
+            DIRECT_COLOR
+          | GRAYSCALE
+          | PSEUDO_COLOR
+          | STATIC_COLOR
+          | STATIC_GRAY
+          | TRUE_COLOR
+        val getType = NativeGdk.VisualTypeGetType
+        val toInt   = NativeGdk.VisualTypeToInt
+        val fromInt = NativeGdk.VisualTypeFromInt
+    end
+    structure GrabStatus = 
+    struct
+        datatype t =
+            ALREADY_GRABBED
+          | FROZEN
+          | INVALID_TIME
+          | NOT_VIEWABLE
+          | SUCCESS
+        val getType = NativeGdk.GrabStatusGetType
+        val toInt   = NativeGdk.GrabStatusToInt
+        val fromInt = NativeGdk.GrabStatusFromInt
+    end
+    structure Status = 
+    struct
+        datatype t =
+            ERROR
+          | ERROR_FILE
+          | ERROR_MEM
+          | ERROR_PARAM
+          | OK
+        val getType = NativeGdk.StatusGetType
+        val toInt   = NativeGdk.StatusToInt
+        val fromInt = NativeGdk.StatusFromInt
+    end
+    structure InputCondition = 
+    struct
+        datatype flag =
+            EXCEPTION
+          | READ
+          | WRITE
+        type t = flag list
+        val getType = NativeGdk.InputConditionGetType
+        val toInt   = NativeGdk.InputConditionToInt
+        val fromInt = NativeGdk.InputConditionFromInt
+    end
+    structure ModifierType = 
+    struct
+        datatype flag =
+            BUTTON1_MASK
+          | BUTTON2_MASK
+          | BUTTON3_MASK
+          | BUTTON4_MASK
+          | BUTTON5_MASK
+          | CONTROL_MASK
+          | LOCK_MASK
+          | MOD1_MASK
+          | MOD2_MASK
+          | MOD3_MASK
+          | MOD4_MASK
+          | MOD5_MASK
+          | MODIFIER_MASK
+          | RELEASE_MASK
+          | SHIFT_MASK
+        type t = flag list
+        val getType = NativeGdk.ModifierTypeGetType
+        val toInt   = NativeGdk.ModifierTypeToInt
+        val fromInt = NativeGdk.ModifierTypeFromInt
+    end
+    structure ByteOrder = 
+    struct
+        datatype t =
+            LSB_FIRST
+          | MSB_FIRST
+        val getType = NativeGdk.ByteOrderGetType
+        val toInt   = NativeGdk.ByteOrderToInt
+        val fromInt = NativeGdk.ByteOrderFromInt
+    end
+    structure RgbDither = 
+    struct
+        datatype t =
+            MAX
+          | NONE
+          | NORMAL
+        val getType = NativeGdk.RgbDitherGetType
+        val toInt   = NativeGdk.RgbDitherToInt
+        val fromInt = NativeGdk.RgbDitherFromInt
+    end
+    structure OverlapType = 
+    struct
+        datatype t =
+            IN
+          | OUT
+          | PART
+        val getType = NativeGdk.OverlapTypeGetType
+        val toInt   = NativeGdk.OverlapTypeToInt
+        val fromInt = NativeGdk.OverlapTypeFromInt
+    end
+    structure FillRule = 
+    struct
+        datatype t =
+            EVEN_ODD_RULE
+          | WINDING_RULE
+        val getType = NativeGdk.FillRuleGetType
+        val toInt   = NativeGdk.FillRuleToInt
+        val fromInt = NativeGdk.FillRuleFromInt
+    end
+    structure PropMode = 
+    struct
+        datatype t =
+            APPEND
+          | PREPEND
+          | REPLACE
+        val getType = NativeGdk.PropModeGetType
+        val toInt   = NativeGdk.PropModeToInt
+        val fromInt = NativeGdk.PropModeFromInt
+    end
+    structure AxisUse = 
+    struct
+        datatype t =
+            IGNORE
+          | LAST
+          | PRESSURE
+          | WHEEL
+          | X
+          | XTILT
+          | Y
+          | YTILT
+        val getType = NativeGdk.AxisUseGetType
+        val toInt   = NativeGdk.AxisUseToInt
+        val fromInt = NativeGdk.AxisUseFromInt
+    end
+    structure InputMode = 
+    struct
+        datatype t =
+            DISABLED
+          | SCREEN
+          | WINDOW
+        val getType = NativeGdk.InputModeGetType
+        val toInt   = NativeGdk.InputModeToInt
+        val fromInt = NativeGdk.InputModeFromInt
+    end
+    structure InputSource = 
+    struct
+        datatype t =
+            CURSOR
+          | ERASER
+          | MOUSE
+          | PEN
+        val getType = NativeGdk.InputSourceGetType
+        val toInt   = NativeGdk.InputSourceToInt
+        val fromInt = NativeGdk.InputSourceFromInt
+    end
+    structure ExtensionMode = 
+    struct
+        datatype t =
+            ALL
+          | CURSOR
+          | NONE
+        val getType = NativeGdk.ExtensionModeGetType
+        val toInt   = NativeGdk.ExtensionModeToInt
+        val fromInt = NativeGdk.ExtensionModeFromInt
+    end
+    structure ImageType = 
+    struct
+        datatype t =
+            FASTEST
+          | NORMAL
+          | SHARED
+        val getType = NativeGdk.ImageTypeGetType
+        val toInt   = NativeGdk.ImageTypeToInt
+        val fromInt = NativeGdk.ImageTypeFromInt
+    end
+    structure GCValuesMask = 
+    struct
+        datatype flag =
+            BACKGROUND
+          | CAP_STYLE
+          | CLIP_MASK
+          | CLIP_X_ORIGIN
+          | CLIP_Y_ORIGIN
+          | EXPOSURES
+          | FILL
+          | FONT
+          | FOREGROUND
+          | FUNCTION
+          | JOIN_STYLE
+          | LINE_STYLE
+          | LINE_WIDTH
+          | STIPPLE
+          | SUBWINDOW
+          | TILE
+          | TS_X_ORIGIN
+          | TS_Y_ORIGIN
+        type t = flag list
+        val getType = NativeGdk.GCValuesMaskGetType
+        val toInt   = NativeGdk.GCValuesMaskToInt
+        val fromInt = NativeGdk.GCValuesMaskFromInt
+    end
+    structure SubwindowMode = 
+    struct
+        datatype t =
+            CLIP_BY_CHILDREN
+          | INCLUDE_INFERIORS
+        val getType = NativeGdk.SubwindowModeGetType
+        val toInt   = NativeGdk.SubwindowModeToInt
+        val fromInt = NativeGdk.SubwindowModeFromInt
+    end
+    structure LineStyle = 
+    struct
+        datatype t =
+            DOUBLE_DASH
+          | ON_OFF_DASH
+          | SOLID
+        val getType = NativeGdk.LineStyleGetType
+        val toInt   = NativeGdk.LineStyleToInt
+        val fromInt = NativeGdk.LineStyleFromInt
+    end
+    structure JoinStyle = 
+    struct
+        datatype t =
+            BEVEL
+          | MITER
+          | ROUND
+        val getType = NativeGdk.JoinStyleGetType
+        val toInt   = NativeGdk.JoinStyleToInt
+        val fromInt = NativeGdk.JoinStyleFromInt
+    end
+    structure Function = 
+    struct
+        datatype t =
+            AND
+          | AND_INVERT
+          | AND_REVERSE
+          | CLEAR
+          | COPY
+          | COPY_INVERT
+          | EQUIV
+          | INVERT
+          | NAND
+          | NOOP
+          | NOR
+          | OR
+          | OR_INVERT
+          | OR_REVERSE
+          | SET
+          | XOR
+        val getType = NativeGdk.FunctionGetType
+        val toInt   = NativeGdk.FunctionToInt
+        val fromInt = NativeGdk.FunctionFromInt
+    end
+    structure Fill = 
+    struct
+        datatype t =
+            OPAQUE_STIPPLED
+          | SOLID
+          | STIPPLED
+          | TILED
+        val getType = NativeGdk.FillGetType
+        val toInt   = NativeGdk.FillToInt
+        val fromInt = NativeGdk.FillFromInt
+    end
+    structure CapStyle = 
+    struct
+        datatype t =
+            BUTT
+          | NOT_LAST
+          | PROJECTING
+          | ROUND
+        val getType = NativeGdk.CapStyleGetType
+        val toInt   = NativeGdk.CapStyleToInt
+        val fromInt = NativeGdk.CapStyleFromInt
+    end
+    structure FontType = 
+    struct
+        datatype t =
+            FONT
+          | FONTSET
+        val getType = NativeGdk.FontTypeGetType
+        val toInt   = NativeGdk.FontTypeToInt
+        val fromInt = NativeGdk.FontTypeFromInt
+    end
+    structure SettingAction = 
+    struct
+        datatype t =
+            CHANGED
+          | DELETED
+          | NEW
+        val getType = NativeGdk.SettingActionGetType
+        val toInt   = NativeGdk.SettingActionToInt
+        val fromInt = NativeGdk.SettingActionFromInt
+    end
+    structure WindowState = 
+    struct
+        datatype flag =
+            ABOVE
+          | BELOW
+          | FULLSCREEN
+          | ICONIFIED
+          | MAXIMIZED
+          | STICKY
+          | WITHDRAWN
+        type t = flag list
+        val getType = NativeGdk.WindowStateGetType
+        val toInt   = NativeGdk.WindowStateToInt
+        val fromInt = NativeGdk.WindowStateFromInt
+    end
+    structure PropertyState = 
+    struct
+        datatype t =
+            DELETE
+          | NEW_VALUE
+        val getType = NativeGdk.PropertyStateGetType
+        val toInt   = NativeGdk.PropertyStateToInt
+        val fromInt = NativeGdk.PropertyStateFromInt
+    end
+    structure CrossingMode = 
+    struct
+        datatype t =
+            GRAB
+          | NORMAL
+          | UNGRAB
+        val getType = NativeGdk.CrossingModeGetType
+        val toInt   = NativeGdk.CrossingModeToInt
+        val fromInt = NativeGdk.CrossingModeFromInt
+    end
+    structure NotifyType = 
+    struct
+        datatype t =
+            ANCESTOR
+          | INFERIOR
+          | NONLINEAR
+          | NONLINEAR_VIRTUAL
+          | UNKNOWN
+          | VIRTUAL
+        val getType = NativeGdk.NotifyTypeGetType
+        val toInt   = NativeGdk.NotifyTypeToInt
+        val fromInt = NativeGdk.NotifyTypeFromInt
+    end
+    structure ScrollDirection = 
+    struct
+        datatype t =
+            DOWN
+          | LEFT
+          | RIGHT
+          | UP
+        val getType = NativeGdk.ScrollDirectionGetType
+        val toInt   = NativeGdk.ScrollDirectionToInt
+        val fromInt = NativeGdk.ScrollDirectionFromInt
+    end
+    structure VisibilityState = 
+    struct
+        datatype t =
+            FULLY_OBSCURED
+          | PARTIAL
+          | UNOBSCURED
+        val getType = NativeGdk.VisibilityStateGetType
+        val toInt   = NativeGdk.VisibilityStateToInt
+        val fromInt = NativeGdk.VisibilityStateFromInt
+    end
+    structure EventMask = 
+    struct
+        datatype flag =
+            ALL_EVENTS_MASK
+          | BUTTON1_MOTION_MASK
+          | BUTTON2_MOTION_MASK
+          | BUTTON3_MOTION_MASK
+          | BUTTON_MOTION_MASK
+          | BUTTON_PRESS_MASK
+          | BUTTON_RELEASE_MASK
+          | ENTER_NOTIFY_MASK
+          | EXPOSURE_MASK
+          | FOCUS_CHANGE_MASK
+          | KEY_PRESS_MASK
+          | KEY_RELEASE_MASK
+          | LEAVE_NOTIFY_MASK
+          | POINTER_MOTION_HINT_MASK
+          | POINTER_MOTION_MASK
+          | PROPERTY_CHANGE_MASK
+          | PROXIMITY_IN_MASK
+          | PROXIMITY_OUT_MASK
+          | SCROLL_MASK
+          | STRUCTURE_MASK
+          | SUBSTRUCTURE_MASK
+          | VISIBILITY_NOTIFY_MASK
+        type t = flag list
+        val getType = NativeGdk.EventMaskGetType
+        val toInt   = NativeGdk.EventMaskToInt
+        val fromInt = NativeGdk.EventMaskFromInt
+    end
+    structure EventType = 
+    struct
+        datatype t =
+            BUTTON2_PRESS
+          | BUTTON3_PRESS
+          | BUTTON_PRESS
+          | BUTTON_RELEASE
+          | CLIENT_EVENT
+          | CONFIGURE
+          | DELETE
+          | DESTROY
+          | DRAG_ENTER
+          | DRAG_LEAVE
+          | DRAG_MOTION
+          | DRAG_STATUS
+          | DROP_FINISHED
+          | DROP_START
+          | ENTER_NOTIFY
+          | EXPOSE
+          | FOCUS_CHANGE
+          | KEY_PRESS
+          | KEY_RELEASE
+          | LEAVE_NOTIFY
+          | MAP
+          | MOTION_NOTIFY
+          | NOTHING
+          | NO_EXPOSE
+          | PROPERTY_NOTIFY
+          | PROXIMITY_IN
+          | PROXIMITY_OUT
+          | SCROLL
+          | SELECTION_CLEAR
+          | SELECTION_NOTIFY
+          | SELECTION_REQUEST
+          | SETTING
+          | UNMAP
+          | VISIBILITY_NOTIFY
+          | WINDOW_STATE
+        val getType = NativeGdk.EventTypeGetType
+        val toInt   = NativeGdk.EventTypeToInt
+        val fromInt = NativeGdk.EventTypeFromInt
+    end
+    structure FilterReturn = 
+    struct
+        datatype t =
+            CONTINUE
+          | REMOVE
+          | TRANSLATE
+        val getType = NativeGdk.FilterReturnGetType
+        val toInt   = NativeGdk.FilterReturnToInt
+        val fromInt = NativeGdk.FilterReturnFromInt
+    end
+    structure DragProtocol = 
+    struct
+        datatype t =
+            LOCAL
+          | MOTIF
+          | NONE
+          | OLE2
+          | ROOTWIN
+          | WIN32_DROPFILES
+          | XDND
+        val getType = NativeGdk.DragProtocolGetType
+        val toInt   = NativeGdk.DragProtocolToInt
+        val fromInt = NativeGdk.DragProtocolFromInt
+    end
+    structure DragAction = 
+    struct
+        datatype flag =
+            ASK
+          | COPY
+          | DEFAULT
+          | LINK
+          | MOVE
+          | PRIVATE
+        type t = flag list
+        val getType = NativeGdk.DragActionGetType
+        val toInt   = NativeGdk.DragActionToInt
+        val fromInt = NativeGdk.DragActionFromInt
+    end
+    structure CursorType = 
+    struct
+        datatype t =
+            GDK_CURSOR_IS_PIXMAP
+        val getType = NativeGdk.CursorTypeGetType
+        val toInt   = NativeGdk.CursorTypeToInt
+        val fromInt = NativeGdk.CursorTypeFromInt
+    end
+    structure Rectangle =
+    struct
+        (* constructors *)
+        val new = NativeGdk.Rectanglenew
+        (* methods *)
+        val union = NativeGdk.Rectangleunion
+        val intersect = NativeGdk.Rectangleintersect
+        val getFieldY = NativeGdk.RectanglegetFieldY
+        val setFieldY = NativeGdk.RectanglesetFieldY
+        val getFieldX = NativeGdk.RectanglegetFieldX
+        val setFieldX = NativeGdk.RectanglesetFieldX
+        val getFieldWidth = NativeGdk.RectanglegetFieldWidth
+        val setFieldWidth = NativeGdk.RectanglesetFieldWidth
+        val getFieldHeight = NativeGdk.RectanglegetFieldHeight
+        val setFieldHeight = NativeGdk.RectanglesetFieldHeight
+    end
+    structure Cursor =
+    struct
+        (* constructors *)
+        val newFromPixbuf = NativeGdk.CursornewFromPixbuf
+        val newFromPixmap = NativeGdk.CursornewFromPixmap
+        val newForDisplay = NativeGdk.CursornewForDisplay
+        val new = NativeGdk.Cursornew
+        (* methods *)
+        val getDisplay = NativeGdk.CursorgetDisplay
+        val getFieldType = NativeGdk.CursorgetFieldType
+        val setFieldType = NativeGdk.CursorsetFieldType
+    end
+    structure Color =
+    struct
+        (* constructors *)
+        val new = NativeGdk.Colornew
+        (* methods *)
+        val parse = NativeGdk.Colorparse
+        val getFieldRed = NativeGdk.ColorgetFieldRed
+        val setFieldRed = NativeGdk.ColorsetFieldRed
+        val getFieldGreen = NativeGdk.ColorgetFieldGreen
+        val setFieldGreen = NativeGdk.ColorsetFieldGreen
+        val getFieldBlue = NativeGdk.ColorgetFieldBlue
+        val setFieldBlue = NativeGdk.ColorsetFieldBlue
+    end
+    structure Font =
+    struct
+        (* constructors *)
+        val load = NativeGdk.Fontload
+        (* methods *)
+        val stringExtents = NativeGdk.FontstringExtents
+        val extents = NativeGdk.Fontextents
+        val charHeight = NativeGdk.FontcharHeight
+        val height = NativeGdk.Fontheight
+        val stringHeight = NativeGdk.FontstringHeight
+        val charMeasure = NativeGdk.FontcharMeasure
+        val measure = NativeGdk.Fontmeasure
+        val stringMeasure = NativeGdk.FontstringMeasure
+        val charWidth = NativeGdk.FontcharWidth
+        val width = NativeGdk.Fontwidth
+        val stringWidth = NativeGdk.FontstringWidth
+        val fromDescription = NativeGdk.FontfromDescription
+        val fromDescriptionForDisplay = NativeGdk.FontfromDescriptionForDisplay
+        val loadForDisplay = NativeGdk.FontloadForDisplay
+        val id = NativeGdk.Fontid
+        val getFieldType = NativeGdk.FontgetFieldType
+        val setFieldType = NativeGdk.FontsetFieldType
+        val getFieldDescent = NativeGdk.FontgetFieldDescent
+        val setFieldDescent = NativeGdk.FontsetFieldDescent
+        val getFieldAscent = NativeGdk.FontgetFieldAscent
+        val setFieldAscent = NativeGdk.FontsetFieldAscent
+    end
+    structure Event =
+    struct
+        (* constructors *)
+        val new = NativeGdk.Eventnew
+        (* methods *)
+        val getScreen = NativeGdk.EventgetScreen
+        val setScreen = NativeGdk.EventsetScreen
+        val getAxis = NativeGdk.EventgetAxis
+        val getRootCoords = NativeGdk.EventgetRootCoords
+        val getCoords = NativeGdk.EventgetCoords
+        val getState = NativeGdk.EventgetState
+        val getTime = NativeGdk.EventgetTime
+        val free = NativeGdk.Eventfree
+        val copy = NativeGdk.Eventcopy
+        val put = NativeGdk.Eventput
+        val getGraphicsExpose = NativeGdk.EventgetGraphicsExpose
+        val peek = NativeGdk.Eventpeek
+        val get = NativeGdk.Eventget
+        val getType = NativeGdk.EventgetType
+    end
+    structure PixbufFormat =
+    struct
+        (* constructors *)
+        (* methods *)
+        val isWritable = NativeGdk.PixbufFormatisWritable
+        val getExtensions = NativeGdk.PixbufFormatgetExtensions
+        val getMimeTypes = NativeGdk.PixbufFormatgetMimeTypes
+        val getDescription = NativeGdk.PixbufFormatgetDescription
+        val getName = NativeGdk.PixbufFormatgetName
+    end
+    structure Region =
+    struct
+        (* constructors *)
+        (* methods *)
+    end
+    structure Point =
+    struct
+        (* constructors *)
+        (* methods *)
+    end
+    structure Bitmap =
+    struct
+        (* constructors *)
+        (* methods *)
+        val createFromData = NativeGdk.BitmapcreateFromData
+    end
+    structure Visual =
+    struct
+        (* constructors *)
+        val getBestWithBoth = NativeGdk.VisualgetBestWithBoth
+        (* methods *)
+        val getScreen = NativeGdk.VisualgetScreen
+        val getBestWithType = NativeGdk.VisualgetBestWithType
+        val getBestWithDepth = NativeGdk.VisualgetBestWithDepth
+        val getBest = NativeGdk.VisualgetBest
+        val getSystem = NativeGdk.VisualgetSystem
+        val getBestType = NativeGdk.VisualgetBestType
+        val getBestDepth = NativeGdk.VisualgetBestDepth
+        val getFieldType = NativeGdk.VisualgetFieldType
+        val setFieldType = NativeGdk.VisualsetFieldType
+        val getFieldRedShift = NativeGdk.VisualgetFieldRedShift
+        val setFieldRedShift = NativeGdk.VisualsetFieldRedShift
+        val getFieldRedPrec = NativeGdk.VisualgetFieldRedPrec
+        val setFieldRedPrec = NativeGdk.VisualsetFieldRedPrec
+        val getFieldRedMask = NativeGdk.VisualgetFieldRedMask
+        val setFieldRedMask = NativeGdk.VisualsetFieldRedMask
+        val getFieldGreenShift = NativeGdk.VisualgetFieldGreenShift
+        val setFieldGreenShift = NativeGdk.VisualsetFieldGreenShift
+        val getFieldGreenPrec = NativeGdk.VisualgetFieldGreenPrec
+        val setFieldGreenPrec = NativeGdk.VisualsetFieldGreenPrec
+        val getFieldGreenMask = NativeGdk.VisualgetFieldGreenMask
+        val setFieldGreenMask = NativeGdk.VisualsetFieldGreenMask
+        val getFieldDepth = NativeGdk.VisualgetFieldDepth
+        val setFieldDepth = NativeGdk.VisualsetFieldDepth
+        val getFieldColormapSize = NativeGdk.VisualgetFieldColormapSize
+        val setFieldColormapSize = NativeGdk.VisualsetFieldColormapSize
+        val getFieldByteOrder = NativeGdk.VisualgetFieldByteOrder
+        val setFieldByteOrder = NativeGdk.VisualsetFieldByteOrder
+        val getFieldBlueShift = NativeGdk.VisualgetFieldBlueShift
+        val setFieldBlueShift = NativeGdk.VisualsetFieldBlueShift
+        val getFieldBluePrec = NativeGdk.VisualgetFieldBluePrec
+        val setFieldBluePrec = NativeGdk.VisualsetFieldBluePrec
+        val getFieldBlueMask = NativeGdk.VisualgetFieldBlueMask
+        val setFieldBlueMask = NativeGdk.VisualsetFieldBlueMask
+        val getFieldBitsPerRgb = NativeGdk.VisualgetFieldBitsPerRgb
+        val setFieldBitsPerRgb = NativeGdk.VisualsetFieldBitsPerRgb
+        (* properties *)
+    end
+    structure Screen =
+    struct
+        (* constructors *)
+        (* methods *)
+        val alternativeDialogButtonOrder = NativeGdk.ScreenalternativeDialogButtonOrder
+        val getSetting = NativeGdk.ScreengetSetting
+        val getDefault = NativeGdk.ScreengetDefault
+        val broadcastClientMessage = NativeGdk.ScreenbroadcastClientMessage
+        val getMonitorAtWindow = NativeGdk.ScreengetMonitorAtWindow
+        val getMonitorAtPoint = NativeGdk.ScreengetMonitorAtPoint
+        val getMonitorGeometry = NativeGdk.ScreengetMonitorGeometry
+        val getNMonitors = NativeGdk.ScreengetNMonitors
+        val makeDisplayName = NativeGdk.ScreenmakeDisplayName
+        val getToplevelWindows = NativeGdk.ScreengetToplevelWindows
+        val listVisuals = NativeGdk.ScreenlistVisuals
+        val getHeightMm = NativeGdk.ScreengetHeightMm
+        val getWidthMm = NativeGdk.ScreengetWidthMm
+        val getHeight = NativeGdk.ScreengetHeight
+        val getWidth = NativeGdk.ScreengetWidth
+        val getNumber = NativeGdk.ScreengetNumber
+        val getDisplay = NativeGdk.ScreengetDisplay
+        val getRootWindow = NativeGdk.ScreengetRootWindow
+        val getRgbVisual = NativeGdk.ScreengetRgbVisual
+        val getRgbColormap = NativeGdk.ScreengetRgbColormap
+        val getSystemVisual = NativeGdk.ScreengetSystemVisual
+        val getSystemColormap = NativeGdk.ScreengetSystemColormap
+        val setDefaultColormap = NativeGdk.ScreensetDefaultColormap
+        val getDefaultColormap = NativeGdk.ScreengetDefaultColormap
+        val getType = NativeGdk.ScreengetType
+        val heightMm = NativeGdk.ScreenheightMm
+        val widthMm = NativeGdk.ScreenwidthMm
+        val height = NativeGdk.Screenheight
+        val width = NativeGdk.Screenwidth
+        (* properties *)
+    end
+    structure PixbufLoader =
+    struct
+        (* constructors *)
+        val newWithType = NativeGdk.PixbufLoadernewWithType
+        (* methods *)
+        val getFormat = NativeGdk.PixbufLoadergetFormat
+        val setSize = NativeGdk.PixbufLoadersetSize
+        val close = NativeGdk.PixbufLoaderclose
+        val getAnimation = NativeGdk.PixbufLoadergetAnimation
+        val getPixbuf = NativeGdk.PixbufLoadergetPixbuf
+        val write = NativeGdk.PixbufLoaderwrite
+        val newWithMimeType = NativeGdk.PixbufLoadernewWithMimeType
+        val new = NativeGdk.PixbufLoadernew
+        val getType = NativeGdk.PixbufLoadergetType
+        (* properties *)
+    end
+    structure PixbufAnimationIter =
+    struct
+        (* constructors *)
+        (* methods *)
+        val advance = NativeGdk.PixbufAnimationIteradvance
+        val onCurrentlyLoadingFrame = NativeGdk.PixbufAnimationIteronCurrentlyLoadingFrame
+        val getPixbuf = NativeGdk.PixbufAnimationItergetPixbuf
+        val getDelayTime = NativeGdk.PixbufAnimationItergetDelayTime
+        val getType = NativeGdk.PixbufAnimationItergetType
+        (* properties *)
+    end
+    structure PixbufAnimation =
+    struct
+        (* constructors *)
+        val newFromFile = NativeGdk.PixbufAnimationnewFromFile
+        (* methods *)
+        val getIter = NativeGdk.PixbufAnimationgetIter
+        val getStaticImage = NativeGdk.PixbufAnimationgetStaticImage
+        val isStaticImage = NativeGdk.PixbufAnimationisStaticImage
+        val getHeight = NativeGdk.PixbufAnimationgetHeight
+        val getWidth = NativeGdk.PixbufAnimationgetWidth
+        val getType = NativeGdk.PixbufAnimationgetType
+        (* properties *)
+    end
+    structure Pixbuf =
+    struct
+        (* constructors *)
+        val new = NativeGdk.Pixbufnew
+        (* methods *)
+        val getFileInfo = NativeGdk.PixbufgetFileInfo
+        val getFormats = NativeGdk.PixbufgetFormats
+        val getOption = NativeGdk.PixbufgetOption
+        val compositeColorSimple = NativeGdk.PixbufcompositeColorSimple
+        val scaleSimple = NativeGdk.PixbufscaleSimple
+        val compositeColor = NativeGdk.PixbufcompositeColor
+        val composite = NativeGdk.Pixbufcomposite
+        val scale = NativeGdk.Pixbufscale
+        val saturateAndPixelate = NativeGdk.PixbufsaturateAndPixelate
+        val copyArea = NativeGdk.PixbufcopyArea
+        val addAlpha = NativeGdk.PixbufaddAlpha
+        val savev = NativeGdk.Pixbufsavev
+        val save = NativeGdk.Pixbufsave
+        val fill = NativeGdk.Pixbuffill
+        val subpixbuf = NativeGdk.Pixbufsubpixbuf
+        val newFromInline = NativeGdk.PixbufnewFromInline
+        val newFromXpmData = NativeGdk.PixbufnewFromXpmData
+        val newFromData = NativeGdk.PixbufnewFromData
+        val newFromFileAtSize = NativeGdk.PixbufnewFromFileAtSize
+        val newFromFile = NativeGdk.PixbufnewFromFile
+        val copy = NativeGdk.Pixbufcopy
+        val getRowstride = NativeGdk.PixbufgetRowstride
+        val getHeight = NativeGdk.PixbufgetHeight
+        val getWidth = NativeGdk.PixbufgetWidth
+        val getPixels = NativeGdk.PixbufgetPixels
+        val getBitsPerSample = NativeGdk.PixbufgetBitsPerSample
+        val getHasAlpha = NativeGdk.PixbufgetHasAlpha
+        val getNChannels = NativeGdk.PixbufgetNChannels
+        val getColorspace = NativeGdk.PixbufgetColorspace
+        val getFromImage = NativeGdk.PixbufgetFromImage
+        val getFromDrawable = NativeGdk.PixbufgetFromDrawable
+        val renderPixmapAndMask = NativeGdk.PixbufrenderPixmapAndMask
+        val renderToDrawableAlpha = NativeGdk.PixbufrenderToDrawableAlpha
+        val renderToDrawable = NativeGdk.PixbufrenderToDrawable
+        (* properties *)
+    end
+    structure Keymap =
+    struct
+        (* constructors *)
+        (* methods *)
+        val getDirection = NativeGdk.KeymapgetDirection
+        val translateKeyboardState = NativeGdk.KeymaptranslateKeyboardState
+        val getForDisplay = NativeGdk.KeymapgetForDisplay
+        val getDefault = NativeGdk.KeymapgetDefault
+        val getType = NativeGdk.KeymapgetType
+        (* properties *)
+    end
+    structure Image =
+    struct
+        (* constructors *)
+        val new = NativeGdk.Imagenew
+        (* methods *)
+        val getColormap = NativeGdk.ImagegetColormap
+        val setColormap = NativeGdk.ImagesetColormap
+        val getPixel = NativeGdk.ImagegetPixel
+        val putPixel = NativeGdk.ImageputPixel
+        val getType = NativeGdk.ImagegetType
+        (* properties *)
+    end
+    structure GC =
+    struct
+        (* constructors *)
+        val new = NativeGdk.GCnew
+        (* methods *)
+        val setRgbBgColor = NativeGdk.GCsetRgbBgColor
+        val setRgbFgColor = NativeGdk.GCsetRgbFgColor
+        val getColormap = NativeGdk.GCgetColormap
+        val setColormap = NativeGdk.GCsetColormap
+        val copy = NativeGdk.GCcopy
+        val offset = NativeGdk.GCoffset
+        val setLineAttributes = NativeGdk.GCsetLineAttributes
+        val setExposures = NativeGdk.GCsetExposures
+        val setSubwindow = NativeGdk.GCsetSubwindow
+        val setClipRegion = NativeGdk.GCsetClipRegion
+        val setClipRectangle = NativeGdk.GCsetClipRectangle
+        val setClipMask = NativeGdk.GCsetClipMask
+        val setClipOrigin = NativeGdk.GCsetClipOrigin
+        val setTsOrigin = NativeGdk.GCsetTsOrigin
+        val setStipple = NativeGdk.GCsetStipple
+        val setTile = NativeGdk.GCsetTile
+        val setFill = NativeGdk.GCsetFill
+        val setFont = NativeGdk.GCsetFont
+        val setBackground = NativeGdk.GCsetBackground
+        val setForeground = NativeGdk.GCsetForeground
+        val getType = NativeGdk.GCgetType
+        (* properties *)
+    end
+    structure Pixmap =
+    struct
+        (* constructors *)
+        val new = NativeGdk.Pixmapnew
+        (* methods *)
+        val colormapCreateFromXpmD = NativeGdk.PixmapcolormapCreateFromXpmD
+        val createFromXpmD = NativeGdk.PixmapcreateFromXpmD
+        val colormapCreateFromXpm = NativeGdk.PixmapcolormapCreateFromXpm
+        val createFromXpm = NativeGdk.PixmapcreateFromXpm
+        val createFromData = NativeGdk.PixmapcreateFromData
+        val getType = NativeGdk.PixmapgetType
+        (* properties *)
+    end
+    structure Window =
+    struct
+        (* constructors *)
+        (* methods *)
+        val configureFinished = NativeGdk.WindowconfigureFinished
+        val enableSynchronizedConfigure = NativeGdk.WindowenableSynchronizedConfigure
+        val setFocusOnMap = NativeGdk.WindowsetFocusOnMap
+        val setAcceptFocus = NativeGdk.WindowsetAcceptFocus
+        val getInternalPaintInfo = NativeGdk.WindowgetInternalPaintInfo
+        val setDebugUpdates = NativeGdk.WindowsetDebugUpdates
+        val processUpdates = NativeGdk.WindowprocessUpdates
+        val processAllUpdates = NativeGdk.WindowprocessAllUpdates
+        val thawUpdates = NativeGdk.WindowthawUpdates
+        val freezeUpdates = NativeGdk.WindowfreezeUpdates
+        val getUpdateArea = NativeGdk.WindowgetUpdateArea
+        val invalidateRegion = NativeGdk.WindowinvalidateRegion
+        val invalidateRect = NativeGdk.WindowinvalidateRect
+        val beginMoveDrag = NativeGdk.WindowbeginMoveDrag
+        val beginResizeDrag = NativeGdk.WindowbeginResizeDrag
+        val registerDnd = NativeGdk.WindowregisterDnd
+        val unfullscreen = NativeGdk.Windowunfullscreen
+        val fullscreen = NativeGdk.Windowfullscreen
+        val unmaximize = NativeGdk.Windowunmaximize
+        val maximize = NativeGdk.Windowmaximize
+        val unstick = NativeGdk.Windowunstick
+        val stick = NativeGdk.Windowstick
+        val deiconify = NativeGdk.Windowdeiconify
+        val iconify = NativeGdk.Windowiconify
+        val getToplevels = NativeGdk.WindowgetToplevels
+        val getDecorations = NativeGdk.WindowgetDecorations
+        val setDecorations = NativeGdk.WindowsetDecorations
+        val getGroup = NativeGdk.WindowgetGroup
+        val setGroup = NativeGdk.WindowsetGroup
+        val setIconName = NativeGdk.WindowsetIconName
+        val setIcon = NativeGdk.WindowsetIcon
+        val setIconList = NativeGdk.WindowsetIconList
+        val setEvents = NativeGdk.WindowsetEvents
+        val getEvents = NativeGdk.WindowgetEvents
+        val peekChildren = NativeGdk.WindowpeekChildren
+        val getChildren = NativeGdk.WindowgetChildren
+        val getToplevel = NativeGdk.WindowgetToplevel
+        val getParent = NativeGdk.WindowgetParent
+        val getPointer = NativeGdk.WindowgetPointer
+        val getFrameExtents = NativeGdk.WindowgetFrameExtents
+        val getRootOrigin = NativeGdk.WindowgetRootOrigin
+        val getDeskrelativeOrigin = NativeGdk.WindowgetDeskrelativeOrigin
+        val getOrigin = NativeGdk.WindowgetOrigin
+        val getPosition = NativeGdk.WindowgetPosition
+        val getGeometry = NativeGdk.WindowgetGeometry
+        val setCursor = NativeGdk.WindowsetCursor
+        val setBackPixmap = NativeGdk.WindowsetBackPixmap
+        val setBackground = NativeGdk.WindowsetBackground
+        val setTransientFor = NativeGdk.WindowsetTransientFor
+        val setRole = NativeGdk.WindowsetRole
+        val setTitle = NativeGdk.WindowsetTitle
+        val endPaint = NativeGdk.WindowendPaint
+        val beginPaintRegion = NativeGdk.WindowbeginPaintRegion
+        val beginPaintRect = NativeGdk.WindowbeginPaintRect
+        val setSkipPagerHint = NativeGdk.WindowsetSkipPagerHint
+        val setSkipTaskbarHint = NativeGdk.WindowsetSkipTaskbarHint
+        val setModalHint = NativeGdk.WindowsetModalHint
+        val setTypeHint = NativeGdk.WindowsetTypeHint
+        val setHints = NativeGdk.WindowsetHints
+        val setStaticGravities = NativeGdk.WindowsetStaticGravities
+        val getState = NativeGdk.WindowgetState
+        val isViewable = NativeGdk.WindowisViewable
+        val isVisible = NativeGdk.WindowisVisible
+        val mergeChildShapes = NativeGdk.WindowmergeChildShapes
+        val setChildShapes = NativeGdk.WindowsetChildShapes
+        val shapeCombineMask = NativeGdk.WindowshapeCombineMask
+        val scroll = NativeGdk.Windowscroll
+        val setOverrideRedirect = NativeGdk.WindowsetOverrideRedirect
+        val setUserData = NativeGdk.WindowsetUserData
+        val focus = NativeGdk.Windowfocus
+        val lowerWindow = NativeGdk.WindowlowerWindow
+        val raiseWindow = NativeGdk.WindowraiseWindow
+        val clearAreaE = NativeGdk.WindowclearAreaE
+        val clearArea = NativeGdk.WindowclearArea
+        val clear = NativeGdk.Windowclear
+        val reparent = NativeGdk.Windowreparent
+        val moveResize = NativeGdk.WindowmoveResize
+        val resize = NativeGdk.Windowresize
+        val move = NativeGdk.Windowmove
+        val withdraw = NativeGdk.Windowwithdraw
+        val hide = NativeGdk.Windowhide
+        val show = NativeGdk.Windowshow
+        val atPointer = NativeGdk.WindowatPointer
+        val getWindowType = NativeGdk.WindowgetWindowType
+        val destroy = NativeGdk.Windowdestroy
+        val setKeepBelow = NativeGdk.WindowsetKeepBelow
+        val setKeepAbove = NativeGdk.WindowsetKeepAbove
+        val objectGetType = NativeGdk.WindowobjectGetType
+        val selectionConvert = NativeGdk.WindowselectionConvert
+        val propertyDelete = NativeGdk.WindowpropertyDelete
+        val propertyChange = NativeGdk.WindowpropertyChange
+        val inputSetExtensionEvents = NativeGdk.WindowinputSetExtensionEvents
+        val dragBegin = NativeGdk.WindowdragBegin
+        (* properties *)
+    end
+    structure Drawable =
+    struct
+        (* constructors *)
+        (* methods *)
+        val drawGrayImage = NativeGdk.DrawabledrawGrayImage
+        val drawRgb32Image = NativeGdk.DrawabledrawRgb32Image
+        val drawRgbImageDithalign = NativeGdk.DrawabledrawRgbImageDithalign
+        val drawRgbImage = NativeGdk.DrawabledrawRgbImage
+        val imageGet = NativeGdk.DrawableimageGet
+        val getVisibleRegion = NativeGdk.DrawablegetVisibleRegion
+        val getClipRegion = NativeGdk.DrawablegetClipRegion
+        val getImage = NativeGdk.DrawablegetImage
+        val drawLayout = NativeGdk.DrawabledrawLayout
+        val drawLayoutLine = NativeGdk.DrawabledrawLayoutLine
+        val drawGlyphs = NativeGdk.DrawabledrawGlyphs
+        val drawPixbuf = NativeGdk.DrawabledrawPixbuf
+        val drawLines = NativeGdk.DrawabledrawLines
+        val drawPoints = NativeGdk.DrawabledrawPoints
+        val drawImage = NativeGdk.DrawabledrawImage
+        val drawDrawable = NativeGdk.DrawabledrawDrawable
+        val drawText = NativeGdk.DrawabledrawText
+        val drawString = NativeGdk.DrawabledrawString
+        val drawPolygon = NativeGdk.DrawabledrawPolygon
+        val drawArc = NativeGdk.DrawabledrawArc
+        val drawRectangle = NativeGdk.DrawabledrawRectangle
+        val drawLine = NativeGdk.DrawabledrawLine
+        val drawPoint = NativeGdk.DrawabledrawPoint
+        val unref = NativeGdk.Drawableunref
+        val reference = NativeGdk.Drawablereference
+        val getDisplay = NativeGdk.DrawablegetDisplay
+        val getScreen = NativeGdk.DrawablegetScreen
+        val getDepth = NativeGdk.DrawablegetDepth
+        val getVisual = NativeGdk.DrawablegetVisual
+        val getColormap = NativeGdk.DrawablegetColormap
+        val setColormap = NativeGdk.DrawablesetColormap
+        val getSize = NativeGdk.DrawablegetSize
+        val getData = NativeGdk.DrawablegetData
+        val setData = NativeGdk.DrawablesetData
+        val getType = NativeGdk.DrawablegetType
+        (* properties *)
+    end
+    structure DragContext =
+    struct
+        (* constructors *)
+        val new = NativeGdk.DragContextnew
+        (* methods *)
+        val setIconDefault = NativeGdk.DragContextsetIconDefault
+        val setIconStock = NativeGdk.DragContextsetIconStock
+        val setIconPixbuf = NativeGdk.DragContextsetIconPixbuf
+        val setIconPixmap = NativeGdk.DragContextsetIconPixmap
+        val setIconWidget = NativeGdk.DragContextsetIconWidget
+        val getSourceWidget = NativeGdk.DragContextgetSourceWidget
+        val finish = NativeGdk.DragContextfinish
+        val dragDropSucceeded = NativeGdk.DragContextdragDropSucceeded
+        val dragAbort = NativeGdk.DragContextdragAbort
+        val dragDrop = NativeGdk.DragContextdragDrop
+        val dragMotion = NativeGdk.DragContextdragMotion
+        val dragFindWindowForScreen = NativeGdk.DragContextdragFindWindowForScreen
+        val dragFindWindow = NativeGdk.DragContextdragFindWindow
+        val dragGetSelection = NativeGdk.DragContextdragGetSelection
+        val dropFinish = NativeGdk.DragContextdropFinish
+        val dropReply = NativeGdk.DragContextdropReply
+        val dragStatus = NativeGdk.DragContextdragStatus
+        val unref = NativeGdk.DragContextunref
+        val reference = NativeGdk.DragContextreference
+        val getType = NativeGdk.DragContextgetType
+        val getFieldTargets = NativeGdk.DragContextgetFieldTargets
+        val setFieldTargets = NativeGdk.DragContextsetFieldTargets
+        val getFieldSuggestedAction = NativeGdk.DragContextgetFieldSuggestedAction
+        val setFieldSuggestedAction = NativeGdk.DragContextsetFieldSuggestedAction
+        val getFieldStartTime = NativeGdk.DragContextgetFieldStartTime
+        val setFieldStartTime = NativeGdk.DragContextsetFieldStartTime
+        val getFieldSourceWindow = NativeGdk.DragContextgetFieldSourceWindow
+        val setFieldSourceWindow = NativeGdk.DragContextsetFieldSourceWindow
+        val getFieldProtocol = NativeGdk.DragContextgetFieldProtocol
+        val setFieldProtocol = NativeGdk.DragContextsetFieldProtocol
+        val getFieldIsSource = NativeGdk.DragContextgetFieldIsSource
+        val setFieldIsSource = NativeGdk.DragContextsetFieldIsSource
+        val getFieldDestWindow = NativeGdk.DragContextgetFieldDestWindow
+        val setFieldDestWindow = NativeGdk.DragContextsetFieldDestWindow
+        val getFieldActions = NativeGdk.DragContextgetFieldActions
+        val setFieldActions = NativeGdk.DragContextsetFieldActions
+        val getFieldAction = NativeGdk.DragContextgetFieldAction
+        val setFieldAction = NativeGdk.DragContextsetFieldAction
+        (* properties *)
+    end
+    structure DisplayManager =
+    struct
+        (* constructors *)
+        (* methods *)
+        val listDisplays = NativeGdk.DisplayManagerlistDisplays
+        val setDefaultDisplay = NativeGdk.DisplayManagersetDefaultDisplay
+        val getDefaultDisplay = NativeGdk.DisplayManagergetDefaultDisplay
+        val get = NativeGdk.DisplayManagerget
+        val getType = NativeGdk.DisplayManagergetType
+        (* properties *)
+    end
+    structure Display =
+    struct
+        (* constructors *)
+        val openDisplay = NativeGdk.DisplayopenDisplay
+        (* methods *)
+        val getDefaultGroup = NativeGdk.DisplaygetDefaultGroup
+        val getMaximalCursorSize = NativeGdk.DisplaygetMaximalCursorSize
+        val getDefaultCursorSize = NativeGdk.DisplaygetDefaultCursorSize
+        val supportsCursorColor = NativeGdk.DisplaysupportsCursorColor
+        val supportsCursorAlpha = NativeGdk.DisplaysupportsCursorAlpha
+        val setDoubleClickDistance = NativeGdk.DisplaysetDoubleClickDistance
+        val flush = NativeGdk.Displayflush
+        val storeClipboard = NativeGdk.DisplaystoreClipboard
+        val supportsClipboardPersistence = NativeGdk.DisplaysupportsClipboardPersistence
+        val requestSelectionNotification = NativeGdk.DisplayrequestSelectionNotification
+        val supportsSelectionNotification = NativeGdk.DisplaysupportsSelectionNotification
+        val openDefaultLibgtkOnly = NativeGdk.DisplayopenDefaultLibgtkOnly
+        val getWindowAtPointer = NativeGdk.DisplaygetWindowAtPointer
+        val getCorePointer = NativeGdk.DisplaygetCorePointer
+        val getDefault = NativeGdk.DisplaygetDefault
+        val setDoubleClickTime = NativeGdk.DisplaysetDoubleClickTime
+        val putEvent = NativeGdk.DisplayputEvent
+        val peekEvent = NativeGdk.DisplaypeekEvent
+        val getEvent = NativeGdk.DisplaygetEvent
+        val close = NativeGdk.Displayclose
+        val sync = NativeGdk.Displaysync
+        val beep = NativeGdk.Displaybeep
+        val pointerIsGrabbed = NativeGdk.DisplaypointerIsGrabbed
+        val keyboardUngrab = NativeGdk.DisplaykeyboardUngrab
+        val pointerUngrab = NativeGdk.DisplaypointerUngrab
+        val getDefaultScreen = NativeGdk.DisplaygetDefaultScreen
+        val getScreen = NativeGdk.DisplaygetScreen
+        val getNScreens = NativeGdk.DisplaygetNScreens
+        val getName = NativeGdk.DisplaygetName
+        val getType = NativeGdk.DisplaygetType
+        (* properties *)
+    end
+    structure Device =
+    struct
+        (* constructors *)
+        val new = NativeGdk.Devicenew
+        (* methods *)
+        val getCorePointer = NativeGdk.DevicegetCorePointer
+        val getAxis = NativeGdk.DevicegetAxis
+        val getState = NativeGdk.DevicegetState
+        val setAxisUse = NativeGdk.DevicesetAxisUse
+        val setKey = NativeGdk.DevicesetKey
+        val setMode = NativeGdk.DevicesetMode
+        val setSource = NativeGdk.DevicesetSource
+        val getType = NativeGdk.DevicegetType
+        val getFieldSource = NativeGdk.DevicegetFieldSource
+        val setFieldSource = NativeGdk.DevicesetFieldSource
+        val getFieldNumKeys = NativeGdk.DevicegetFieldNumKeys
+        val setFieldNumKeys = NativeGdk.DevicesetFieldNumKeys
+        val getFieldNumAxes = NativeGdk.DevicegetFieldNumAxes
+        val setFieldNumAxes = NativeGdk.DevicesetFieldNumAxes
+        val getFieldName = NativeGdk.DevicegetFieldName
+        val setFieldName = NativeGdk.DevicesetFieldName
+        val getFieldMode = NativeGdk.DevicegetFieldMode
+        val setFieldMode = NativeGdk.DevicesetFieldMode
+        val getFieldKeys = NativeGdk.DevicegetFieldKeys
+        val setFieldKeys = NativeGdk.DevicesetFieldKeys
+        val getFieldHasCursor = NativeGdk.DevicegetFieldHasCursor
+        val setFieldHasCursor = NativeGdk.DevicesetFieldHasCursor
+        val getFieldAxes = NativeGdk.DevicegetFieldAxes
+        val setFieldAxes = NativeGdk.DevicesetFieldAxes
+        (* properties *)
+    end
+    structure Colormap =
+    struct
+        (* constructors *)
+        val new = NativeGdk.Colormapnew
+        (* methods *)
+        val change = NativeGdk.Colormapchange
+        val alloc = NativeGdk.Colormapalloc
+        val black = NativeGdk.Colormapblack
+        val white = NativeGdk.Colormapwhite
+        val getScreen = NativeGdk.ColormapgetScreen
+        val getVisual = NativeGdk.ColormapgetVisual
+        val queryColor = NativeGdk.ColormapqueryColor
+        val allocColor = NativeGdk.ColormapallocColor
+        val getSystem = NativeGdk.ColormapgetSystem
+        val getType = NativeGdk.ColormapgetType
+        (* properties *)
+    end
+    structure Pointer=
+    struct
+        val isGrabbed = NativeGdk.PointerisGrabbed
+        val ungrab = NativeGdk.Pointerungrab
+        val grab = NativeGdk.Pointergrab
+    end
+    structure Keyval=
+    struct
+        val toUnicode = NativeGdk.KeyvaltoUnicode
+        val isLower = NativeGdk.KeyvalisLower
+        val isUpper = NativeGdk.KeyvalisUpper
+        val toLower = NativeGdk.KeyvaltoLower
+        val toUpper = NativeGdk.KeyvaltoUpper
+        val convertCase = NativeGdk.KeyvalconvertCase
+        val fromName = NativeGdk.KeyvalfromName
+        val name = NativeGdk.Keyvalname
+    end
+    structure List=
+    struct
+        val visuals = NativeGdk.Listvisuals
+    end
+    structure Unicode=
+    struct
+        val toKeyval = NativeGdk.UnicodetoKeyval
+    end
+    structure Draw=
+    struct
+        val layoutWithColors = NativeGdk.DrawlayoutWithColors
+        val layoutLineWithColors = NativeGdk.DrawlayoutLineWithColors
+    end
+    structure Devices=
+    struct
+        val list = NativeGdk.Deviceslist
+    end
+    structure Fontset=
+    struct
+        val load = NativeGdk.Fontsetload
+        val loadForDisplay = NativeGdk.FontsetloadForDisplay
+    end
+    structure Events=
+    struct
+        val pending = NativeGdk.Eventspending
+    end
+    structure Rgb=
+    struct
+        val getVisual = NativeGdk.RgbgetVisual
+        val getCmap = NativeGdk.RgbgetCmap
+        val getColormap = NativeGdk.RgbgetColormap
+        val setMinColors = NativeGdk.RgbsetMinColors
+        val setInstall = NativeGdk.RgbsetInstall
+        val setVerbose = NativeGdk.RgbsetVerbose
+        val ditherable = NativeGdk.Rgbditherable
+        val gcSetBackground = NativeGdk.RgbgcSetBackground
+        val gcSetForeground = NativeGdk.RgbgcSetForeground
+        val xpixelFromRgb = NativeGdk.RgbxpixelFromRgb
+    end
+    structure Threads=
+    struct
+        val init = NativeGdk.Threadsinit
+        val leave = NativeGdk.Threadsleave
+        val enter = NativeGdk.Threadsenter
+    end
+    structure Query=
+    struct
+        val visualTypes = NativeGdk.QueryvisualTypes
+        val depths = NativeGdk.Querydepths
+    end
+    structure Drag=
+    struct
+        val getProtocolForDisplay = NativeGdk.DraggetProtocolForDisplay
+        val getProtocol = NativeGdk.DraggetProtocol
+    end
+    structure Keyboard=
+    struct
+        val ungrab = NativeGdk.Keyboardungrab
+        val grab = NativeGdk.Keyboardgrab
+    end
+    structure Atom=
+    struct
+        val intern = NativeGdk.Atomintern
+    end
+    structure Setting=
+    struct
+        val get = NativeGdk.Settingget
+    end
+    structure Set=
+    struct
+        val pointerHooks = NativeGdk.SetpointerHooks
+        val smClientId = NativeGdk.SetsmClientId
+        val showEvents = NativeGdk.SetshowEvents
+        val doubleClickTime = NativeGdk.SetdoubleClickTime
+    end
+    structure Get=
+    struct
+        val defaultRootWindow = NativeGdk.GetdefaultRootWindow
+        val showEvents = NativeGdk.GetshowEvents
+    end
+    structure Selection=
+    struct
+        val sendNotifyForDisplay = NativeGdk.SelectionsendNotifyForDisplay
+        val sendNotify = NativeGdk.SelectionsendNotify
+        val ownerGetForDisplay = NativeGdk.SelectionownerGetForDisplay
+        val ownerSetForDisplay = NativeGdk.SelectionownerSetForDisplay
+        val ownerGet = NativeGdk.SelectionownerGet
+        val ownerSet = NativeGdk.SelectionownerSet
+    end
+end

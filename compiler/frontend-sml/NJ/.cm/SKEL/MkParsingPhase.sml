@@ -1,0 +1,2 @@
+Skeleton 5
+d2f1d"General"ae"MkParsingPhase"i2aä¢Switches"gp1c"SWITCHES"f2ä¢Source"ä¢ParsingError"jh5Cad"C"gp1d"EmptyContext"ad"I"gp1ÿ>ad"O"gp1d"InputGrammar"ad"E"gp1ÿaä¢DerivedForms"jgp1ÿ#gp1e"MkDerivedForms"Caä¢LrVals"jh2aä¢Token"gp2ä¢LrParser"ÿƒaÿ‚gp1ÿ‚gp1e"MkLrVals"aä¢LexerError"jh1áä¢Tokens"çð²ÿƒ	ÿ„gp1e"MkLexerError"aä¢Lexer"jh2ÿ„áÿ„çð±ÿ„gp1e"MkLexer"aä¢Lexer'"jh2aÿ„>gp1ÿ„>ÿ…gp1e"MkCountPosLexer"ad"Parser"jh3aÿƒ!gp1ÿƒ!aä¢ParserData"gp2ÿƒ	ÿ†*ad"Lex"gp1ÿ…$gp1e"Join"Ngp1c"PARSING_PHASE"

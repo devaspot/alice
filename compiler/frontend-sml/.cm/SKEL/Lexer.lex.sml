@@ -1,0 +1,2 @@
+Skeleton 5
+d2f±ä¢ParsingError"ae"MkLexer"i3aä¢Tokens"gp1c"Parser_TOKENS"aä¢LexerError"gp1c"LEXER_ERROR"f6ä¢Char"Cä¢List"ÿ>ä¢String"ä¢TextIO"ÿ!Nh3aä¢yyInput"jh3aä¢TIO"gp1ÿ8ad"TSIO"gp2ÿ‚d"StreamIO"ad"TPIO"gp1d"TextPrimIO"h0aä¢UserDeclarations"h3aä¢E"gpÿegp1ÿ!f8ÿƒ+d"Int"ÿCÿ&d"Option"d"WideChar"ÿ/d"LargeInt"Cd"LargeReal"d"LargeWord"d"Crash"d"WideString"d"StringCvt"Nbbd2egp1ÿƒf6ÿƒ+Cd"IO"ÿ/ÿƒd"Vector"ÿ‚Nf0f1ÿ‚

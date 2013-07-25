@@ -1,0 +1,3 @@
+Skeleton 5
+d3f4ä¢Url"ä¢Source"d"General"ä¢BindEnvFromSig"ad"SigLoader"h0ae"MkAbstractionPhase"i1aä¢Switches"gp1c"SWITCHES"jh7ad"C"çğ±ä¢BindEnv"aä¢I"gp1d"InputGrammar"Caä¢O"gp1d"AbstractGrammar"aä¢E"gp1d"AbstractionError"eÿ7egp1ÿ‚f8ÿ‚7ÿ‚ÿ‚Cd"Int"d"Lab"d"VId"ÿd"Char"Cd"List"d"Name"d"SCon"d"Option"d"PervasiveType"Cÿ
+d"String"d"Vector"ÿ:ÿCd"Substring"d"CharVectorSlice"d"Sharing"d"Crash"d"Infix"Cd"Label"d"SigId"d"Stamp"d"StrId"d"TyCon"Cd"TyVar"d"VectorPair"d"Fixity"d"Future"ÿNNgp1c"ABSTRACTION_PHASE"

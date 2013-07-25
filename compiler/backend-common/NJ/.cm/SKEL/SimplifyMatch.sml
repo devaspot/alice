@@ -1,0 +1,2 @@
+Skeleton 5
+d2f1d"General"ad"SimplifyMatch"jh6a‰¢I"gp1d"IntermediateGrammar"Ca‰¢O"gp1d"FlatGrammar"egp1ˇ#egp1d"IntermediateAux"f6ˇ#CˇÅd"Int"d"Char"d"List"d"Name"Cd"Word"d"Option"d"WideChar"d"Source"d"String"Cd"Vector"d"LargeInt"d"LargeReal"d"LargeWord"d"Arity"Cd"Crash"d"Error"d"Label"d"Stamp"d"WideString"Nad"PosMap"jh0gp1e"MkRedBlackMap"Ngp1c"SIMPLIFY_MATCH"

@@ -1,0 +1,473 @@
+import structure NativeLibs  from "NativeLibs"
+import structure Core        from "Core"
+import structure GLib	from "GLib"
+import signature PANGO	from "PANGO-sig"
+structure NativePango = NativeLibs.NativePango
+structure Pango :> PANGO =
+struct
+    open Core
+    structure EllipsizeMode = 
+    struct
+        datatype t =
+            END
+          | MIDDLE
+          | NONE
+          | START
+        val getType = NativePango.EllipsizeModeGetType
+        val toInt   = NativePango.EllipsizeModeToInt
+        val fromInt = NativePango.EllipsizeModeFromInt
+    end
+    structure Direction = 
+    struct
+        datatype t =
+            LTR
+          | RTL
+          | TTB_LTR
+          | TTB_RTL
+        val getType = NativePango.DirectionGetType
+        val toInt   = NativePango.DirectionToInt
+        val fromInt = NativePango.DirectionFromInt
+    end
+    structure TabAlign = 
+    struct
+        datatype t =
+            LEFT
+        val getType = NativePango.TabAlignGetType
+        val toInt   = NativePango.TabAlignToInt
+        val fromInt = NativePango.TabAlignFromInt
+    end
+    structure WrapMode = 
+    struct
+        datatype t =
+            CHAR
+          | WORD
+        val getType = NativePango.WrapModeGetType
+        val toInt   = NativePango.WrapModeToInt
+        val fromInt = NativePango.WrapModeFromInt
+    end
+    structure Alignment = 
+    struct
+        datatype t =
+            CENTER
+          | LEFT
+          | RIGHT
+        val getType = NativePango.AlignmentGetType
+        val toInt   = NativePango.AlignmentToInt
+        val fromInt = NativePango.AlignmentFromInt
+    end
+    structure FontMask = 
+    struct
+        datatype flag =
+            FAMILY
+          | SIZE
+          | STRETCH
+          | STYLE
+          | VARIANT
+          | WEIGHT
+        type t = flag list
+        val getType = NativePango.FontMaskGetType
+        val toInt   = NativePango.FontMaskToInt
+        val fromInt = NativePango.FontMaskFromInt
+    end
+    structure Stretch = 
+    struct
+        datatype t =
+            CONDENSED
+          | EXPANDED
+          | EXTRA_CONDENSED
+          | EXTRA_EXPANDED
+          | NORMAL
+          | SEMI_CONDENSED
+          | SEMI_EXPANDED
+          | ULTRA_CONDENSED
+          | ULTRA_EXPANDED
+        val getType = NativePango.StretchGetType
+        val toInt   = NativePango.StretchToInt
+        val fromInt = NativePango.StretchFromInt
+    end
+    structure Weight = 
+    struct
+        datatype t =
+            BOLD
+          | HEAVY
+          | LIGHT
+          | NORMAL
+          | ULTRABOLD
+          | ULTRALIGHT
+        val getType = NativePango.WeightGetType
+        val toInt   = NativePango.WeightToInt
+        val fromInt = NativePango.WeightFromInt
+    end
+    structure Variant = 
+    struct
+        datatype t =
+            NORMAL
+          | SMALL_CAPS
+        val getType = NativePango.VariantGetType
+        val toInt   = NativePango.VariantToInt
+        val fromInt = NativePango.VariantFromInt
+    end
+    structure Style = 
+    struct
+        datatype t =
+            ITALIC
+          | NORMAL
+          | OBLIQUE
+        val getType = NativePango.StyleGetType
+        val toInt   = NativePango.StyleToInt
+        val fromInt = NativePango.StyleFromInt
+    end
+    structure CoverageLevel = 
+    struct
+        datatype t =
+            APPROXIMATE
+          | EXACT
+          | FALLBACK
+          | NONE
+        val getType = NativePango.CoverageLevelGetType
+        val toInt   = NativePango.CoverageLevelToInt
+        val fromInt = NativePango.CoverageLevelFromInt
+    end
+    structure Underline = 
+    struct
+        datatype t =
+            DOUBLE
+          | LOW
+          | NONE
+          | SINGLE
+        val getType = NativePango.UnderlineGetType
+        val toInt   = NativePango.UnderlineToInt
+        val fromInt = NativePango.UnderlineFromInt
+    end
+    structure AttrType = 
+    struct
+        datatype t =
+            BACKGROUND
+          | FAMILY
+          | FONT_DESC
+          | FOREGROUND
+          | INVALID
+          | LANGUAGE
+          | RISE
+          | SCALE
+          | SHAPE
+          | SIZE
+          | STRETCH
+          | STRIKETHROUGH
+          | STYLE
+          | UNDERLINE
+          | VARIANT
+          | WEIGHT
+        val getType = NativePango.AttrTypeGetType
+        val toInt   = NativePango.AttrTypeToInt
+        val fromInt = NativePango.AttrTypeFromInt
+    end
+    structure TabArray =
+    struct
+        (* constructors *)
+        val newWithPositions = NativePango.TabArraynewWithPositions
+        val new = NativePango.TabArraynew
+        (* methods *)
+        val getPositionsInPixels = NativePango.TabArraygetPositionsInPixels
+        val getTab = NativePango.TabArraygetTab
+        val setTab = NativePango.TabArraysetTab
+        val resize = NativePango.TabArrayresize
+        val getSize = NativePango.TabArraygetSize
+        val free = NativePango.TabArrayfree
+        val copy = NativePango.TabArraycopy
+        val getType = NativePango.TabArraygetType
+    end
+    structure LayoutIter =
+    struct
+        (* constructors *)
+        (* methods *)
+        val getBaseline = NativePango.LayoutItergetBaseline
+        val getLayoutExtents = NativePango.LayoutItergetLayoutExtents
+        val getLineYrange = NativePango.LayoutItergetLineYrange
+        val getLineExtents = NativePango.LayoutItergetLineExtents
+        val getRunExtents = NativePango.LayoutItergetRunExtents
+        val getClusterExtents = NativePango.LayoutItergetClusterExtents
+        val getCharExtents = NativePango.LayoutItergetCharExtents
+        val nextLine = NativePango.LayoutIternextLine
+        val nextRun = NativePango.LayoutIternextRun
+        val nextCluster = NativePango.LayoutIternextCluster
+        val nextChar = NativePango.LayoutIternextChar
+        val atLastLine = NativePango.LayoutIteratLastLine
+        val getIndex = NativePango.LayoutItergetIndex
+        val free = NativePango.LayoutIterfree
+        val getType = NativePango.LayoutItergetType
+    end
+    structure Language =
+    struct
+        (* constructors *)
+        val fromString = NativePango.LanguagefromString
+        (* methods *)
+        val toString = NativePango.LanguagetoString
+        val matches = NativePango.Languagematches
+    end
+    structure GlyphString =
+    struct
+        (* constructors *)
+        val new = NativePango.GlyphStringnew
+        (* methods *)
+        val getLogicalWidths = NativePango.GlyphStringgetLogicalWidths
+        val extentsRange = NativePango.GlyphStringextentsRange
+        val extents = NativePango.GlyphStringextents
+        val free = NativePango.GlyphStringfree
+        val copy = NativePango.GlyphStringcopy
+        val getType = NativePango.GlyphStringgetType
+        val setSize = NativePango.GlyphStringsetSize
+        val getFieldNumGlyphs = NativePango.GlyphStringgetFieldNumGlyphs
+        val setFieldNumGlyphs = NativePango.GlyphStringsetFieldNumGlyphs
+        val getFieldLogClusters = NativePango.GlyphStringgetFieldLogClusters
+        val setFieldLogClusters = NativePango.GlyphStringsetFieldLogClusters
+        val getFieldGlyphs = NativePango.GlyphStringgetFieldGlyphs
+        val setFieldGlyphs = NativePango.GlyphStringsetFieldGlyphs
+    end
+    structure FontMetrics =
+    struct
+        (* constructors *)
+        (* methods *)
+        val getApproximateDigitWidth = NativePango.FontMetricsgetApproximateDigitWidth
+        val getApproximateCharWidth = NativePango.FontMetricsgetApproximateCharWidth
+        val getDescent = NativePango.FontMetricsgetDescent
+        val getAscent = NativePango.FontMetricsgetAscent
+        val unref = NativePango.FontMetricsunref
+        val reference = NativePango.FontMetricsreference
+        val getType = NativePango.FontMetricsgetType
+    end
+    structure FontDescription =
+    struct
+        (* constructors *)
+        val fromString = NativePango.FontDescriptionfromString
+        val new = NativePango.FontDescriptionnew
+        (* methods *)
+        val toFilename = NativePango.FontDescriptiontoFilename
+        val toString = NativePango.FontDescriptiontoString
+        val betterMatch = NativePango.FontDescriptionbetterMatch
+        val mergeStatic = NativePango.FontDescriptionmergeStatic
+        val merge = NativePango.FontDescriptionmerge
+        val unsetFields = NativePango.FontDescriptionunsetFields
+        val getSetFields = NativePango.FontDescriptiongetSetFields
+        val getSize = NativePango.FontDescriptiongetSize
+        val setSize = NativePango.FontDescriptionsetSize
+        val getStretch = NativePango.FontDescriptiongetStretch
+        val setStretch = NativePango.FontDescriptionsetStretch
+        val getWeight = NativePango.FontDescriptiongetWeight
+        val setWeight = NativePango.FontDescriptionsetWeight
+        val getVariant = NativePango.FontDescriptiongetVariant
+        val setVariant = NativePango.FontDescriptionsetVariant
+        val getStyle = NativePango.FontDescriptiongetStyle
+        val setStyle = NativePango.FontDescriptionsetStyle
+        val getFamily = NativePango.FontDescriptiongetFamily
+        val setFamilyStatic = NativePango.FontDescriptionsetFamilyStatic
+        val setFamily = NativePango.FontDescriptionsetFamily
+        val free = NativePango.FontDescriptionfree
+        val equal = NativePango.FontDescriptionequal
+        val hash = NativePango.FontDescriptionhash
+        val copyStatic = NativePango.FontDescriptioncopyStatic
+        val copy = NativePango.FontDescriptioncopy
+    end
+    structure Color =
+    struct
+        (* constructors *)
+        val new = NativePango.Colornew
+        (* methods *)
+        val parse = NativePango.Colorparse
+        val free = NativePango.Colorfree
+        val copy = NativePango.Colorcopy
+        val getType = NativePango.ColorgetType
+        val getFieldRed = NativePango.ColorgetFieldRed
+        val setFieldRed = NativePango.ColorsetFieldRed
+        val getFieldGreen = NativePango.ColorgetFieldGreen
+        val setFieldGreen = NativePango.ColorsetFieldGreen
+        val getFieldBlue = NativePango.ColorgetFieldBlue
+        val setFieldBlue = NativePango.ColorsetFieldBlue
+    end
+    structure Attribute =
+    struct
+        (* constructors *)
+        (* methods *)
+        val equal = NativePango.Attributeequal
+        val destroy = NativePango.Attributedestroy
+        val copy = NativePango.Attributecopy
+    end
+    structure LayoutLine =
+    struct
+        (* constructors *)
+        val new = NativePango.LayoutLinenew
+        (* methods *)
+        val getPixelExtents = NativePango.LayoutLinegetPixelExtents
+        val getExtents = NativePango.LayoutLinegetExtents
+        val indexToX = NativePango.LayoutLineindexToX
+        val xToIndex = NativePango.LayoutLinexToIndex
+        val unref = NativePango.LayoutLineunref
+        val reference = NativePango.LayoutLinereference
+        val getFieldStartIndex = NativePango.LayoutLinegetFieldStartIndex
+        val setFieldStartIndex = NativePango.LayoutLinesetFieldStartIndex
+        val getFieldRuns = NativePango.LayoutLinegetFieldRuns
+        val setFieldRuns = NativePango.LayoutLinesetFieldRuns
+        val getFieldResolvedDir = NativePango.LayoutLinegetFieldResolvedDir
+        val setFieldResolvedDir = NativePango.LayoutLinesetFieldResolvedDir
+        val getFieldLength = NativePango.LayoutLinegetFieldLength
+        val setFieldLength = NativePango.LayoutLinesetFieldLength
+        val getFieldIsParagraphStart = NativePango.LayoutLinegetFieldIsParagraphStart
+        val setFieldIsParagraphStart = NativePango.LayoutLinesetFieldIsParagraphStart
+    end
+    structure Rectangle =
+    struct
+        (* constructors *)
+        val new = NativePango.Rectanglenew
+        (* methods *)
+        val getFieldY = NativePango.RectanglegetFieldY
+        val setFieldY = NativePango.RectanglesetFieldY
+        val getFieldX = NativePango.RectanglegetFieldX
+        val setFieldX = NativePango.RectanglesetFieldX
+        val getFieldWidth = NativePango.RectanglegetFieldWidth
+        val setFieldWidth = NativePango.RectanglesetFieldWidth
+        val getFieldHeight = NativePango.RectanglegetFieldHeight
+        val setFieldHeight = NativePango.RectanglesetFieldHeight
+    end
+    structure Layout =
+    struct
+        (* constructors *)
+        val new = NativePango.Layoutnew
+        (* methods *)
+        val getIter = NativePango.LayoutgetIter
+        val getLines = NativePango.LayoutgetLines
+        val getLine = NativePango.LayoutgetLine
+        val getLineCount = NativePango.LayoutgetLineCount
+        val getPixelSize = NativePango.LayoutgetPixelSize
+        val getSize = NativePango.LayoutgetSize
+        val getPixelExtents = NativePango.LayoutgetPixelExtents
+        val getExtents = NativePango.LayoutgetExtents
+        val xyToIndex = NativePango.LayoutxyToIndex
+        val moveCursorVisually = NativePango.LayoutmoveCursorVisually
+        val getCursorPos = NativePango.LayoutgetCursorPos
+        val indexToPos = NativePango.LayoutindexToPos
+        val contextChanged = NativePango.LayoutcontextChanged
+        val getSingleParagraphMode = NativePango.LayoutgetSingleParagraphMode
+        val setSingleParagraphMode = NativePango.LayoutsetSingleParagraphMode
+        val getTabs = NativePango.LayoutgetTabs
+        val setTabs = NativePango.LayoutsetTabs
+        val getAlignment = NativePango.LayoutgetAlignment
+        val setAlignment = NativePango.LayoutsetAlignment
+        val getAutoDir = NativePango.LayoutgetAutoDir
+        val setAutoDir = NativePango.LayoutsetAutoDir
+        val getJustify = NativePango.LayoutgetJustify
+        val setJustify = NativePango.LayoutsetJustify
+        val getSpacing = NativePango.LayoutgetSpacing
+        val setSpacing = NativePango.LayoutsetSpacing
+        val getIndent = NativePango.LayoutgetIndent
+        val setIndent = NativePango.LayoutsetIndent
+        val getWrap = NativePango.LayoutgetWrap
+        val setWrap = NativePango.LayoutsetWrap
+        val getWidth = NativePango.LayoutgetWidth
+        val setWidth = NativePango.LayoutsetWidth
+        val setFontDescription = NativePango.LayoutsetFontDescription
+        val setMarkup = NativePango.LayoutsetMarkup
+        val getText = NativePango.LayoutgetText
+        val setText = NativePango.LayoutsetText
+        val getContext = NativePango.LayoutgetContext
+        val copy = NativePango.Layoutcopy
+        val getType = NativePango.LayoutgetType
+        (* properties *)
+    end
+    structure FontsetSimple =
+    struct
+        (* constructors *)
+        (* methods *)
+        (* properties *)
+    end
+    structure Fontset =
+    struct
+        (* constructors *)
+        (* methods *)
+        val getMetrics = NativePango.FontsetgetMetrics
+        val getFont = NativePango.FontsetgetFont
+        (* properties *)
+    end
+    structure FontMap =
+    struct
+        (* constructors *)
+        (* methods *)
+        val loadFontset = NativePango.FontMaploadFontset
+        val loadFont = NativePango.FontMaploadFont
+        (* properties *)
+    end
+    structure FontFamily =
+    struct
+        (* constructors *)
+        (* methods *)
+        val isMonospace = NativePango.FontFamilyisMonospace
+        val getName = NativePango.FontFamilygetName
+        val getType = NativePango.FontFamilygetType
+        (* properties *)
+    end
+    structure FontFace =
+    struct
+        (* constructors *)
+        (* methods *)
+        val getFaceName = NativePango.FontFacegetFaceName
+        val describe = NativePango.FontFacedescribe
+        val getType = NativePango.FontFacegetType
+        (* properties *)
+    end
+    structure Font =
+    struct
+        (* constructors *)
+        (* methods *)
+        val getMetrics = NativePango.FontgetMetrics
+        val describe = NativePango.Fontdescribe
+        val getType = NativePango.FontgetType
+        val descriptionsFree = NativePango.FontdescriptionsFree
+        (* properties *)
+    end
+    structure Context =
+    struct
+        (* constructors *)
+        (* methods *)
+        val getBaseDir = NativePango.ContextgetBaseDir
+        val setBaseDir = NativePango.ContextsetBaseDir
+        val setLanguage = NativePango.ContextsetLanguage
+        val getLanguage = NativePango.ContextgetLanguage
+        val getFontDescription = NativePango.ContextgetFontDescription
+        val setFontDescription = NativePango.ContextsetFontDescription
+        val getMetrics = NativePango.ContextgetMetrics
+        val loadFontset = NativePango.ContextloadFontset
+        val loadFont = NativePango.ContextloadFont
+        (* properties *)
+    end
+    structure Parse=
+    struct
+        val markup = NativePango.Parsemarkup
+    end
+    structure Attr=
+    struct
+        val listGetType = NativePango.AttrlistGetType
+        val fallbackNew = NativePango.AttrfallbackNew
+        val scaleNew = NativePango.AttrscaleNew
+        val shapeNew = NativePango.AttrshapeNew
+        val riseNew = NativePango.AttrriseNew
+        val strikethroughNew = NativePango.AttrstrikethroughNew
+        val underlineNew = NativePango.AttrunderlineNew
+        val fontDescNew = NativePango.AttrfontDescNew
+        val stretchNew = NativePango.AttrstretchNew
+        val variantNew = NativePango.AttrvariantNew
+        val weightNew = NativePango.AttrweightNew
+        val styleNew = NativePango.AttrstyleNew
+        val sizeNew = NativePango.AttrsizeNew
+        val backgroundNew = NativePango.AttrbackgroundNew
+        val foregroundNew = NativePango.AttrforegroundNew
+        val familyNew = NativePango.AttrfamilyNew
+        val languageNew = NativePango.AttrlanguageNew
+    end
+    structure Find=
+    struct
+        val paragraphBoundary = NativePango.FindparagraphBoundary
+    end
+    structure Reorder=
+    struct
+        val items = NativePango.Reorderitems
+    end
+end

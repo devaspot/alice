@@ -1,0 +1,37 @@
+import structure Core  from "Core"
+signature GLIB =
+sig
+    type object = Core.object
+    type gtype = Core.gtype
+    type gvalue = Core.gvalue
+    type prop   = Core.prop
+    type prop_initializer = Core.prop_initializer
+<<< "CORE-sig.aml" >>>
+    structure TimeVal :
+    sig
+        (* constructors *)
+        val new : { tv_sec : int, tv_usec : int } -> object
+        (* methods *)
+        val getFieldTvUsec : object -> int
+        val setFieldTvUsec : object * int -> unit
+        val getFieldTvSec : object -> int
+        val setFieldTvSec : object * int -> unit
+    end
+    structure PtrArray :
+    sig
+        (* constructors *)
+        val gPtrArrayNew : unit -> object
+        (* methods *)
+        val index : object * int -> object
+        val getFieldLen : object -> int
+        val setFieldLen : object * int -> unit
+    end
+    structure Object :
+    sig
+        (* constructors *)
+        (* methods *)
+        val getProperty : object * string -> gvalue
+        val setProperty : object * string * gvalue -> unit
+        (* properties *)
+    end
+end

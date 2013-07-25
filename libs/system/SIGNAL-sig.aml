@@ -1,0 +1,18 @@
+(*
+ * Authors:
+ *   Thorsten Brunklaus <brunklaus@ps.uni-sb.de>
+ *
+ * Copyright:
+ *   Thorsten Brunklaus, 2004
+ *
+ * Last Change:
+ *   $Date: 2004-06-17 11:01:59 $ by $Author: bruni $
+ *   $Revision: 1.3 $
+ *
+ *)
+
+signature SIGNAL =
+    sig
+	datatype signal = SIGINT | SIGSTOP
+	val register : signal * (signal -> unit) -> unit
+    end

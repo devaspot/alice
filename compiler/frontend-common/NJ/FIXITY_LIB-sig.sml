@@ -1,0 +1,31 @@
+val assert=General.assert;
+(*
+ * Authors:
+ *   Andreas Rossberg <rossberg@ps.uni-sb.de>
+ *
+ * Copyright:
+ *   Andreas Rossberg, 2001-2004
+ *
+ * Last change:
+ *   $Date: 2004-04-11 19:33:54 $ by $Author: rossberg $
+ *   $Revision: 1.2 $
+ *)
+
+
+
+signature FIXITY_LIB =
+sig
+    val modlab_fixity:	Label.t
+
+    val typlab_assoc :	Label.t
+    val typlab_fix :	Label.t
+
+    val lab_left :	Label.t
+    val lab_right :	Label.t
+    val lab_neither :	Label.t
+
+    val lab_nonfix :	Label.t
+    val lab_prefix :	Label.t
+    val lab_postfix :	Label.t
+    val lab_infix :	Label.t
+end

@@ -1,0 +1,2 @@
+Skeleton 5
+d2f5Cä¢Inf"ä¢Url"d"Source"d"General"d"Reflect"Nae"MkRewriteImports"i1aä¢Switches"gp1c"SWITCHES"jh4aä¢O"gp1d"TypedGrammar"aä¢E"gp1d"ElaborationError"egp1d"TypedInfo"f7ÿ:ÿ#Cd"Env"ÿÿd"List"d"Pair"Cd"Path"d"Type"d"Option"d"UseEnv"d"Vector"Cÿd"Label"d"PathMap"d"PathSet"d"DynMatch"Ngp1c"REWRITE_IMPORTS"

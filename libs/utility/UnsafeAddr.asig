@@ -1,0 +1,16 @@
+(*
+ * Author:
+ *   Andreas Rossberg <rossberg@ps.uni-sb.de>
+ *
+ * Copyright:
+ *   Andreas Rossberg, 2001
+ *
+ * Last change:
+ *   $Date: 2002-02-07 11:12:34 $ by $Author: kornstae $
+ *   $Revision: 1.1 $
+ *)
+
+signature ADDR_COMPONENT =
+sig
+    val addr : 'a -> int
+end

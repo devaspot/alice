@@ -1,0 +1,405 @@
+import structure NativeLibs  from "NativeLibs"
+import structure Core        from "Core"
+import structure GLib	from "GLib"
+import signature ATK	from "ATK-sig"
+structure NativeAtk = NativeLibs.NativeAtk
+structure Atk :> ATK =
+struct
+    open Core
+    structure CoordType = 
+    struct
+        datatype t =
+            SCREEN
+          | WINDOW
+        val getType = NativeAtk.CoordTypeGetType
+        val toInt   = NativeAtk.CoordTypeToInt
+        val fromInt = NativeAtk.CoordTypeFromInt
+    end
+    structure KeyEventType = 
+    struct
+        datatype t =
+            LAST_DEFINED
+          | PRESS
+          | RELEASE
+        val getType = NativeAtk.KeyEventTypeGetType
+        val toInt   = NativeAtk.KeyEventTypeToInt
+        val fromInt = NativeAtk.KeyEventTypeFromInt
+    end
+    structure TextBoundary = 
+    struct
+        datatype t =
+            CHAR
+          | LINE_END
+          | LINE_START
+          | SENTENCE_END
+          | SENTENCE_START
+          | WORD_END
+          | WORD_START
+        val getType = NativeAtk.TextBoundaryGetType
+        val toInt   = NativeAtk.TextBoundaryToInt
+        val fromInt = NativeAtk.TextBoundaryFromInt
+    end
+    structure TextAttribute = 
+    struct
+        datatype t =
+            BG_COLOR
+          | BG_FULL_HEIGHT
+          | BG_STIPPLE
+          | DIRECTION
+          | EDITABLE
+          | FAMILY_NAME
+          | FG_COLOR
+          | FG_STIPPLE
+          | INDENT
+          | INVISIBLE
+          | JUSTIFICATION
+          | LANGUAGE
+          | LEFT_MARGIN
+          | PIXELS_ABOVE_LINES
+          | PIXELS_BELOW_LINES
+          | PIXELS_INSIDE_WRAP
+          | RIGHT_MARGIN
+          | RISE
+          | SCALE
+          | SIZE
+          | STRETCH
+          | STRIKETHROUGH
+          | STYLE
+          | UNDERLINE
+          | VARIANT
+          | WEIGHT
+          | WRAP_MODE
+        val getType = NativeAtk.TextAttributeGetType
+        val toInt   = NativeAtk.TextAttributeToInt
+        val fromInt = NativeAtk.TextAttributeFromInt
+    end
+    structure StateType = 
+    struct
+        datatype t =
+            ACTIVE
+          | ARMED
+          | BUSY
+          | CHECKED
+          | DEFUNCT
+          | EDITABLE
+          | ENABLED
+          | EXPANDABLE
+          | EXPANDED
+          | FOCUSABLE
+          | FOCUSED
+          | HORIZONTAL
+          | ICONIFIED
+          | INVALID
+          | LAST_DEFINED
+          | MODAL
+          | MULTISELECTABLE
+          | MULTI_LINE
+          | OPAQUE
+          | PRESSED
+          | RESIZABLE
+          | SELECTABLE
+          | SELECTED
+          | SENSITIVE
+          | SHOWING
+          | SINGLE_LINE
+          | STALE
+          | TRANSIENT
+          | VERTICAL
+          | VISIBLE
+        val getType = NativeAtk.StateTypeGetType
+        val toInt   = NativeAtk.StateTypeToInt
+        val fromInt = NativeAtk.StateTypeFromInt
+    end
+    structure RelationType = 
+    struct
+        datatype t =
+            CONTROLLED_BY
+          | CONTROLLER_FOR
+          | LABELLED_BY
+          | LABEL_FOR
+          | LAST_DEFINED
+          | MEMBER_OF
+          | NODE_CHILD_OF
+          | NULL
+        val getType = NativeAtk.RelationTypeGetType
+        val toInt   = NativeAtk.RelationTypeToInt
+        val fromInt = NativeAtk.RelationTypeFromInt
+    end
+    structure Layer = 
+    struct
+        datatype t =
+            BACKGROUND
+          | CANVAS
+          | INVALID
+          | MDI
+          | OVERLAY
+          | POPUP
+          | WIDGET
+        val getType = NativeAtk.LayerGetType
+        val toInt   = NativeAtk.LayerToInt
+        val fromInt = NativeAtk.LayerFromInt
+    end
+    structure Role = 
+    struct
+        datatype t =
+            ACCEL_LABEL
+          | ALERT
+          | ANIMATION
+          | ARROW
+          | CALENDAR
+          | CANVAS
+          | CHECK_BOX
+          | CHECK_MENU_ITEM
+          | COLOR_CHOOSER
+          | COLUMN_HEADER
+          | COMBO_BOX
+          | DATE_EDITOR
+          | DESKTOP_FRAME
+          | DESKTOP_ICON
+          | DIAL
+          | DIALOG
+          | DIRECTORY_PANE
+          | DRAWING_AREA
+          | FILE_CHOOSER
+          | FILLER
+          | FONT_CHOOSER
+          | FRAME
+          | GLASS_PANE
+          | HTML_CONTAINER
+          | ICON
+          | IMAGE
+          | INTERNAL_FRAME
+          | INVALID
+          | LABEL
+          | LAST_DEFINED
+          | LAYERED_PANE
+          | LIST
+          | LIST_ITEM
+          | MENU
+          | MENU_BAR
+          | MENU_ITEM
+          | OPTION_PANE
+          | PAGE_TAB
+          | PAGE_TAB_LIST
+          | PANEL
+          | PASSWORD_TEXT
+          | POPUP_MENU
+          | PROGRESS_BAR
+          | PUSH_BUTTON
+          | RADIO_BUTTON
+          | RADIO_MENU_ITEM
+          | ROOT_PANE
+          | ROW_HEADER
+          | SCROLL_BAR
+          | SCROLL_PANE
+          | SEPARATOR
+          | SLIDER
+          | SPIN_BUTTON
+          | SPLIT_PANE
+          | STATUSBAR
+          | TABLE
+          | TABLE_CELL
+          | TABLE_COLUMN_HEADER
+          | TABLE_ROW_HEADER
+          | TEAR_OFF_MENU_ITEM
+          | TERMINAL
+          | TEXT
+          | TOGGLE_BUTTON
+          | TOOL_BAR
+          | TOOL_TIP
+          | TREE
+          | TREE_TABLE
+          | UNKNOWN
+          | VIEWPORT
+          | WINDOW
+        val getType = NativeAtk.RoleGetType
+        val toInt   = NativeAtk.RoleToInt
+        val fromInt = NativeAtk.RoleFromInt
+    end
+    structure Util =
+    struct
+        (* constructors *)
+        (* methods *)
+        val getType = NativeAtk.UtilgetType
+        (* properties *)
+    end
+    structure StateSet =
+    struct
+        (* constructors *)
+        (* methods *)
+        val xorSets = NativeAtk.StateSetxorSets
+        val orSets = NativeAtk.StateSetorSets
+        val andSets = NativeAtk.StateSetandSets
+        val removeState = NativeAtk.StateSetremoveState
+        val containsStates = NativeAtk.StateSetcontainsStates
+        val containsState = NativeAtk.StateSetcontainsState
+        val clearStates = NativeAtk.StateSetclearStates
+        val addStates = NativeAtk.StateSetaddStates
+        val addState = NativeAtk.StateSetaddState
+        val isEmpty = NativeAtk.StateSetisEmpty
+        val getType = NativeAtk.StateSetgetType
+        (* properties *)
+    end
+    structure RelationSet =
+    struct
+        (* constructors *)
+        val new = NativeAtk.RelationSetnew
+        (* methods *)
+        val getRelationByType = NativeAtk.RelationSetgetRelationByType
+        val getRelation = NativeAtk.RelationSetgetRelation
+        val getNRelations = NativeAtk.RelationSetgetNRelations
+        val add = NativeAtk.RelationSetadd
+        val remove = NativeAtk.RelationSetremove
+        val contains = NativeAtk.RelationSetcontains
+        val getType = NativeAtk.RelationSetgetType
+        (* properties *)
+    end
+    structure Relation =
+    struct
+        (* constructors *)
+        (* methods *)
+        val getTarget = NativeAtk.RelationgetTarget
+        val getRelationType = NativeAtk.RelationgetRelationType
+        val getType = NativeAtk.RelationgetType
+        (* properties *)
+    end
+    structure Registry =
+    struct
+        (* constructors *)
+        (* methods *)
+        val getFactory = NativeAtk.RegistrygetFactory
+        val getFactoryType = NativeAtk.RegistrygetFactoryType
+        val setFactoryType = NativeAtk.RegistrysetFactoryType
+        val getType = NativeAtk.RegistrygetType
+        (* properties *)
+    end
+    structure NoOpObjectFactory =
+    struct
+        (* constructors *)
+        val new = NativeAtk.NoOpObjectFactorynew
+        (* methods *)
+        val getType = NativeAtk.NoOpObjectFactorygetType
+        (* properties *)
+    end
+    structure ObjectFactory =
+    struct
+        (* constructors *)
+        (* methods *)
+        val invalidate = NativeAtk.ObjectFactoryinvalidate
+        val createAccessible = NativeAtk.ObjectFactorycreateAccessible
+        val getType = NativeAtk.ObjectFactorygetType
+        (* properties *)
+    end
+    structure NoOpObject =
+    struct
+        (* constructors *)
+        val new = NativeAtk.NoOpObjectnew
+        (* methods *)
+        val getType = NativeAtk.NoOpObjectgetType
+        (* properties *)
+    end
+    structure Object =
+    struct
+        (* constructors *)
+        (* methods *)
+        val removePropertyChangeHandler = NativeAtk.ObjectremovePropertyChangeHandler
+        val setRole = NativeAtk.ObjectsetRole
+        val setParent = NativeAtk.ObjectsetParent
+        val setDescription = NativeAtk.ObjectsetDescription
+        val setName = NativeAtk.ObjectsetName
+        val getIndexInParent = NativeAtk.ObjectgetIndexInParent
+        val refStateSet = NativeAtk.ObjectrefStateSet
+        val getMdiZorder = NativeAtk.ObjectgetMdiZorder
+        val getLayer = NativeAtk.ObjectgetLayer
+        val getRole = NativeAtk.ObjectgetRole
+        val refRelationSet = NativeAtk.ObjectrefRelationSet
+        val refAccessibleChild = NativeAtk.ObjectrefAccessibleChild
+        val getNAccessibleChildren = NativeAtk.ObjectgetNAccessibleChildren
+        val getParent = NativeAtk.ObjectgetParent
+        val getDescription = NativeAtk.ObjectgetDescription
+        val getName = NativeAtk.ObjectgetName
+        val getType = NativeAtk.ObjectgetType
+        (* properties *)
+    end
+    structure Hyperlink =
+    struct
+        (* constructors *)
+        (* methods *)
+        val getNAnchors = NativeAtk.HyperlinkgetNAnchors
+        val isValid = NativeAtk.HyperlinkisValid
+        val getStartIndex = NativeAtk.HyperlinkgetStartIndex
+        val getEndIndex = NativeAtk.HyperlinkgetEndIndex
+        val getObject = NativeAtk.HyperlinkgetObject
+        val getUri = NativeAtk.HyperlinkgetUri
+        val getType = NativeAtk.HyperlinkgetType
+        (* properties *)
+    end
+    structure Implementor=
+    struct
+        val getType = NativeAtk.ImplementorgetType
+    end
+    structure Text=
+    struct
+        val getType = NativeAtk.TextgetType
+    end
+    structure Streamable=
+    struct
+        val contentGetType = NativeAtk.StreamablecontentGetType
+    end
+    structure Image=
+    struct
+        val getType = NativeAtk.ImagegetType
+    end
+    structure Focus=
+    struct
+        val trackerNotify = NativeAtk.FocustrackerNotify
+        val trackerInit = NativeAtk.FocustrackerInit
+    end
+    structure Add=
+    struct
+        val keyEventListener = NativeAtk.AddkeyEventListener
+        val globalEventListener = NativeAtk.AddglobalEventListener
+        val focusTracker = NativeAtk.AddfocusTracker
+    end
+    structure Hypertext=
+    struct
+        val getType = NativeAtk.HypertextgetType
+    end
+    structure Editable=
+    struct
+        val textGetType = NativeAtk.EditabletextGetType
+    end
+    structure Document=
+    struct
+        val getType = NativeAtk.DocumentgetType
+    end
+    structure Table=
+    struct
+        val getType = NativeAtk.TablegetType
+    end
+    structure Remove=
+    struct
+        val keyEventListener = NativeAtk.RemovekeyEventListener
+        val globalEventListener = NativeAtk.RemoveglobalEventListener
+        val focusTracker = NativeAtk.RemovefocusTracker
+    end
+    structure Get=
+    struct
+        val toolkitVersion = NativeAtk.GettoolkitVersion
+        val toolkitName = NativeAtk.GettoolkitName
+        val root = NativeAtk.Getroot
+        val defaultRegistry = NativeAtk.GetdefaultRegistry
+    end
+    structure Selection=
+    struct
+        val getType = NativeAtk.SelectiongetType
+    end
+    structure Component=
+    struct
+        val getType = NativeAtk.ComponentgetType
+    end
+    structure Action=
+    struct
+        val getType = NativeAtk.ActiongetType
+    end
+end

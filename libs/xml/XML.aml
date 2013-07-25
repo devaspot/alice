@@ -1,0 +1,99 @@
+(*
+ * Author:
+ *   Guido Tack <tack@ps.uni-sb.de>
+ *
+ * Copyright:
+ *   Guido Tack, 2003
+ * 
+ *  See the file "LICENSE" for information on usage and
+ *  redistribution of this file, and for a
+ *     DISCLAIMER OF ALL WARRANTIES.
+ *
+ * Last change:
+ *   $Date: 2006-06-26 18:23:05 $ by $Author: tack $
+ *   $Revision: 1.9 $
+ *
+ *) 
+
+import structure NativeXML from "NativeXML"
+import signature XML from "XML-sig"
+
+import structure PPValue from "x-alice:/lib/system/PPValue"
+
+structure XML :> XML =
+    struct
+	type xml_node
+
+	exception XMLError = NativeXML.XMLError
+
+	datatype xml_node_type =
+	    ATTRIBUTE_DECL
+	  | ATTRIBUTE_NODE
+	  | CDATA_SECTION_NODE
+	  | COMMENT_NODE
+	  | DOCB_DOCUMENT_NODE
+	  | DOCUMENT_FRAG_NODE
+	  | DOCUMENT_NODE
+	  | DOCUMENT_TYPE_NODE
+	  | DTD_NODE
+	  | ELEMENT_DECL
+	  | ELEMENT_NODE
+	  | ENTITY_DECL
+	  | ENTITY_NODE
+	  | ENTITY_REF_NODE
+	  | HTML_DOCUMENT_NODE
+	  | NAMESPACE_DECL
+	  | NOTATION_NODE
+	  | PI_NODE
+	  | TEXT_NODE
+	  | XINCLUDE_END
+	  | XINCLUDE_START
+
+	infix />
+	fun node /> f = f node
+
+	structure X = NativeXML
+
+	fun getSiblingsList node acc =
+	    if X.isNull node then acc
+	    else
+		getSiblingsList (X.next node) (node::acc)
+
+	fun parse filename =
+	    let
+		val doc = X.parse filename
+	    in
+		if X.isNull doc then
+		    raise XMLError ""
+		else
+		    doc
+	    end
+
+	fun parseString string =
+	    let
+		val doc = X.parseString string
+	    in
+		if X.isNull doc then
+		    raise XMLError ""
+		else
+		    doc
+	    end
+
+	val name = X.name
+	fun children n = rev (getSiblingsList (X.children n) nil)
+	val null = X.isNull
+	val parent = X.parent
+	fun properties n = rev (getSiblingsList (X.properties n) nil)
+	val getType = X.getType
+	fun getProp n s = X.getProp(n, s)
+	fun getContent n f = X.nodeListGetString(X.children n,
+						 if f then 1 else 0)
+
+      fun ppExn t fm (XMLError msg as exn) =
+          PPValue.ppExnWithArg fm exn msg
+        | ppExn _ _ _ = NONE
+
+      fun ppExn _ _ (_:exn) = (print "bla\n"; NONE)
+
+      val _ = PPValue.registerTyp ppExn
+    end

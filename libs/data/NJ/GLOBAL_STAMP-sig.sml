@@ -1,0 +1,31 @@
+val assert=General.assert;
+(*
+ * Author:
+ *   Andreas Rossberg <rossberg@ps.uni-sb.de>
+ *
+ * Copyright:
+ *   Andreas Rossberg, 2001-2003
+ *
+ * Last change:
+ *   $Date: 2003-07-18 13:53:41 $ by $Author: rossberg $
+ *   $Revision: 1.7 $
+ *)
+
+
+
+
+signature GLOBAL_STAMP =
+sig
+    (*include STAMP*)
+
+    eqtype stamp
+    type t = stamp
+
+    val stamp :		unit   -> stamp
+    val fromString :	string -> stamp
+    val toString :	stamp  -> string
+
+    val equal :		stamp * stamp -> bool
+    val compare :	stamp * stamp -> order
+    val hash :		stamp -> int
+end

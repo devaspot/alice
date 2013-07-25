@@ -1,0 +1,25 @@
+(*
+ * Authors:
+ *   Andreas Rossberg <rossberg@ps.uni-sb.de>
+ *
+ * Copyright:
+ *   Andreas Rossberg, 2002-2003
+ *
+ * Last change:
+ *   $Date: 2003-09-15 15:31:22 $ by $Author: rossberg $
+ *   $Revision: 1.2 $
+ *)
+
+signature ATOM =
+sig
+    eqtype string
+    eqtype atom
+    type t = atom
+
+    val atom :		string -> atom
+    val toString :	atom -> string
+
+    val equal :		atom * atom -> bool
+    val compare :	atom * atom -> order
+    val hash :		atom -> int
+end

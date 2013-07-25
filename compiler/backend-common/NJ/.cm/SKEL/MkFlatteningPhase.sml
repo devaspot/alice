@@ -1,0 +1,2 @@
+Skeleton 5
+d2f1d"General"ae"MkFlatteningPhase"i1aä¢Switches"gp1c"SWITCHES"jh7ad"C"gp1d"EmptyContext"aä¢I"gp1d"IntermediateGrammar"Caä¢O"gp1d"FlatGrammar"egp1ÿegp1ä¢IntermediateAux"egp1d"SimplifyMatch"f9ÿÿ9d"List"d"Name"Cd"Type"d"Option"d"PervasiveType"d"Source"d"Vector"Cÿ&d"SimplifyRec"ÿ‚d"Arity"d"Crash"Cd"Error"d"Label"d"Stamp"d"PathSet"d"LabelSort"NNgp1c"FLATTENING_PHASE"

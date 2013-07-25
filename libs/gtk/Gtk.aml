@@ -1,0 +1,4489 @@
+import structure NativeLibs  from "NativeLibs"
+import structure Core        from "Core"
+import structure GLib	from "GLib"
+import structure Pango	from "Pango"
+import structure Atk	from "Atk"
+import structure Gdk	from "Gdk"
+import signature GTK	from "GTK-sig"
+structure NativeGtk = NativeLibs.NativeGtk
+structure Gtk :> GTK =
+struct
+    open Core
+    structure WidgetFlags = 
+    struct
+        datatype flag =
+            APP_PAINTABLE
+          | CAN_DEFAULT
+          | CAN_FOCUS
+          | COMPOSITE_CHILD
+          | DOUBLE_BUFFERED
+          | HAS_DEFAULT
+          | HAS_FOCUS
+          | HAS_GRAB
+          | MAPPED
+          | NO_REPARENT
+          | NO_SHOW_ALL
+          | NO_WINDOW
+          | PARENT_SENSITIVE
+          | RC_STYLE
+          | REALIZED
+          | RECEIVES_DEFAULT
+          | SENSITIVE
+          | TOPLEVEL
+          | VISIBLE
+        type t = flag list
+        val getType = NativeGtk.WidgetFlagsGetType
+        val toInt   = NativeGtk.WidgetFlagsToInt
+        val fromInt = NativeGtk.WidgetFlagsFromInt
+    end
+    structure UIManagerItemType = 
+    struct
+        datatype flag =
+            ACCELERATOR
+          | AUTO
+          | MENU
+          | MENUBAR
+          | MENUITEM
+          | PLACEHOLDER
+          | POPUP
+          | SEPARATOR
+          | TOOLBAR
+          | TOOLITEM
+        type t = flag list
+        val getType = NativeGtk.UIManagerItemTypeGetType
+        val toInt   = NativeGtk.UIManagerItemTypeToInt
+        val fromInt = NativeGtk.UIManagerItemTypeFromInt
+    end
+    structure TreeModelFlags = 
+    struct
+        datatype flag =
+            ITERS_PERSIST
+          | LIST_ONLY
+        type t = flag list
+        val getType = NativeGtk.TreeModelFlagsGetType
+        val toInt   = NativeGtk.TreeModelFlagsToInt
+        val fromInt = NativeGtk.TreeModelFlagsFromInt
+    end
+    structure TextSearchFlags = 
+    struct
+        datatype flag =
+            TEXT_ONLY
+          | VISIBLE_ONLY
+        type t = flag list
+        val getType = NativeGtk.TextSearchFlagsGetType
+        val toInt   = NativeGtk.TextSearchFlagsToInt
+        val fromInt = NativeGtk.TextSearchFlagsFromInt
+    end
+    structure TargetFlags = 
+    struct
+        datatype flag =
+            APP
+          | WIDGET
+        type t = flag list
+        val getType = NativeGtk.TargetFlagsGetType
+        val toInt   = NativeGtk.TargetFlagsToInt
+        val fromInt = NativeGtk.TargetFlagsFromInt
+    end
+    structure RcFlags = 
+    struct
+        datatype flag =
+            BASE
+          | BG
+          | FG
+          | TEXT
+        type t = flag list
+        val getType = NativeGtk.RcFlagsGetType
+        val toInt   = NativeGtk.RcFlagsToInt
+        val fromInt = NativeGtk.RcFlagsFromInt
+    end
+    structure PrivateFlags = 
+    struct
+        datatype flag =
+            ALLOC_NEEDED
+          | ANCHORED
+          | CHILD_VISIBLE
+          | DIRECTION_LTR
+          | DIRECTION_SET
+          | HAS_SHAPE_MASK
+          | IN_REPARENT
+          | LEAVE_PENDING
+          | REDRAW_ON_ALLOC
+          | REQUEST_NEEDED
+          | RESIZE_PENDING
+          | USER_STYLE
+        type t = flag list
+        val getType = NativeGtk.PrivateFlagsGetType
+        val toInt   = NativeGtk.PrivateFlagsToInt
+        val fromInt = NativeGtk.PrivateFlagsFromInt
+    end
+    structure ObjectFlags = 
+    struct
+        datatype flag =
+            FLOATING
+          | IN_DESTRUCTION
+          | RESERVED_1
+          | RESERVED_2
+        type t = flag list
+        val getType = NativeGtk.ObjectFlagsGetType
+        val toInt   = NativeGtk.ObjectFlagsToInt
+        val fromInt = NativeGtk.ObjectFlagsFromInt
+    end
+    structure IconLookupFlags = 
+    struct
+        datatype flag =
+            FORCE_SVG
+          | NO_SVG
+          | USE_BUILTIN
+        type t = flag list
+        val getType = NativeGtk.IconLookupFlagsGetType
+        val toInt   = NativeGtk.IconLookupFlagsToInt
+        val fromInt = NativeGtk.IconLookupFlagsFromInt
+    end
+    structure FileFilterFlags = 
+    struct
+        datatype flag =
+            DISPLAY_NAME
+          | FILENAME
+          | MIME_TYPE
+          | URI
+        type t = flag list
+        val getType = NativeGtk.FileFilterFlagsGetType
+        val toInt   = NativeGtk.FileFilterFlagsToInt
+        val fromInt = NativeGtk.FileFilterFlagsFromInt
+    end
+    structure DialogFlags = 
+    struct
+        datatype flag =
+            DESTROY_WITH_PARENT
+          | MODAL
+          | NO_SEPARATOR
+        type t = flag list
+        val getType = NativeGtk.DialogFlagsGetType
+        val toInt   = NativeGtk.DialogFlagsToInt
+        val fromInt = NativeGtk.DialogFlagsFromInt
+    end
+    structure DestDefaults = 
+    struct
+        datatype flag =
+            ALL
+          | DROP
+          | HIGHLIGHT
+          | MOTION
+        type t = flag list
+        val getType = NativeGtk.DestDefaultsGetType
+        val toInt   = NativeGtk.DestDefaultsToInt
+        val fromInt = NativeGtk.DestDefaultsFromInt
+    end
+    structure DebugFlag = 
+    struct
+        datatype flag =
+            KEYBINDINGS
+          | MISC
+          | MULTIHEAD
+          | PLUGSOCKET
+          | TEXT
+          | TREE
+          | UPDATES
+        type t = flag list
+        val getType = NativeGtk.DebugFlagGetType
+        val toInt   = NativeGtk.DebugFlagToInt
+        val fromInt = NativeGtk.DebugFlagFromInt
+    end
+    structure CellRendererState = 
+    struct
+        datatype flag =
+            FOCUSED
+          | INSENSITIVE
+          | PRELIT
+          | SELECTED
+          | SORTED
+        type t = flag list
+        val getType = NativeGtk.CellRendererStateGetType
+        val toInt   = NativeGtk.CellRendererStateToInt
+        val fromInt = NativeGtk.CellRendererStateFromInt
+    end
+    structure CalendarDisplayOptions = 
+    struct
+        datatype flag =
+            NO_MONTH_CHANGE
+          | SHOW_DAY_NAMES
+          | SHOW_HEADING
+          | SHOW_WEEK_NUMBERS
+          | WEEK_START_MONDAY
+        type t = flag list
+        val getType = NativeGtk.CalendarDisplayOptionsGetType
+        val toInt   = NativeGtk.CalendarDisplayOptionsToInt
+        val fromInt = NativeGtk.CalendarDisplayOptionsFromInt
+    end
+    structure ButtonAction = 
+    struct
+        datatype flag =
+            DRAGS
+          | EXPANDS
+          | IGNORED
+          | SELECTS
+        type t = flag list
+        val getType = NativeGtk.ButtonActionGetType
+        val toInt   = NativeGtk.ButtonActionToInt
+        val fromInt = NativeGtk.ButtonActionFromInt
+    end
+    structure AttachOptions = 
+    struct
+        datatype flag =
+            EXPAND
+          | FILL
+          | SHRINK
+        type t = flag list
+        val getType = NativeGtk.AttachOptionsGetType
+        val toInt   = NativeGtk.AttachOptionsToInt
+        val fromInt = NativeGtk.AttachOptionsFromInt
+    end
+    structure ArgFlags = 
+    struct
+        datatype flag =
+            CHILD_ARG
+          | CONSTRUCT
+          | CONSTRUCT_ONLY
+          | READABLE
+          | WRITABLE
+        type t = flag list
+        val getType = NativeGtk.ArgFlagsGetType
+        val toInt   = NativeGtk.ArgFlagsToInt
+        val fromInt = NativeGtk.ArgFlagsFromInt
+    end
+    structure AccelFlags = 
+    struct
+        datatype flag =
+            LOCKED
+          | MASK
+          | VISIBLE
+        type t = flag list
+        val getType = NativeGtk.AccelFlagsGetType
+        val toInt   = NativeGtk.AccelFlagsToInt
+        val fromInt = NativeGtk.AccelFlagsFromInt
+    end
+    structure WrapMode = 
+    struct
+        datatype t =
+            CHAR
+          | NONE
+          | WORD
+          | WORD_CHAR
+        val getType = NativeGtk.WrapModeGetType
+        val toInt   = NativeGtk.WrapModeToInt
+        val fromInt = NativeGtk.WrapModeFromInt
+    end
+    structure WindowType = 
+    struct
+        datatype t =
+            POPUP
+          | TOPLEVEL
+        val getType = NativeGtk.WindowTypeGetType
+        val toInt   = NativeGtk.WindowTypeToInt
+        val fromInt = NativeGtk.WindowTypeFromInt
+    end
+    structure WindowPosition = 
+    struct
+        datatype t =
+            CENTER
+          | CENTER_ALWAYS
+          | CENTER_ON_PARENT
+          | MOUSE
+          | NONE
+        val getType = NativeGtk.WindowPositionGetType
+        val toInt   = NativeGtk.WindowPositionToInt
+        val fromInt = NativeGtk.WindowPositionFromInt
+    end
+    structure WidgetHelpType = 
+    struct
+        datatype t =
+            TOOLTIP
+          | WHATS_THIS
+        val getType = NativeGtk.WidgetHelpTypeGetType
+        val toInt   = NativeGtk.WidgetHelpTypeToInt
+        val fromInt = NativeGtk.WidgetHelpTypeFromInt
+    end
+    structure Visibility = 
+    struct
+        datatype t =
+            FULL
+          | NONE
+          | PARTIAL
+        val getType = NativeGtk.VisibilityGetType
+        val toInt   = NativeGtk.VisibilityToInt
+        val fromInt = NativeGtk.VisibilityFromInt
+    end
+    structure UpdateType = 
+    struct
+        datatype t =
+            CONTINUOUS
+          | DELAYED
+          | DISCONTINUOUS
+        val getType = NativeGtk.UpdateTypeGetType
+        val toInt   = NativeGtk.UpdateTypeToInt
+        val fromInt = NativeGtk.UpdateTypeFromInt
+    end
+    structure TreeViewDropPosition = 
+    struct
+        datatype t =
+            AFTER
+          | BEFORE
+          | INTO_OR_AFTER
+          | INTO_OR_BEFORE
+        val getType = NativeGtk.TreeViewDropPositionGetType
+        val toInt   = NativeGtk.TreeViewDropPositionToInt
+        val fromInt = NativeGtk.TreeViewDropPositionFromInt
+    end
+    structure TreeViewColumnSizing = 
+    struct
+        datatype t =
+            AUTOSIZE
+          | FIXED
+          | GROW_ONLY
+        val getType = NativeGtk.TreeViewColumnSizingGetType
+        val toInt   = NativeGtk.TreeViewColumnSizingToInt
+        val fromInt = NativeGtk.TreeViewColumnSizingFromInt
+    end
+    structure ToolbarStyle = 
+    struct
+        datatype t =
+            BOTH
+          | BOTH_HORIZ
+          | ICONS
+          | TEXT
+        val getType = NativeGtk.ToolbarStyleGetType
+        val toInt   = NativeGtk.ToolbarStyleToInt
+        val fromInt = NativeGtk.ToolbarStyleFromInt
+    end
+    structure ToolbarSpaceStyle = 
+    struct
+        datatype t =
+            EMPTY
+          | LINE
+        val getType = NativeGtk.ToolbarSpaceStyleGetType
+        val toInt   = NativeGtk.ToolbarSpaceStyleToInt
+        val fromInt = NativeGtk.ToolbarSpaceStyleFromInt
+    end
+    structure ToolbarChildType = 
+    struct
+        datatype t =
+            BUTTON
+          | RADIOBUTTON
+          | SPACE
+          | TOGGLEBUTTON
+          | WIDGET
+        val getType = NativeGtk.ToolbarChildTypeGetType
+        val toInt   = NativeGtk.ToolbarChildTypeToInt
+        val fromInt = NativeGtk.ToolbarChildTypeFromInt
+    end
+    structure TextWindowType = 
+    struct
+        datatype t =
+            BOTTOM
+          | LEFT
+          | PRIVATE
+          | RIGHT
+          | TEXT
+          | TOP
+          | WIDGET
+        val getType = NativeGtk.TextWindowTypeGetType
+        val toInt   = NativeGtk.TextWindowTypeToInt
+        val fromInt = NativeGtk.TextWindowTypeFromInt
+    end
+    structure TextDirection = 
+    struct
+        datatype t =
+            LTR
+          | NONE
+          | RTL
+        val getType = NativeGtk.TextDirectionGetType
+        val toInt   = NativeGtk.TextDirectionToInt
+        val fromInt = NativeGtk.TextDirectionFromInt
+    end
+    structure SubmenuPlacement = 
+    struct
+        datatype t =
+            LEFT_RIGHT
+          | TOP_BOTTOM
+        val getType = NativeGtk.SubmenuPlacementGetType
+        val toInt   = NativeGtk.SubmenuPlacementToInt
+        val fromInt = NativeGtk.SubmenuPlacementFromInt
+    end
+    structure SubmenuDirection = 
+    struct
+        datatype t =
+            LEFT
+          | RIGHT
+        val getType = NativeGtk.SubmenuDirectionGetType
+        val toInt   = NativeGtk.SubmenuDirectionToInt
+        val fromInt = NativeGtk.SubmenuDirectionFromInt
+    end
+    structure StateType = 
+    struct
+        datatype t =
+            ACTIVE
+          | INSENSITIVE
+          | NORMAL
+          | PRELIGHT
+          | SELECTED
+        val getType = NativeGtk.StateTypeGetType
+        val toInt   = NativeGtk.StateTypeToInt
+        val fromInt = NativeGtk.StateTypeFromInt
+    end
+    structure SpinType = 
+    struct
+        datatype t =
+            END
+          | HOME
+          | PAGE_BACKWARD
+          | PAGE_FORWARD
+          | STEP_BACKWARD
+          | STEP_FORWARD
+          | USER_DEFINED
+        val getType = NativeGtk.SpinTypeGetType
+        val toInt   = NativeGtk.SpinTypeToInt
+        val fromInt = NativeGtk.SpinTypeFromInt
+    end
+    structure SpinButtonUpdatePolicy = 
+    struct
+        datatype t =
+            ALWAYS
+          | IF_VALID
+        val getType = NativeGtk.SpinButtonUpdatePolicyGetType
+        val toInt   = NativeGtk.SpinButtonUpdatePolicyToInt
+        val fromInt = NativeGtk.SpinButtonUpdatePolicyFromInt
+    end
+    structure SortType = 
+    struct
+        datatype t =
+            ASCENDING
+          | DESCENDING
+        val getType = NativeGtk.SortTypeGetType
+        val toInt   = NativeGtk.SortTypeToInt
+        val fromInt = NativeGtk.SortTypeFromInt
+    end
+    structure SizeGroupMode = 
+    struct
+        datatype t =
+            BOTH
+          | HORIZONTAL
+          | NONE
+          | VERTICAL
+        val getType = NativeGtk.SizeGroupModeGetType
+        val toInt   = NativeGtk.SizeGroupModeToInt
+        val fromInt = NativeGtk.SizeGroupModeFromInt
+    end
+    structure SideType = 
+    struct
+        datatype t =
+            BOTTOM
+          | LEFT
+          | RIGHT
+          | TOP
+        val getType = NativeGtk.SideTypeGetType
+        val toInt   = NativeGtk.SideTypeToInt
+        val fromInt = NativeGtk.SideTypeFromInt
+    end
+    structure ShadowType = 
+    struct
+        datatype t =
+            ETCHED_IN
+          | ETCHED_OUT
+          | IN
+          | NONE
+          | OUT
+        val getType = NativeGtk.ShadowTypeGetType
+        val toInt   = NativeGtk.ShadowTypeToInt
+        val fromInt = NativeGtk.ShadowTypeFromInt
+    end
+    structure SelectionMode = 
+    struct
+        datatype t =
+            BROWSE
+          | EXTENDED
+          | MULTIPLE
+          | NONE
+          | SINGLE
+        val getType = NativeGtk.SelectionModeGetType
+        val toInt   = NativeGtk.SelectionModeToInt
+        val fromInt = NativeGtk.SelectionModeFromInt
+    end
+    structure ScrollType = 
+    struct
+        datatype t =
+            END
+          | JUMP
+          | NONE
+          | PAGE_BACKWARD
+          | PAGE_DOWN
+          | PAGE_FORWARD
+          | PAGE_LEFT
+          | PAGE_RIGHT
+          | PAGE_UP
+          | START
+          | STEP_BACKWARD
+          | STEP_DOWN
+          | STEP_FORWARD
+          | STEP_LEFT
+          | STEP_RIGHT
+          | STEP_UP
+        val getType = NativeGtk.ScrollTypeGetType
+        val toInt   = NativeGtk.ScrollTypeToInt
+        val fromInt = NativeGtk.ScrollTypeFromInt
+    end
+    structure ScrollStep = 
+    struct
+        datatype t =
+            ENDS
+          | HORIZONTAL_ENDS
+          | HORIZONTAL_PAGES
+          | HORIZONTAL_STEPS
+          | PAGES
+          | STEPS
+        val getType = NativeGtk.ScrollStepGetType
+        val toInt   = NativeGtk.ScrollStepToInt
+        val fromInt = NativeGtk.ScrollStepFromInt
+    end
+    structure ResponseType = 
+    struct
+        datatype t =
+            ACCEPT
+          | APPLY
+          | CANCEL
+          | CLOSE
+          | DELETE_EVENT
+          | HELP
+          | NO
+          | NONE
+          | OK
+          | REJECT
+          | YES
+        val getType = NativeGtk.ResponseTypeGetType
+        val toInt   = NativeGtk.ResponseTypeToInt
+        val fromInt = NativeGtk.ResponseTypeFromInt
+    end
+    structure ResizeMode = 
+    struct
+        datatype t =
+            IMMEDIATE
+          | PARENT
+          | QUEUE
+        val getType = NativeGtk.ResizeModeGetType
+        val toInt   = NativeGtk.ResizeModeToInt
+        val fromInt = NativeGtk.ResizeModeFromInt
+    end
+    structure ReliefStyle = 
+    struct
+        datatype t =
+            HALF
+          | NONE
+          | NORMAL
+        val getType = NativeGtk.ReliefStyleGetType
+        val toInt   = NativeGtk.ReliefStyleToInt
+        val fromInt = NativeGtk.ReliefStyleFromInt
+    end
+    structure RcTokenType = 
+    struct
+        datatype t =
+            ACTIVE
+          | APPLICATION
+          | BASE
+          | BG
+          | BG_PIXMAP
+          | BIND
+          | BINDING
+          | CLASS
+          | ENGINE
+          | FG
+          | FONT
+          | FONTSET
+          | FONT_NAME
+          | GTK
+          | HIGHEST
+          | IM_MODULE_FILE
+          | IM_MODULE_PATH
+          | INCLUDE
+          | INSENSITIVE
+          | INVALID
+          | LAST
+          | LOWEST
+          | LTR
+          | MODULE_PATH
+          | NORMAL
+          | PIXMAP_PATH
+          | PRELIGHT
+          | RC
+          | RTL
+          | SELECTED
+          | STOCK
+          | STYLE
+          | TEXT
+          | THEME
+          | WIDGET
+          | WIDGET_CLASS
+          | XTHICKNESS
+          | YTHICKNESS
+        val getType = NativeGtk.RcTokenTypeGetType
+        val toInt   = NativeGtk.RcTokenTypeToInt
+        val fromInt = NativeGtk.RcTokenTypeFromInt
+    end
+    structure ProgressBarStyle = 
+    struct
+        datatype t =
+            CONTINUOUS
+          | DISCRETE
+        val getType = NativeGtk.ProgressBarStyleGetType
+        val toInt   = NativeGtk.ProgressBarStyleToInt
+        val fromInt = NativeGtk.ProgressBarStyleFromInt
+    end
+    structure ProgressBarOrientation = 
+    struct
+        datatype t =
+            BOTTOM_TO_TOP
+          | LEFT_TO_RIGHT
+          | RIGHT_TO_LEFT
+          | TOP_TO_BOTTOM
+        val getType = NativeGtk.ProgressBarOrientationGetType
+        val toInt   = NativeGtk.ProgressBarOrientationToInt
+        val fromInt = NativeGtk.ProgressBarOrientationFromInt
+    end
+    structure PreviewType = 
+    struct
+        datatype t =
+            COLOR
+          | GRAYSCALE
+        val getType = NativeGtk.PreviewTypeGetType
+        val toInt   = NativeGtk.PreviewTypeToInt
+        val fromInt = NativeGtk.PreviewTypeFromInt
+    end
+    structure PositionType = 
+    struct
+        datatype t =
+            BOTTOM
+          | LEFT
+          | RIGHT
+          | TOP
+        val getType = NativeGtk.PositionTypeGetType
+        val toInt   = NativeGtk.PositionTypeToInt
+        val fromInt = NativeGtk.PositionTypeFromInt
+    end
+    structure PolicyType = 
+    struct
+        datatype t =
+            ALWAYS
+          | AUTOMATIC
+          | NEVER
+        val getType = NativeGtk.PolicyTypeGetType
+        val toInt   = NativeGtk.PolicyTypeToInt
+        val fromInt = NativeGtk.PolicyTypeFromInt
+    end
+    structure PathType = 
+    struct
+        datatype t =
+            CLASS
+          | WIDGET
+          | WIDGET_CLASS
+        val getType = NativeGtk.PathTypeGetType
+        val toInt   = NativeGtk.PathTypeToInt
+        val fromInt = NativeGtk.PathTypeFromInt
+    end
+    structure PathPriorityType = 
+    struct
+        datatype t =
+            APPLICATION
+          | GTK
+          | HIGHEST
+          | LOWEST
+          | RC
+          | THEME
+        val getType = NativeGtk.PathPriorityTypeGetType
+        val toInt   = NativeGtk.PathPriorityTypeToInt
+        val fromInt = NativeGtk.PathPriorityTypeFromInt
+    end
+    structure PackType = 
+    struct
+        datatype t =
+            END
+          | START
+        val getType = NativeGtk.PackTypeGetType
+        val toInt   = NativeGtk.PackTypeToInt
+        val fromInt = NativeGtk.PackTypeFromInt
+    end
+    structure Orientation = 
+    struct
+        datatype t =
+            HORIZONTAL
+          | VERTICAL
+        val getType = NativeGtk.OrientationGetType
+        val toInt   = NativeGtk.OrientationToInt
+        val fromInt = NativeGtk.OrientationFromInt
+    end
+    structure NotebookTab = 
+    struct
+        datatype t =
+            FIRST
+          | LAST
+        val getType = NativeGtk.NotebookTabGetType
+        val toInt   = NativeGtk.NotebookTabToInt
+        val fromInt = NativeGtk.NotebookTabFromInt
+    end
+    structure MovementStep = 
+    struct
+        datatype t =
+            BUFFER_ENDS
+          | DISPLAY_LINES
+          | DISPLAY_LINE_ENDS
+          | HORIZONTAL_PAGES
+          | LOGICAL_POSITIONS
+          | PAGES
+          | PARAGRAPHS
+          | PARAGRAPH_ENDS
+          | VISUAL_POSITIONS
+          | WORDS
+        val getType = NativeGtk.MovementStepGetType
+        val toInt   = NativeGtk.MovementStepToInt
+        val fromInt = NativeGtk.MovementStepFromInt
+    end
+    structure MetricType = 
+    struct
+        datatype t =
+            CENTIMETERS
+          | INCHES
+          | PIXELS
+        val getType = NativeGtk.MetricTypeGetType
+        val toInt   = NativeGtk.MetricTypeToInt
+        val fromInt = NativeGtk.MetricTypeFromInt
+    end
+    structure MessageType = 
+    struct
+        datatype t =
+            ERROR
+          | INFO
+          | QUESTION
+          | WARNING
+        val getType = NativeGtk.MessageTypeGetType
+        val toInt   = NativeGtk.MessageTypeToInt
+        val fromInt = NativeGtk.MessageTypeFromInt
+    end
+    structure MenuDirectionType = 
+    struct
+        datatype t =
+            CHILD
+          | NEXT
+          | PARENT
+          | PREV
+        val getType = NativeGtk.MenuDirectionTypeGetType
+        val toInt   = NativeGtk.MenuDirectionTypeToInt
+        val fromInt = NativeGtk.MenuDirectionTypeFromInt
+    end
+    structure MatchType = 
+    struct
+        datatype t =
+            ALL
+          | ALL_TAIL
+          | EXACT
+          | HEAD
+          | LAST
+          | TAIL
+        val getType = NativeGtk.MatchTypeGetType
+        val toInt   = NativeGtk.MatchTypeToInt
+        val fromInt = NativeGtk.MatchTypeFromInt
+    end
+    structure Justification = 
+    struct
+        datatype t =
+            CENTER
+          | FILL
+          | LEFT
+          | RIGHT
+        val getType = NativeGtk.JustificationGetType
+        val toInt   = NativeGtk.JustificationToInt
+        val fromInt = NativeGtk.JustificationFromInt
+    end
+    structure IMStatusStyle = 
+    struct
+        datatype t =
+            CALLBACK
+          | NOTHING
+        val getType = NativeGtk.IMStatusStyleGetType
+        val toInt   = NativeGtk.IMStatusStyleToInt
+        val fromInt = NativeGtk.IMStatusStyleFromInt
+    end
+    structure IMPreeditStyle = 
+    struct
+        datatype t =
+            CALLBACK
+          | NONE
+          | NOTHING
+        val getType = NativeGtk.IMPreeditStyleGetType
+        val toInt   = NativeGtk.IMPreeditStyleToInt
+        val fromInt = NativeGtk.IMPreeditStyleFromInt
+    end
+    structure ImageType = 
+    struct
+        datatype t =
+            ANIMATION
+          | EMPTY
+          | ICON_SET
+          | IMAGE
+          | PIXBUF
+          | PIXMAP
+          | STOCK
+        val getType = NativeGtk.ImageTypeGetType
+        val toInt   = NativeGtk.ImageTypeToInt
+        val fromInt = NativeGtk.ImageTypeFromInt
+    end
+    structure IconThemeError = 
+    struct
+        datatype t =
+            FAILED
+          | NOT_FOUND
+        val getType = NativeGtk.IconThemeErrorGetType
+        val toInt   = NativeGtk.IconThemeErrorToInt
+        val fromInt = NativeGtk.IconThemeErrorFromInt
+    end
+    structure IconSize = 
+    struct
+        datatype t =
+            BUTTON
+          | DIALOG
+          | DND
+          | INVALID
+          | LARGE_TOOLBAR
+          | MENU
+          | SMALL_TOOLBAR
+        val getType = NativeGtk.IconSizeGetType
+        val toInt   = NativeGtk.IconSizeToInt
+        val fromInt = NativeGtk.IconSizeFromInt
+    end
+    structure FileChooserError = 
+    struct
+        datatype t =
+            BAD_FILENAME
+          | NONEXISTENT
+        val getType = NativeGtk.FileChooserErrorGetType
+        val toInt   = NativeGtk.FileChooserErrorToInt
+        val fromInt = NativeGtk.FileChooserErrorFromInt
+    end
+    structure FileChooserAction = 
+    struct
+        datatype t =
+            CREATE_FOLDER
+          | OPEN
+          | SAVE
+          | SELECT_FOLDER
+        val getType = NativeGtk.FileChooserActionGetType
+        val toInt   = NativeGtk.FileChooserActionToInt
+        val fromInt = NativeGtk.FileChooserActionFromInt
+    end
+    structure ExpanderStyle = 
+    struct
+        datatype t =
+            COLLAPSED
+          | EXPANDED
+          | SEMI_COLLAPSED
+          | SEMI_EXPANDED
+        val getType = NativeGtk.ExpanderStyleGetType
+        val toInt   = NativeGtk.ExpanderStyleToInt
+        val fromInt = NativeGtk.ExpanderStyleFromInt
+    end
+    structure DirectionType = 
+    struct
+        datatype t =
+            DOWN
+          | LEFT
+          | RIGHT
+          | TAB_BACKWARD
+          | TAB_FORWARD
+          | UP
+        val getType = NativeGtk.DirectionTypeGetType
+        val toInt   = NativeGtk.DirectionTypeToInt
+        val fromInt = NativeGtk.DirectionTypeFromInt
+    end
+    structure DeleteType = 
+    struct
+        datatype t =
+            CHARS
+          | DISPLAY_LINES
+          | DISPLAY_LINE_ENDS
+          | PARAGRAPHS
+          | PARAGRAPH_ENDS
+          | WHITESPACE
+          | WORDS
+          | WORD_ENDS
+        val getType = NativeGtk.DeleteTypeGetType
+        val toInt   = NativeGtk.DeleteTypeToInt
+        val fromInt = NativeGtk.DeleteTypeFromInt
+    end
+    structure CurveType = 
+    struct
+        datatype t =
+            FREE
+          | LINEAR
+          | SPLINE
+        val getType = NativeGtk.CurveTypeGetType
+        val toInt   = NativeGtk.CurveTypeToInt
+        val fromInt = NativeGtk.CurveTypeFromInt
+    end
+    structure CornerType = 
+    struct
+        datatype t =
+            BOTTOM_LEFT
+          | BOTTOM_RIGHT
+          | TOP_LEFT
+          | TOP_RIGHT
+        val getType = NativeGtk.CornerTypeGetType
+        val toInt   = NativeGtk.CornerTypeToInt
+        val fromInt = NativeGtk.CornerTypeFromInt
+    end
+    structure CellType = 
+    struct
+        datatype t =
+            EMPTY
+          | PIXMAP
+          | PIXTEXT
+          | TEXT
+          | WIDGET
+        val getType = NativeGtk.CellTypeGetType
+        val toInt   = NativeGtk.CellTypeToInt
+        val fromInt = NativeGtk.CellTypeFromInt
+    end
+    structure CellRendererMode = 
+    struct
+        datatype t =
+            ACTIVATABLE
+          | EDITABLE
+          | INERT
+        val getType = NativeGtk.CellRendererModeGetType
+        val toInt   = NativeGtk.CellRendererModeToInt
+        val fromInt = NativeGtk.CellRendererModeFromInt
+    end
+    structure ButtonsType = 
+    struct
+        datatype t =
+            CANCEL
+          | CLOSE
+          | NONE
+          | OK
+          | OK_CANCEL
+          | YES_NO
+        val getType = NativeGtk.ButtonsTypeGetType
+        val toInt   = NativeGtk.ButtonsTypeToInt
+        val fromInt = NativeGtk.ButtonsTypeFromInt
+    end
+    structure ButtonBoxStyle = 
+    struct
+        datatype t =
+            DEFAULT_STYLE
+          | EDGE
+          | END
+          | SPREAD
+          | START
+        val getType = NativeGtk.ButtonBoxStyleGetType
+        val toInt   = NativeGtk.ButtonBoxStyleToInt
+        val fromInt = NativeGtk.ButtonBoxStyleFromInt
+    end
+    structure ArrowType = 
+    struct
+        datatype t =
+            DOWN
+          | LEFT
+          | RIGHT
+          | UP
+        val getType = NativeGtk.ArrowTypeGetType
+        val toInt   = NativeGtk.ArrowTypeToInt
+        val fromInt = NativeGtk.ArrowTypeFromInt
+    end
+    structure AnchorType = 
+    struct
+        datatype t =
+            CENTER
+          | E
+          | EAST
+          | N
+          | NE
+          | NORTH
+          | NORTH_EAST
+          | NORTH_WEST
+          | NW
+          | S
+          | SE
+          | SOUTH
+          | SOUTH_EAST
+          | SOUTH_WEST
+          | SW
+          | W
+          | WEST
+        val getType = NativeGtk.AnchorTypeGetType
+        val toInt   = NativeGtk.AnchorTypeToInt
+        val fromInt = NativeGtk.AnchorTypeFromInt
+    end
+    structure TreeRowReference =
+    struct
+        (* constructors *)
+        val newProxy = NativeGtk.TreeRowReferencenewProxy
+        val new = NativeGtk.TreeRowReferencenew
+        (* methods *)
+        val reordered = NativeGtk.TreeRowReferencereordered
+        val deleted = NativeGtk.TreeRowReferencedeleted
+        val inserted = NativeGtk.TreeRowReferenceinserted
+        val free = NativeGtk.TreeRowReferencefree
+        val copy = NativeGtk.TreeRowReferencecopy
+        val valid = NativeGtk.TreeRowReferencevalid
+        val getPath = NativeGtk.TreeRowReferencegetPath
+        val getType = NativeGtk.TreeRowReferencegetType
+    end
+    structure TreeIter =
+    struct
+        (* constructors *)
+        val new = NativeGtk.TreeIternew
+        (* methods *)
+        val getType = NativeGtk.TreeItergetType
+        val free = NativeGtk.TreeIterfree
+        val copy = NativeGtk.TreeItercopy
+    end
+    structure TextIter =
+    struct
+        (* constructors *)
+        val new = NativeGtk.TextIternew
+        (* methods *)
+        val order = NativeGtk.TextIterorder
+        val inRange = NativeGtk.TextIterinRange
+        val compare = NativeGtk.TextItercompare
+        val equal = NativeGtk.TextIterequal
+        val backwardSearch = NativeGtk.TextIterbackwardSearch
+        val forwardSearch = NativeGtk.TextIterforwardSearch
+        val backwardFindChar = NativeGtk.TextIterbackwardFindChar
+        val forwardFindChar = NativeGtk.TextIterforwardFindChar
+        val backwardToTagToggle = NativeGtk.TextIterbackwardToTagToggle
+        val forwardToTagToggle = NativeGtk.TextIterforwardToTagToggle
+        val setVisibleLineIndex = NativeGtk.TextItersetVisibleLineIndex
+        val setVisibleLineOffset = NativeGtk.TextItersetVisibleLineOffset
+        val forwardToLineEnd = NativeGtk.TextIterforwardToLineEnd
+        val forwardToEnd = NativeGtk.TextIterforwardToEnd
+        val setLineIndex = NativeGtk.TextItersetLineIndex
+        val setLineOffset = NativeGtk.TextItersetLineOffset
+        val setLine = NativeGtk.TextItersetLine
+        val setOffset = NativeGtk.TextItersetOffset
+        val backwardVisibleCursorPositions = NativeGtk.TextIterbackwardVisibleCursorPositions
+        val forwardVisibleCursorPositions = NativeGtk.TextIterforwardVisibleCursorPositions
+        val backwardVisibleCursorPosition = NativeGtk.TextIterbackwardVisibleCursorPosition
+        val forwardVisibleCursorPosition = NativeGtk.TextIterforwardVisibleCursorPosition
+        val backwardCursorPositions = NativeGtk.TextIterbackwardCursorPositions
+        val forwardCursorPositions = NativeGtk.TextIterforwardCursorPositions
+        val backwardCursorPosition = NativeGtk.TextIterbackwardCursorPosition
+        val forwardCursorPosition = NativeGtk.TextIterforwardCursorPosition
+        val backwardSentenceStarts = NativeGtk.TextIterbackwardSentenceStarts
+        val forwardSentenceEnds = NativeGtk.TextIterforwardSentenceEnds
+        val backwardSentenceStart = NativeGtk.TextIterbackwardSentenceStart
+        val forwardSentenceEnd = NativeGtk.TextIterforwardSentenceEnd
+        val backwardVisibleWordStarts = NativeGtk.TextIterbackwardVisibleWordStarts
+        val forwardVisibleWordEnds = NativeGtk.TextIterforwardVisibleWordEnds
+        val backwardVisibleWordStart = NativeGtk.TextIterbackwardVisibleWordStart
+        val forwardVisibleWordEnd = NativeGtk.TextIterforwardVisibleWordEnd
+        val backwardWordStarts = NativeGtk.TextIterbackwardWordStarts
+        val forwardWordEnds = NativeGtk.TextIterforwardWordEnds
+        val backwardWordStart = NativeGtk.TextIterbackwardWordStart
+        val forwardWordEnd = NativeGtk.TextIterforwardWordEnd
+        val backwardLines = NativeGtk.TextIterbackwardLines
+        val forwardLines = NativeGtk.TextIterforwardLines
+        val backwardLine = NativeGtk.TextIterbackwardLine
+        val forwardLine = NativeGtk.TextIterforwardLine
+        val backwardChars = NativeGtk.TextIterbackwardChars
+        val forwardChars = NativeGtk.TextIterforwardChars
+        val backwardChar = NativeGtk.TextIterbackwardChar
+        val forwardChar = NativeGtk.TextIterforwardChar
+        val isStart = NativeGtk.TextIterisStart
+        val isEnd = NativeGtk.TextIterisEnd
+        val getLanguage = NativeGtk.TextItergetLanguage
+        val getAttributes = NativeGtk.TextItergetAttributes
+        val getBytesInLine = NativeGtk.TextItergetBytesInLine
+        val getCharsInLine = NativeGtk.TextItergetCharsInLine
+        val isCursorPosition = NativeGtk.TextIterisCursorPosition
+        val endsLine = NativeGtk.TextIterendsLine
+        val startsLine = NativeGtk.TextIterstartsLine
+        val insideSentence = NativeGtk.TextIterinsideSentence
+        val endsSentence = NativeGtk.TextIterendsSentence
+        val startsSentence = NativeGtk.TextIterstartsSentence
+        val insideWord = NativeGtk.TextIterinsideWord
+        val endsWord = NativeGtk.TextIterendsWord
+        val startsWord = NativeGtk.TextIterstartsWord
+        val canInsert = NativeGtk.TextItercanInsert
+        val editable = NativeGtk.TextItereditable
+        val getTags = NativeGtk.TextItergetTags
+        val hasTag = NativeGtk.TextIterhasTag
+        val togglesTag = NativeGtk.TextItertogglesTag
+        val endsTag = NativeGtk.TextIterendsTag
+        val beginsTag = NativeGtk.TextIterbeginsTag
+        val getToggledTags = NativeGtk.TextItergetToggledTags
+        val getChildAnchor = NativeGtk.TextItergetChildAnchor
+        val getMarks = NativeGtk.TextItergetMarks
+        val getPixbuf = NativeGtk.TextItergetPixbuf
+        val getVisibleText = NativeGtk.TextItergetVisibleText
+        val getVisibleSlice = NativeGtk.TextItergetVisibleSlice
+        val getText = NativeGtk.TextItergetText
+        val getSlice = NativeGtk.TextItergetSlice
+        val getChar = NativeGtk.TextItergetChar
+        val getVisibleLineIndex = NativeGtk.TextItergetVisibleLineIndex
+        val getVisibleLineOffset = NativeGtk.TextItergetVisibleLineOffset
+        val getLineIndex = NativeGtk.TextItergetLineIndex
+        val getLineOffset = NativeGtk.TextItergetLineOffset
+        val getLine = NativeGtk.TextItergetLine
+        val getOffset = NativeGtk.TextItergetOffset
+        val getType = NativeGtk.TextItergetType
+        val free = NativeGtk.TextIterfree
+        val copy = NativeGtk.TextItercopy
+        val getBuffer = NativeGtk.TextItergetBuffer
+    end
+    structure TextAttributes =
+    struct
+        (* constructors *)
+        val new = NativeGtk.TextAttributesnew
+        (* methods *)
+        val getType = NativeGtk.TextAttributesgetType
+        val reference = NativeGtk.TextAttributesreference
+        val unref = NativeGtk.TextAttributesunref
+        val copyValues = NativeGtk.TextAttributescopyValues
+        val copy = NativeGtk.TextAttributescopy
+        val getFieldWrapMode = NativeGtk.TextAttributesgetFieldWrapMode
+        val setFieldWrapMode = NativeGtk.TextAttributessetFieldWrapMode
+        val getFieldTabs = NativeGtk.TextAttributesgetFieldTabs
+        val setFieldTabs = NativeGtk.TextAttributessetFieldTabs
+        val getFieldRightMargin = NativeGtk.TextAttributesgetFieldRightMargin
+        val setFieldRightMargin = NativeGtk.TextAttributessetFieldRightMargin
+        val getFieldRealized = NativeGtk.TextAttributesgetFieldRealized
+        val setFieldRealized = NativeGtk.TextAttributessetFieldRealized
+        val getFieldPixelsInsideWrap = NativeGtk.TextAttributesgetFieldPixelsInsideWrap
+        val setFieldPixelsInsideWrap = NativeGtk.TextAttributessetFieldPixelsInsideWrap
+        val getFieldPixelsBelowLines = NativeGtk.TextAttributesgetFieldPixelsBelowLines
+        val setFieldPixelsBelowLines = NativeGtk.TextAttributessetFieldPixelsBelowLines
+        val getFieldPixelsAboveLines = NativeGtk.TextAttributesgetFieldPixelsAboveLines
+        val setFieldPixelsAboveLines = NativeGtk.TextAttributessetFieldPixelsAboveLines
+        val getFieldLeftMargin = NativeGtk.TextAttributesgetFieldLeftMargin
+        val setFieldLeftMargin = NativeGtk.TextAttributessetFieldLeftMargin
+        val getFieldLanguage = NativeGtk.TextAttributesgetFieldLanguage
+        val setFieldLanguage = NativeGtk.TextAttributessetFieldLanguage
+        val getFieldJustification = NativeGtk.TextAttributesgetFieldJustification
+        val setFieldJustification = NativeGtk.TextAttributessetFieldJustification
+        val getFieldInvisible = NativeGtk.TextAttributesgetFieldInvisible
+        val setFieldInvisible = NativeGtk.TextAttributessetFieldInvisible
+        val getFieldIndent = NativeGtk.TextAttributesgetFieldIndent
+        val setFieldIndent = NativeGtk.TextAttributessetFieldIndent
+        val getFieldFontScale = NativeGtk.TextAttributesgetFieldFontScale
+        val setFieldFontScale = NativeGtk.TextAttributessetFieldFontScale
+        val getFieldFont = NativeGtk.TextAttributesgetFieldFont
+        val setFieldFont = NativeGtk.TextAttributessetFieldFont
+        val getFieldEditable = NativeGtk.TextAttributesgetFieldEditable
+        val setFieldEditable = NativeGtk.TextAttributessetFieldEditable
+        val getFieldDirection = NativeGtk.TextAttributesgetFieldDirection
+        val setFieldDirection = NativeGtk.TextAttributessetFieldDirection
+        val getFieldBgFullHeight = NativeGtk.TextAttributesgetFieldBgFullHeight
+        val setFieldBgFullHeight = NativeGtk.TextAttributessetFieldBgFullHeight
+        val getFieldAppearance = NativeGtk.TextAttributesgetFieldAppearance
+        val setFieldAppearance = NativeGtk.TextAttributessetFieldAppearance
+    end
+    structure TextAppearance =
+    struct
+        (* constructors *)
+        val new = NativeGtk.TextAppearancenew
+        (* methods *)
+        val getFieldUnderline = NativeGtk.TextAppearancegetFieldUnderline
+        val setFieldUnderline = NativeGtk.TextAppearancesetFieldUnderline
+        val getFieldStrikethrough = NativeGtk.TextAppearancegetFieldStrikethrough
+        val setFieldStrikethrough = NativeGtk.TextAppearancesetFieldStrikethrough
+        val getFieldRise = NativeGtk.TextAppearancegetFieldRise
+        val setFieldRise = NativeGtk.TextAppearancesetFieldRise
+        val getFieldFgStipple = NativeGtk.TextAppearancegetFieldFgStipple
+        val setFieldFgStipple = NativeGtk.TextAppearancesetFieldFgStipple
+        val getFieldFgColor = NativeGtk.TextAppearancegetFieldFgColor
+        val setFieldFgColor = NativeGtk.TextAppearancesetFieldFgColor
+        val getFieldDrawBg = NativeGtk.TextAppearancegetFieldDrawBg
+        val setFieldDrawBg = NativeGtk.TextAppearancesetFieldDrawBg
+        val getFieldBgStipple = NativeGtk.TextAppearancegetFieldBgStipple
+        val setFieldBgStipple = NativeGtk.TextAppearancesetFieldBgStipple
+        val getFieldBgColor = NativeGtk.TextAppearancegetFieldBgColor
+        val setFieldBgColor = NativeGtk.TextAppearancesetFieldBgColor
+    end
+    structure SelectionData =
+    struct
+        (* constructors *)
+        val new = NativeGtk.SelectionDatanew
+        (* methods *)
+        val treeGetRowDragData = NativeGtk.SelectionDatatreeGetRowDragData
+        val treeSetRowDragData = NativeGtk.SelectionDatatreeSetRowDragData
+        val targetsIncludeImage = NativeGtk.SelectionDatatargetsIncludeImage
+        val getUris = NativeGtk.SelectionDatagetUris
+        val setUris = NativeGtk.SelectionDatasetUris
+        val getPixbuf = NativeGtk.SelectionDatagetPixbuf
+        val setPixbuf = NativeGtk.SelectionDatasetPixbuf
+        val free = NativeGtk.SelectionDatafree
+        val copy = NativeGtk.SelectionDatacopy
+        val getType = NativeGtk.SelectionDatagetType
+        val targetsIncludeText = NativeGtk.SelectionDatatargetsIncludeText
+        val getTargets = NativeGtk.SelectionDatagetTargets
+        val getText = NativeGtk.SelectionDatagetText
+        val setText = NativeGtk.SelectionDatasetText
+        val set = NativeGtk.SelectionDataset
+        val getFieldType = NativeGtk.SelectionDatagetFieldType
+        val setFieldType = NativeGtk.SelectionDatasetFieldType
+        val getFieldTarget = NativeGtk.SelectionDatagetFieldTarget
+        val setFieldTarget = NativeGtk.SelectionDatasetFieldTarget
+        val getFieldSelection = NativeGtk.SelectionDatagetFieldSelection
+        val setFieldSelection = NativeGtk.SelectionDatasetFieldSelection
+        val getFieldFormat = NativeGtk.SelectionDatagetFieldFormat
+        val setFieldFormat = NativeGtk.SelectionDatasetFieldFormat
+        val getFieldData = NativeGtk.SelectionDatagetFieldData
+        val setFieldData = NativeGtk.SelectionDatasetFieldData
+    end
+    structure Requisition =
+    struct
+        (* constructors *)
+        val new = NativeGtk.Requisitionnew
+        (* methods *)
+        val free = NativeGtk.Requisitionfree
+        val copy = NativeGtk.Requisitioncopy
+        val getType = NativeGtk.RequisitiongetType
+        val getFieldWidth = NativeGtk.RequisitiongetFieldWidth
+        val setFieldWidth = NativeGtk.RequisitionsetFieldWidth
+        val getFieldHeight = NativeGtk.RequisitiongetFieldHeight
+        val setFieldHeight = NativeGtk.RequisitionsetFieldHeight
+    end
+    structure IconSource =
+    struct
+        (* constructors *)
+        val new = NativeGtk.IconSourcenew
+        (* methods *)
+        val getSize = NativeGtk.IconSourcegetSize
+        val getState = NativeGtk.IconSourcegetState
+        val getDirection = NativeGtk.IconSourcegetDirection
+        val setSize = NativeGtk.IconSourcesetSize
+        val setState = NativeGtk.IconSourcesetState
+        val setDirection = NativeGtk.IconSourcesetDirection
+        val getDirectionWildcarded = NativeGtk.IconSourcegetDirectionWildcarded
+        val getStateWildcarded = NativeGtk.IconSourcegetStateWildcarded
+        val getSizeWildcarded = NativeGtk.IconSourcegetSizeWildcarded
+        val setSizeWildcarded = NativeGtk.IconSourcesetSizeWildcarded
+        val setStateWildcarded = NativeGtk.IconSourcesetStateWildcarded
+        val setDirectionWildcarded = NativeGtk.IconSourcesetDirectionWildcarded
+        val getPixbuf = NativeGtk.IconSourcegetPixbuf
+        val getIconName = NativeGtk.IconSourcegetIconName
+        val getFilename = NativeGtk.IconSourcegetFilename
+        val setPixbuf = NativeGtk.IconSourcesetPixbuf
+        val setIconName = NativeGtk.IconSourcesetIconName
+        val setFilename = NativeGtk.IconSourcesetFilename
+        val free = NativeGtk.IconSourcefree
+        val copy = NativeGtk.IconSourcecopy
+        val getType = NativeGtk.IconSourcegetType
+    end
+    structure IconSet =
+    struct
+        (* constructors *)
+        val newFromPixbuf = NativeGtk.IconSetnewFromPixbuf
+        (* methods *)
+        val getSizes = NativeGtk.IconSetgetSizes
+        val addSource = NativeGtk.IconSetaddSource
+        val renderIcon = NativeGtk.IconSetrenderIcon
+        val copy = NativeGtk.IconSetcopy
+        val unref = NativeGtk.IconSetunref
+        val reference = NativeGtk.IconSetreference
+        val new = NativeGtk.IconSetnew
+        val getType = NativeGtk.IconSetgetType
+    end
+    structure IconInfo =
+    struct
+        (* constructors *)
+        (* methods *)
+        val getDisplayName = NativeGtk.IconInfogetDisplayName
+        val getAttachPoints = NativeGtk.IconInfogetAttachPoints
+        val getEmbeddedRect = NativeGtk.IconInfogetEmbeddedRect
+        val setRawCoordinates = NativeGtk.IconInfosetRawCoordinates
+        val loadIcon = NativeGtk.IconInfoloadIcon
+        val getBuiltinPixbuf = NativeGtk.IconInfogetBuiltinPixbuf
+        val getFilename = NativeGtk.IconInfogetFilename
+        val getBaseSize = NativeGtk.IconInfogetBaseSize
+        val free = NativeGtk.IconInfofree
+        val copy = NativeGtk.IconInfocopy
+        val getType = NativeGtk.IconInfogetType
+    end
+    structure Border =
+    struct
+        (* constructors *)
+        (* methods *)
+        val free = NativeGtk.Borderfree
+        val copy = NativeGtk.Bordercopy
+        val getType = NativeGtk.BordergetType
+    end
+    structure TargetEntry =
+    struct
+        (* constructors *)
+        val new = NativeGtk.TargetEntrynew
+        (* methods *)
+        val getFieldTarget = NativeGtk.TargetEntrygetFieldTarget
+        val setFieldTarget = NativeGtk.TargetEntrysetFieldTarget
+        val getFieldInfo = NativeGtk.TargetEntrygetFieldInfo
+        val setFieldInfo = NativeGtk.TargetEntrysetFieldInfo
+        val getFieldFlags = NativeGtk.TargetEntrygetFieldFlags
+        val setFieldFlags = NativeGtk.TargetEntrysetFieldFlags
+    end
+    structure TreePath =
+    struct
+        (* constructors *)
+        val new = NativeGtk.TreePathnew
+        (* methods *)
+        val isDescendant = NativeGtk.TreePathisDescendant
+        val isAncestor = NativeGtk.TreePathisAncestor
+        val down = NativeGtk.TreePathdown
+        val up = NativeGtk.TreePathup
+        val prev = NativeGtk.TreePathprev
+        val next = NativeGtk.TreePathnext
+        val compare = NativeGtk.TreePathcompare
+        val copy = NativeGtk.TreePathcopy
+        val free = NativeGtk.TreePathfree
+        val getDepth = NativeGtk.TreePathgetDepth
+        val prependIndex = NativeGtk.TreePathprependIndex
+        val appendIndex = NativeGtk.TreePathappendIndex
+        val newFirst = NativeGtk.TreePathnewFirst
+        val toString = NativeGtk.TreePathtoString
+        val newFromIndices = NativeGtk.TreePathnewFromIndices
+        val newFromString = NativeGtk.TreePathnewFromString
+    end
+    structure BindingSet =
+    struct
+        (* constructors *)
+        val find = NativeGtk.BindingSetfind
+        val new = NativeGtk.BindingSetnew
+        (* methods *)
+        val addPath = NativeGtk.BindingSetaddPath
+        val activate = NativeGtk.BindingSetactivate
+        val byClass = NativeGtk.BindingSetbyClass
+    end
+    structure WindowGroup =
+    struct
+        (* constructors *)
+        val new = NativeGtk.WindowGroupnew
+        (* methods *)
+        val removeWindow = NativeGtk.WindowGroupremoveWindow
+        val addWindow = NativeGtk.WindowGroupaddWindow
+        val getType = NativeGtk.WindowGroupgetType
+        (* properties *)
+    end
+    structure Window =
+    struct
+        (* constructors *)
+        val new = NativeGtk.Windownew
+        (* methods *)
+        val setDefaultIconName = NativeGtk.WindowsetDefaultIconName
+        val getIconName = NativeGtk.WindowgetIconName
+        val setIconName = NativeGtk.WindowsetIconName
+        val getFocusOnMap = NativeGtk.WindowgetFocusOnMap
+        val setFocusOnMap = NativeGtk.WindowsetFocusOnMap
+        val addEmbeddedXid = NativeGtk.WindowaddEmbeddedXid
+        val removeEmbeddedXid = NativeGtk.WindowremoveEmbeddedXid
+        val reshowWithInitialSize = NativeGtk.WindowreshowWithInitialSize
+        val parseGeometry = NativeGtk.WindowparseGeometry
+        val getPosition = NativeGtk.WindowgetPosition
+        val move = NativeGtk.Windowmove
+        val getSize = NativeGtk.WindowgetSize
+        val resize = NativeGtk.Windowresize
+        val getDefaultSize = NativeGtk.WindowgetDefaultSize
+        val setDefaultSize = NativeGtk.WindowsetDefaultSize
+        val beginMoveDrag = NativeGtk.WindowbeginMoveDrag
+        val beginResizeDrag = NativeGtk.WindowbeginResizeDrag
+        val setKeepBelow = NativeGtk.WindowsetKeepBelow
+        val setKeepAbove = NativeGtk.WindowsetKeepAbove
+        val unfullscreen = NativeGtk.Windowunfullscreen
+        val fullscreen = NativeGtk.Windowfullscreen
+        val unmaximize = NativeGtk.Windowunmaximize
+        val maximize = NativeGtk.Windowmaximize
+        val unstick = NativeGtk.Windowunstick
+        val stick = NativeGtk.Windowstick
+        val deiconify = NativeGtk.Windowdeiconify
+        val iconify = NativeGtk.Windowiconify
+        val present = NativeGtk.Windowpresent
+        val propagateKeyEvent = NativeGtk.WindowpropagateKeyEvent
+        val activateKey = NativeGtk.WindowactivateKey
+        val getMnemonicModifier = NativeGtk.WindowgetMnemonicModifier
+        val setMnemonicModifier = NativeGtk.WindowsetMnemonicModifier
+        val mnemonicActivate = NativeGtk.WindowmnemonicActivate
+        val removeMnemonic = NativeGtk.WindowremoveMnemonic
+        val addMnemonic = NativeGtk.WindowaddMnemonic
+        val listToplevels = NativeGtk.WindowlistToplevels
+        val getModal = NativeGtk.WindowgetModal
+        val setModal = NativeGtk.WindowsetModal
+        val setAutoStartupNotification = NativeGtk.WindowsetAutoStartupNotification
+        val setDefaultIconFromFile = NativeGtk.WindowsetDefaultIconFromFile
+        val setDefaultIcon = NativeGtk.WindowsetDefaultIcon
+        val getDefaultIconList = NativeGtk.WindowgetDefaultIconList
+        val setDefaultIconList = NativeGtk.WindowsetDefaultIconList
+        val getIcon = NativeGtk.WindowgetIcon
+        val setIconFromFile = NativeGtk.WindowsetIconFromFile
+        val setIcon = NativeGtk.WindowsetIcon
+        val getIconList = NativeGtk.WindowgetIconList
+        val setIconList = NativeGtk.WindowsetIconList
+        val getDecorated = NativeGtk.WindowgetDecorated
+        val setDecorated = NativeGtk.WindowsetDecorated
+        val getFrameDimensions = NativeGtk.WindowgetFrameDimensions
+        val setFrameDimensions = NativeGtk.WindowsetFrameDimensions
+        val getHasFrame = NativeGtk.WindowgetHasFrame
+        val setHasFrame = NativeGtk.WindowsetHasFrame
+        val hasToplevelFocus = NativeGtk.WindowhasToplevelFocus
+        val isActive = NativeGtk.WindowisActive
+        val getScreen = NativeGtk.WindowgetScreen
+        val setScreen = NativeGtk.WindowsetScreen
+        val getGravity = NativeGtk.WindowgetGravity
+        val setGravity = NativeGtk.WindowsetGravity
+        val getResizable = NativeGtk.WindowgetResizable
+        val setResizable = NativeGtk.WindowsetResizable
+        val getDestroyWithParent = NativeGtk.WindowgetDestroyWithParent
+        val setDestroyWithParent = NativeGtk.WindowsetDestroyWithParent
+        val getAcceptFocus = NativeGtk.WindowgetAcceptFocus
+        val setAcceptFocus = NativeGtk.WindowsetAcceptFocus
+        val getSkipPagerHint = NativeGtk.WindowgetSkipPagerHint
+        val setSkipPagerHint = NativeGtk.WindowsetSkipPagerHint
+        val getSkipTaskbarHint = NativeGtk.WindowgetSkipTaskbarHint
+        val setSkipTaskbarHint = NativeGtk.WindowsetSkipTaskbarHint
+        val getTypeHint = NativeGtk.WindowgetTypeHint
+        val setTypeHint = NativeGtk.WindowsetTypeHint
+        val getTransientFor = NativeGtk.WindowgetTransientFor
+        val setTransientFor = NativeGtk.WindowsetTransientFor
+        val activateDefault = NativeGtk.WindowactivateDefault
+        val setDefault = NativeGtk.WindowsetDefault
+        val getFocus = NativeGtk.WindowgetFocus
+        val setFocus = NativeGtk.WindowsetFocus
+        val activateFocus = NativeGtk.WindowactivateFocus
+        val setPosition = NativeGtk.WindowsetPosition
+        val removeAccelGroup = NativeGtk.WindowremoveAccelGroup
+        val addAccelGroup = NativeGtk.WindowaddAccelGroup
+        val getRole = NativeGtk.WindowgetRole
+        val setRole = NativeGtk.WindowsetRole
+        val setWmclass = NativeGtk.WindowsetWmclass
+        val getTitle = NativeGtk.WindowgetTitle
+        val setTitle = NativeGtk.WindowsetTitle
+        val getType = NativeGtk.WindowgetType
+        val tooltipsGetInfoFromTipWindow = NativeGtk.WindowtooltipsGetInfoFromTipWindow
+        val getFieldWmclassName = NativeGtk.WindowgetFieldWmclassName
+        val setFieldWmclassName = NativeGtk.WindowsetFieldWmclassName
+        val getFieldWmclassClass = NativeGtk.WindowgetFieldWmclassClass
+        val setFieldWmclassClass = NativeGtk.WindowsetFieldWmclassClass
+        val getFieldWmRole = NativeGtk.WindowgetFieldWmRole
+        val setFieldWmRole = NativeGtk.WindowsetFieldWmRole
+        val getFieldTypeHint = NativeGtk.WindowgetFieldTypeHint
+        val setFieldTypeHint = NativeGtk.WindowsetFieldTypeHint
+        val getFieldType = NativeGtk.WindowgetFieldType
+        val setFieldType = NativeGtk.WindowsetFieldType
+        val getFieldTransientParent = NativeGtk.WindowgetFieldTransientParent
+        val setFieldTransientParent = NativeGtk.WindowsetFieldTransientParent
+        val getFieldTitle = NativeGtk.WindowgetFieldTitle
+        val setFieldTitle = NativeGtk.WindowsetFieldTitle
+        val getFieldStickInitially = NativeGtk.WindowgetFieldStickInitially
+        val setFieldStickInitially = NativeGtk.WindowsetFieldStickInitially
+        val getFieldPosition = NativeGtk.WindowgetFieldPosition
+        val setFieldPosition = NativeGtk.WindowsetFieldPosition
+        val getFieldNeedDefaultSize = NativeGtk.WindowgetFieldNeedDefaultSize
+        val setFieldNeedDefaultSize = NativeGtk.WindowsetFieldNeedDefaultSize
+        val getFieldNeedDefaultPosition = NativeGtk.WindowgetFieldNeedDefaultPosition
+        val setFieldNeedDefaultPosition = NativeGtk.WindowsetFieldNeedDefaultPosition
+        val getFieldModal = NativeGtk.WindowgetFieldModal
+        val setFieldModal = NativeGtk.WindowsetFieldModal
+        val getFieldMnemonicModifier = NativeGtk.WindowgetFieldMnemonicModifier
+        val setFieldMnemonicModifier = NativeGtk.WindowsetFieldMnemonicModifier
+        val getFieldMaximizeInitially = NativeGtk.WindowgetFieldMaximizeInitially
+        val setFieldMaximizeInitially = NativeGtk.WindowsetFieldMaximizeInitially
+        val getFieldKeysChangedHandler = NativeGtk.WindowgetFieldKeysChangedHandler
+        val setFieldKeysChangedHandler = NativeGtk.WindowsetFieldKeysChangedHandler
+        val getFieldIconifyInitially = NativeGtk.WindowgetFieldIconifyInitially
+        val setFieldIconifyInitially = NativeGtk.WindowsetFieldIconifyInitially
+        val getFieldHasUserRefCount = NativeGtk.WindowgetFieldHasUserRefCount
+        val setFieldHasUserRefCount = NativeGtk.WindowsetFieldHasUserRefCount
+        val getFieldHasFrame = NativeGtk.WindowgetFieldHasFrame
+        val setFieldHasFrame = NativeGtk.WindowsetFieldHasFrame
+        val getFieldHasFocus = NativeGtk.WindowgetFieldHasFocus
+        val setFieldHasFocus = NativeGtk.WindowsetFieldHasFocus
+        val getFieldGroup = NativeGtk.WindowgetFieldGroup
+        val setFieldGroup = NativeGtk.WindowsetFieldGroup
+        val getFieldGravity = NativeGtk.WindowgetFieldGravity
+        val setFieldGravity = NativeGtk.WindowsetFieldGravity
+        val getFieldFrameTop = NativeGtk.WindowgetFieldFrameTop
+        val setFieldFrameTop = NativeGtk.WindowsetFieldFrameTop
+        val getFieldFrameRight = NativeGtk.WindowgetFieldFrameRight
+        val setFieldFrameRight = NativeGtk.WindowsetFieldFrameRight
+        val getFieldFrameLeft = NativeGtk.WindowgetFieldFrameLeft
+        val setFieldFrameLeft = NativeGtk.WindowsetFieldFrameLeft
+        val getFieldFrameBottom = NativeGtk.WindowgetFieldFrameBottom
+        val setFieldFrameBottom = NativeGtk.WindowsetFieldFrameBottom
+        val getFieldFrame = NativeGtk.WindowgetFieldFrame
+        val setFieldFrame = NativeGtk.WindowsetFieldFrame
+        val getFieldFocusWidget = NativeGtk.WindowgetFieldFocusWidget
+        val setFieldFocusWidget = NativeGtk.WindowsetFieldFocusWidget
+        val getFieldDestroyWithParent = NativeGtk.WindowgetFieldDestroyWithParent
+        val setFieldDestroyWithParent = NativeGtk.WindowsetFieldDestroyWithParent
+        val getFieldDefaultWidget = NativeGtk.WindowgetFieldDefaultWidget
+        val setFieldDefaultWidget = NativeGtk.WindowsetFieldDefaultWidget
+        val getFieldDecorated = NativeGtk.WindowgetFieldDecorated
+        val setFieldDecorated = NativeGtk.WindowsetFieldDecorated
+        val getFieldConfigureRequestCount = NativeGtk.WindowgetFieldConfigureRequestCount
+        val setFieldConfigureRequestCount = NativeGtk.WindowsetFieldConfigureRequestCount
+        val getFieldConfigureNotifyReceived = NativeGtk.WindowgetFieldConfigureNotifyReceived
+        val setFieldConfigureNotifyReceived = NativeGtk.WindowsetFieldConfigureNotifyReceived
+        val getFieldAllowShrink = NativeGtk.WindowgetFieldAllowShrink
+        val setFieldAllowShrink = NativeGtk.WindowsetFieldAllowShrink
+        val getFieldAllowGrow = NativeGtk.WindowgetFieldAllowGrow
+        val setFieldAllowGrow = NativeGtk.WindowsetFieldAllowGrow
+        (* properties *)
+    end
+    structure Widget =
+    struct
+        (* constructors *)
+        val new = NativeGtk.Widgetnew
+        (* methods *)
+        val removeMnemonicLabel = NativeGtk.WidgetremoveMnemonicLabel
+        val addMnemonicLabel = NativeGtk.WidgetaddMnemonicLabel
+        val listMnemonicLabels = NativeGtk.WidgetlistMnemonicLabels
+        val classPath = NativeGtk.WidgetclassPath
+        val path = NativeGtk.Widgetpath
+        val resetShapes = NativeGtk.WidgetresetShapes
+        val shapeCombineMask = NativeGtk.WidgetshapeCombineMask
+        val getDefaultDirection = NativeGtk.WidgetgetDefaultDirection
+        val setDefaultDirection = NativeGtk.WidgetsetDefaultDirection
+        val getDirection = NativeGtk.WidgetgetDirection
+        val setDirection = NativeGtk.WidgetsetDirection
+        val getDefaultVisual = NativeGtk.WidgetgetDefaultVisual
+        val getDefaultColormap = NativeGtk.WidgetgetDefaultColormap
+        val setDefaultColormap = NativeGtk.WidgetsetDefaultColormap
+        val getDefaultStyle = NativeGtk.WidgetgetDefaultStyle
+        val styleGet = NativeGtk.WidgetstyleGet
+        val styleGetProperty = NativeGtk.WidgetstyleGetProperty
+        val classFindStyleProperty = NativeGtk.WidgetclassFindStyleProperty
+        val classInstallStylePropertyParser = NativeGtk.WidgetclassInstallStylePropertyParser
+        val classInstallStyleProperty = NativeGtk.WidgetclassInstallStyleProperty
+        val popColormap = NativeGtk.WidgetpopColormap
+        val popCompositeChild = NativeGtk.WidgetpopCompositeChild
+        val pushCompositeChild = NativeGtk.WidgetpushCompositeChild
+        val pushColormap = NativeGtk.WidgetpushColormap
+        val resetRcStyles = NativeGtk.WidgetresetRcStyles
+        val getCompositeName = NativeGtk.WidgetgetCompositeName
+        val setCompositeName = NativeGtk.WidgetsetCompositeName
+        val renderIcon = NativeGtk.WidgetrenderIcon
+        val createPangoLayout = NativeGtk.WidgetcreatePangoLayout
+        val getPangoContext = NativeGtk.WidgetgetPangoContext
+        val createPangoContext = NativeGtk.WidgetcreatePangoContext
+        val modifyFont = NativeGtk.WidgetmodifyFont
+        val modifyBase = NativeGtk.WidgetmodifyBase
+        val modifyText = NativeGtk.WidgetmodifyText
+        val modifyBg = NativeGtk.WidgetmodifyBg
+        val modifyFg = NativeGtk.WidgetmodifyFg
+        val getModifierStyle = NativeGtk.WidgetgetModifierStyle
+        val modifyStyle = NativeGtk.WidgetmodifyStyle
+        val getStyle = NativeGtk.WidgetgetStyle
+        val ensureStyle = NativeGtk.WidgetensureStyle
+        val setStyle = NativeGtk.WidgetsetStyle
+        val hideOnDelete = NativeGtk.WidgethideOnDelete
+        val translateCoordinates = NativeGtk.WidgettranslateCoordinates
+        val isAncestor = NativeGtk.WidgetisAncestor
+        val getPointer = NativeGtk.WidgetgetPointer
+        val getEvents = NativeGtk.WidgetgetEvents
+        val setColormap = NativeGtk.WidgetsetColormap
+        val getAccessible = NativeGtk.WidgetgetAccessible
+        val getClipboard = NativeGtk.WidgetgetClipboard
+        val getSettings = NativeGtk.WidgetgetSettings
+        val getRootWindow = NativeGtk.WidgetgetRootWindow
+        val getDisplay = NativeGtk.WidgetgetDisplay
+        val hasScreen = NativeGtk.WidgethasScreen
+        val getScreen = NativeGtk.WidgetgetScreen
+        val getVisual = NativeGtk.WidgetgetVisual
+        val getColormap = NativeGtk.WidgetgetColormap
+        val getAncestor = NativeGtk.WidgetgetAncestor
+        val getToplevel = NativeGtk.WidgetgetToplevel
+        val getExtensionEvents = NativeGtk.WidgetgetExtensionEvents
+        val setExtensionEvents = NativeGtk.WidgetsetExtensionEvents
+        val addEvents = NativeGtk.WidgetaddEvents
+        val setEvents = NativeGtk.WidgetsetEvents
+        val getSizeRequest = NativeGtk.WidgetgetSizeRequest
+        val setSizeRequest = NativeGtk.WidgetsetSizeRequest
+        val childFocus = NativeGtk.WidgetchildFocus
+        val getParentWindow = NativeGtk.WidgetgetParentWindow
+        val getParent = NativeGtk.WidgetgetParent
+        val getChildVisible = NativeGtk.WidgetgetChildVisible
+        val setChildVisible = NativeGtk.WidgetsetChildVisible
+        val setParentWindow = NativeGtk.WidgetsetParentWindow
+        val setParent = NativeGtk.WidgetsetParent
+        val setRedrawOnAllocate = NativeGtk.WidgetsetRedrawOnAllocate
+        val setDoubleBuffered = NativeGtk.WidgetsetDoubleBuffered
+        val setAppPaintable = NativeGtk.WidgetsetAppPaintable
+        val setSensitive = NativeGtk.WidgetsetSensitive
+        val setState = NativeGtk.WidgetsetState
+        val getName = NativeGtk.WidgetgetName
+        val setName = NativeGtk.WidgetsetName
+        val grabDefault = NativeGtk.WidgetgrabDefault
+        val grabFocus = NativeGtk.WidgetgrabFocus
+        val isFocus = NativeGtk.WidgetisFocus
+        val thawChildNotify = NativeGtk.WidgetthawChildNotify
+        val childNotify = NativeGtk.WidgetchildNotify
+        val freezeChildNotify = NativeGtk.WidgetfreezeChildNotify
+        val regionIntersect = NativeGtk.WidgetregionIntersect
+        val intersect = NativeGtk.Widgetintersect
+        val reparent = NativeGtk.Widgetreparent
+        val setScrollAdjustments = NativeGtk.WidgetsetScrollAdjustments
+        val activate = NativeGtk.Widgetactivate
+        val sendExpose = NativeGtk.WidgetsendExpose
+        val event = NativeGtk.Widgetevent
+        val mnemonicActivate = NativeGtk.WidgetmnemonicActivate
+        val canActivateAccel = NativeGtk.WidgetcanActivateAccel
+        val listAccelClosures = NativeGtk.WidgetlistAccelClosures
+        val setAccelPath = NativeGtk.WidgetsetAccelPath
+        val removeAccelerator = NativeGtk.WidgetremoveAccelerator
+        val addAccelerator = NativeGtk.WidgetaddAccelerator
+        val getChildRequisition = NativeGtk.WidgetgetChildRequisition
+        val sizeAllocate = NativeGtk.WidgetsizeAllocate
+        val sizeRequest = NativeGtk.WidgetsizeRequest
+        val draw = NativeGtk.Widgetdraw
+        val queueResizeNoRedraw = NativeGtk.WidgetqueueResizeNoRedraw
+        val queueResize = NativeGtk.WidgetqueueResize
+        val queueClearArea = NativeGtk.WidgetqueueClearArea
+        val queueClear = NativeGtk.WidgetqueueClear
+        val queueDrawArea = NativeGtk.WidgetqueueDrawArea
+        val queueDraw = NativeGtk.WidgetqueueDraw
+        val unrealize = NativeGtk.Widgetunrealize
+        val realize = NativeGtk.Widgetrealize
+        val unmap = NativeGtk.Widgetunmap
+        val map = NativeGtk.Widgetmap
+        val getNoShowAll = NativeGtk.WidgetgetNoShowAll
+        val setNoShowAll = NativeGtk.WidgetsetNoShowAll
+        val hideAll = NativeGtk.WidgethideAll
+        val showAll = NativeGtk.WidgetshowAll
+        val hide = NativeGtk.Widgethide
+        val showNow = NativeGtk.WidgetshowNow
+        val show = NativeGtk.Widgetshow
+        val unparent = NativeGtk.Widgetunparent
+        val set = NativeGtk.Widgetset
+        val destroyed = NativeGtk.Widgetdestroyed
+        val destroy = NativeGtk.Widgetdestroy
+        val unref = NativeGtk.Widgetunref
+        val reference = NativeGtk.Widgetreference
+        val getType = NativeGtk.WidgetgetType
+        val selectionClear = NativeGtk.WidgetselectionClear
+        val selectionRemoveAll = NativeGtk.WidgetselectionRemoveAll
+        val selectionConvert = NativeGtk.WidgetselectionConvert
+        val selectionClearTargets = NativeGtk.WidgetselectionClearTargets
+        val selectionAddTargets = NativeGtk.WidgetselectionAddTargets
+        val selectionAddTarget = NativeGtk.WidgetselectionAddTarget
+        val selectionOwnerSet = NativeGtk.WidgetselectionOwnerSet
+        val rcGetStyle = NativeGtk.WidgetrcGetStyle
+        val menuGetForAttachWidget = NativeGtk.WidgetmenuGetForAttachWidget
+        val propagateEvent = NativeGtk.WidgetpropagateEvent
+        val grabRemove = NativeGtk.WidgetgrabRemove
+        val grabAdd = NativeGtk.WidgetgrabAdd
+        val dragSourceAddTextTargets = NativeGtk.WidgetdragSourceAddTextTargets
+        val dragDestAddUriTargets = NativeGtk.WidgetdragDestAddUriTargets
+        val dragDestAddImageTargets = NativeGtk.WidgetdragDestAddImageTargets
+        val dragDestAddTextTargets = NativeGtk.WidgetdragDestAddTextTargets
+        val dragBegin = NativeGtk.WidgetdragBegin
+        val dragSourceSetTargetList = NativeGtk.WidgetdragSourceSetTargetList
+        val dragSourceGetTargetList = NativeGtk.WidgetdragSourceGetTargetList
+        val dragSourceSetIconStock = NativeGtk.WidgetdragSourceSetIconStock
+        val dragSourceSetIconPixbuf = NativeGtk.WidgetdragSourceSetIconPixbuf
+        val dragSourceSetIcon = NativeGtk.WidgetdragSourceSetIcon
+        val dragSourceUnset = NativeGtk.WidgetdragSourceUnset
+        val dragSourceSet = NativeGtk.WidgetdragSourceSet
+        val dragDestSetTargetList = NativeGtk.WidgetdragDestSetTargetList
+        val dragDestGetTargetList = NativeGtk.WidgetdragDestGetTargetList
+        val dragDestFindTarget = NativeGtk.WidgetdragDestFindTarget
+        val dragDestUnset = NativeGtk.WidgetdragDestUnset
+        val dragDestSetProxy = NativeGtk.WidgetdragDestSetProxy
+        val dragDestSet = NativeGtk.WidgetdragDestSet
+        val dragUnhighlight = NativeGtk.WidgetdragUnhighlight
+        val dragHighlight = NativeGtk.WidgetdragHighlight
+        val dragGetData = NativeGtk.WidgetdragGetData
+        val dragCheckThreshold = NativeGtk.WidgetdragCheckThreshold
+        val getFieldWindow = NativeGtk.WidgetgetFieldWindow
+        val setFieldWindow = NativeGtk.WidgetsetFieldWindow
+        val getFieldStyle = NativeGtk.WidgetgetFieldStyle
+        val setFieldStyle = NativeGtk.WidgetsetFieldStyle
+        val getFieldState = NativeGtk.WidgetgetFieldState
+        val setFieldState = NativeGtk.WidgetsetFieldState
+        val getFieldSavedState = NativeGtk.WidgetgetFieldSavedState
+        val setFieldSavedState = NativeGtk.WidgetsetFieldSavedState
+        val getFieldParent = NativeGtk.WidgetgetFieldParent
+        val setFieldParent = NativeGtk.WidgetsetFieldParent
+        val getFieldName = NativeGtk.WidgetgetFieldName
+        val setFieldName = NativeGtk.WidgetsetFieldName
+        val getFieldAllocation = NativeGtk.WidgetgetFieldAllocation
+        val setFieldAllocation = NativeGtk.WidgetsetFieldAllocation
+        (* properties *)
+        val sensitive = Prop.newProp ("sensitive",Value.bool,Value.toBool)
+        val hasDefault = Prop.newProp ("has-default",Value.bool,Value.toBool)
+        val hasFocus = Prop.newProp ("has-focus",Value.bool,Value.toBool)
+        val canFocus = Prop.newProp ("can-focus",Value.bool,Value.toBool)
+        val canDefault = Prop.newProp ("can-default",Value.bool,Value.toBool)
+    end
+    structure VSeparator =
+    struct
+        (* constructors *)
+        val new = NativeGtk.VSeparatornew
+        (* methods *)
+        val getType = NativeGtk.VSeparatorgetType
+        (* properties *)
+    end
+    structure VScrollbar =
+    struct
+        (* constructors *)
+        val new = NativeGtk.VScrollbarnew
+        (* methods *)
+        val getType = NativeGtk.VScrollbargetType
+        (* properties *)
+    end
+    structure VScale =
+    struct
+        (* constructors *)
+        val newWithRange = NativeGtk.VScalenewWithRange
+        val new = NativeGtk.VScalenew
+        (* methods *)
+        val getType = NativeGtk.VScalegetType
+        (* properties *)
+    end
+    structure VRuler =
+    struct
+        (* constructors *)
+        val new = NativeGtk.VRulernew
+        (* methods *)
+        val getType = NativeGtk.VRulergetType
+        (* properties *)
+    end
+    structure VPaned =
+    struct
+        (* constructors *)
+        val new = NativeGtk.VPanednew
+        (* methods *)
+        val getType = NativeGtk.VPanedgetType
+        (* properties *)
+    end
+    structure Viewport =
+    struct
+        (* constructors *)
+        val new = NativeGtk.Viewportnew
+        (* methods *)
+        val getShadowType = NativeGtk.ViewportgetShadowType
+        val setShadowType = NativeGtk.ViewportsetShadowType
+        val setVadjustment = NativeGtk.ViewportsetVadjustment
+        val setHadjustment = NativeGtk.ViewportsetHadjustment
+        val getVadjustment = NativeGtk.ViewportgetVadjustment
+        val getHadjustment = NativeGtk.ViewportgetHadjustment
+        val getType = NativeGtk.ViewportgetType
+        (* properties *)
+    end
+    structure VButtonBox =
+    struct
+        (* constructors *)
+        val new = NativeGtk.VButtonBoxnew
+        (* methods *)
+        val setLayoutDefault = NativeGtk.VButtonBoxsetLayoutDefault
+        val getLayoutDefault = NativeGtk.VButtonBoxgetLayoutDefault
+        val setSpacingDefault = NativeGtk.VButtonBoxsetSpacingDefault
+        val getSpacingDefault = NativeGtk.VButtonBoxgetSpacingDefault
+        val getType = NativeGtk.VButtonBoxgetType
+        (* properties *)
+    end
+    structure VBox =
+    struct
+        (* constructors *)
+        val new = NativeGtk.VBoxnew
+        (* methods *)
+        val getType = NativeGtk.VBoxgetType
+        (* properties *)
+    end
+    structure UIManager =
+    struct
+        (* constructors *)
+        val new = NativeGtk.UIManagernew
+        (* methods *)
+        val newMergeId = NativeGtk.UIManagernewMergeId
+        val ensureUpdate = NativeGtk.UIManagerensureUpdate
+        val getUI = NativeGtk.UIManagergetUI
+        val removeUI = NativeGtk.UIManagerremoveUI
+        val addUI = NativeGtk.UIManageraddUI
+        val addUIFromFile = NativeGtk.UIManageraddUIFromFile
+        val addUIFromString = NativeGtk.UIManageraddUIFromString
+        val getAction = NativeGtk.UIManagergetAction
+        val getToplevels = NativeGtk.UIManagergetToplevels
+        val getWidget = NativeGtk.UIManagergetWidget
+        val getAccelGroup = NativeGtk.UIManagergetAccelGroup
+        val getActionGroups = NativeGtk.UIManagergetActionGroups
+        val removeActionGroup = NativeGtk.UIManagerremoveActionGroup
+        val insertActionGroup = NativeGtk.UIManagerinsertActionGroup
+        val getAddTearoffs = NativeGtk.UIManagergetAddTearoffs
+        val setAddTearoffs = NativeGtk.UIManagersetAddTearoffs
+        val getType = NativeGtk.UIManagergetType
+        (* properties *)
+    end
+    structure TreeViewColumn =
+    struct
+        (* constructors *)
+        val newWithAttributes = NativeGtk.TreeViewColumnnewWithAttributes
+        val new = NativeGtk.TreeViewColumnnew
+        (* methods *)
+        val cellGetPosition = NativeGtk.TreeViewColumncellGetPosition
+        val focusCell = NativeGtk.TreeViewColumnfocusCell
+        val cellIsVisible = NativeGtk.TreeViewColumncellIsVisible
+        val cellGetSize = NativeGtk.TreeViewColumncellGetSize
+        val cellSetCellData = NativeGtk.TreeViewColumncellSetCellData
+        val getSortOrder = NativeGtk.TreeViewColumngetSortOrder
+        val setSortOrder = NativeGtk.TreeViewColumnsetSortOrder
+        val getSortIndicator = NativeGtk.TreeViewColumngetSortIndicator
+        val setSortIndicator = NativeGtk.TreeViewColumnsetSortIndicator
+        val getSortColumnId = NativeGtk.TreeViewColumngetSortColumnId
+        val setSortColumnId = NativeGtk.TreeViewColumnsetSortColumnId
+        val getReorderable = NativeGtk.TreeViewColumngetReorderable
+        val setReorderable = NativeGtk.TreeViewColumnsetReorderable
+        val getAlignment = NativeGtk.TreeViewColumngetAlignment
+        val setAlignment = NativeGtk.TreeViewColumnsetAlignment
+        val getWidget = NativeGtk.TreeViewColumngetWidget
+        val setWidget = NativeGtk.TreeViewColumnsetWidget
+        val getClickable = NativeGtk.TreeViewColumngetClickable
+        val setClickable = NativeGtk.TreeViewColumnsetClickable
+        val getExpand = NativeGtk.TreeViewColumngetExpand
+        val setExpand = NativeGtk.TreeViewColumnsetExpand
+        val getTitle = NativeGtk.TreeViewColumngetTitle
+        val setTitle = NativeGtk.TreeViewColumnsetTitle
+        val clicked = NativeGtk.TreeViewColumnclicked
+        val getMaxWidth = NativeGtk.TreeViewColumngetMaxWidth
+        val setMaxWidth = NativeGtk.TreeViewColumnsetMaxWidth
+        val getMinWidth = NativeGtk.TreeViewColumngetMinWidth
+        val setMinWidth = NativeGtk.TreeViewColumnsetMinWidth
+        val setFixedWidth = NativeGtk.TreeViewColumnsetFixedWidth
+        val getFixedWidth = NativeGtk.TreeViewColumngetFixedWidth
+        val getWidth = NativeGtk.TreeViewColumngetWidth
+        val getSizing = NativeGtk.TreeViewColumngetSizing
+        val setSizing = NativeGtk.TreeViewColumnsetSizing
+        val getResizable = NativeGtk.TreeViewColumngetResizable
+        val setResizable = NativeGtk.TreeViewColumnsetResizable
+        val getVisible = NativeGtk.TreeViewColumngetVisible
+        val setVisible = NativeGtk.TreeViewColumnsetVisible
+        val getSpacing = NativeGtk.TreeViewColumngetSpacing
+        val setSpacing = NativeGtk.TreeViewColumnsetSpacing
+        val clearAttributes = NativeGtk.TreeViewColumnclearAttributes
+        val setCellDataFunc = NativeGtk.TreeViewColumnsetCellDataFunc
+        val setAttributes = NativeGtk.TreeViewColumnsetAttributes
+        val addAttribute = NativeGtk.TreeViewColumnaddAttribute
+        val getCellRenderers = NativeGtk.TreeViewColumngetCellRenderers
+        val clear = NativeGtk.TreeViewColumnclear
+        val packEnd = NativeGtk.TreeViewColumnpackEnd
+        val packStart = NativeGtk.TreeViewColumnpackStart
+        val getType = NativeGtk.TreeViewColumngetType
+        (* properties *)
+    end
+    structure TreeView =
+    struct
+        (* constructors *)
+        val newWithModel = NativeGtk.TreeViewnewWithModel
+        val new = NativeGtk.TreeViewnew
+        (* methods *)
+        val getHoverExpand = NativeGtk.TreeViewgetHoverExpand
+        val setHoverExpand = NativeGtk.TreeViewsetHoverExpand
+        val getHoverSelection = NativeGtk.TreeViewgetHoverSelection
+        val setHoverSelection = NativeGtk.TreeViewsetHoverSelection
+        val getFixedHeightMode = NativeGtk.TreeViewgetFixedHeightMode
+        val setFixedHeightMode = NativeGtk.TreeViewsetFixedHeightMode
+        val setSearchColumn = NativeGtk.TreeViewsetSearchColumn
+        val getSearchColumn = NativeGtk.TreeViewgetSearchColumn
+        val getEnableSearch = NativeGtk.TreeViewgetEnableSearch
+        val setEnableSearch = NativeGtk.TreeViewsetEnableSearch
+        val createRowDragIcon = NativeGtk.TreeViewcreateRowDragIcon
+        val getDestRowAtPos = NativeGtk.TreeViewgetDestRowAtPos
+        val getDragDestRow = NativeGtk.TreeViewgetDragDestRow
+        val setDragDestRow = NativeGtk.TreeViewsetDragDestRow
+        val unsetRowsDragDest = NativeGtk.TreeViewunsetRowsDragDest
+        val unsetRowsDragSource = NativeGtk.TreeViewunsetRowsDragSource
+        val enableModelDragDest = NativeGtk.TreeViewenableModelDragDest
+        val enableModelDragSource = NativeGtk.TreeViewenableModelDragSource
+        val treeToWidgetCoords = NativeGtk.TreeViewtreeToWidgetCoords
+        val widgetToTreeCoords = NativeGtk.TreeViewwidgetToTreeCoords
+        val getVisibleRect = NativeGtk.TreeViewgetVisibleRect
+        val getBackgroundArea = NativeGtk.TreeViewgetBackgroundArea
+        val getCellArea = NativeGtk.TreeViewgetCellArea
+        val getPathAtPos = NativeGtk.TreeViewgetPathAtPos
+        val getBinWindow = NativeGtk.TreeViewgetBinWindow
+        val getCursor = NativeGtk.TreeViewgetCursor
+        val setCursorOnCell = NativeGtk.TreeViewsetCursorOnCell
+        val setCursor = NativeGtk.TreeViewsetCursor
+        val getReorderable = NativeGtk.TreeViewgetReorderable
+        val setReorderable = NativeGtk.TreeViewsetReorderable
+        val rowExpanded = NativeGtk.TreeViewrowExpanded
+        val collapseRow = NativeGtk.TreeViewcollapseRow
+        val expandRow = NativeGtk.TreeViewexpandRow
+        val expandToPath = NativeGtk.TreeViewexpandToPath
+        val collapseAll = NativeGtk.TreeViewcollapseAll
+        val expandAll = NativeGtk.TreeViewexpandAll
+        val rowActivated = NativeGtk.TreeViewrowActivated
+        val scrollToCell = NativeGtk.TreeViewscrollToCell
+        val scrollToPoint = NativeGtk.TreeViewscrollToPoint
+        val getExpanderColumn = NativeGtk.TreeViewgetExpanderColumn
+        val setExpanderColumn = NativeGtk.TreeViewsetExpanderColumn
+        val moveColumnAfter = NativeGtk.TreeViewmoveColumnAfter
+        val getColumns = NativeGtk.TreeViewgetColumns
+        val getColumn = NativeGtk.TreeViewgetColumn
+        val insertColumnWithAttributes = NativeGtk.TreeViewinsertColumnWithAttributes
+        val insertColumn = NativeGtk.TreeViewinsertColumn
+        val removeColumn = NativeGtk.TreeViewremoveColumn
+        val appendColumn = NativeGtk.TreeViewappendColumn
+        val getRulesHint = NativeGtk.TreeViewgetRulesHint
+        val setRulesHint = NativeGtk.TreeViewsetRulesHint
+        val setHeadersClickable = NativeGtk.TreeViewsetHeadersClickable
+        val columnsAutosize = NativeGtk.TreeViewcolumnsAutosize
+        val setHeadersVisible = NativeGtk.TreeViewsetHeadersVisible
+        val getHeadersVisible = NativeGtk.TreeViewgetHeadersVisible
+        val setVadjustment = NativeGtk.TreeViewsetVadjustment
+        val getVadjustment = NativeGtk.TreeViewgetVadjustment
+        val setHadjustment = NativeGtk.TreeViewsetHadjustment
+        val getHadjustment = NativeGtk.TreeViewgetHadjustment
+        val getSelection = NativeGtk.TreeViewgetSelection
+        val setModel = NativeGtk.TreeViewsetModel
+        val getModel = NativeGtk.TreeViewgetModel
+        val getType = NativeGtk.TreeViewgetType
+        (* properties *)
+        val searchColumn = Prop.newProp ("search-column",Value.int,Value.toInt)
+        val reorderable = Prop.newProp ("reorderable",Value.bool,Value.toBool)
+        val headersVisible = Prop.newProp ("headers-visible",Value.bool,Value.toBool)
+        val headersClickable = Prop.newProp ("headers-clickable",Value.bool,Value.toBool)
+        val enableSearch = Prop.newProp ("enable-search",Value.bool,Value.toBool)
+        val indentExpanders = Prop.newProp ("indent-expanders",Value.bool,Value.toBool)
+        val allowRules = Prop.newProp ("allow-rules",Value.bool,Value.toBool)
+        val verticalSeparator = Prop.newProp ("vertical-separator",Value.int,Value.toInt)
+        val horizontalSeparator = Prop.newProp ("horizontal-separator",Value.int,Value.toInt)
+        val expanderSize = Prop.newProp ("expander-size",Value.int,Value.toInt)
+        val oddRowColor = Prop.newProp ("odd-row-color",Value.object,Value.toObject)
+        val evenRowColor = Prop.newProp ("even-row-color",Value.object,Value.toObject)
+    end
+    structure TreeStore =
+    struct
+        (* constructors *)
+        val newv = NativeGtk.TreeStorenewv
+        (* methods *)
+        val moveBefore = NativeGtk.TreeStoremoveBefore
+        val moveAfter = NativeGtk.TreeStoremoveAfter
+        val swap = NativeGtk.TreeStoreswap
+        val reorder = NativeGtk.TreeStorereorder
+        val iterIsValid = NativeGtk.TreeStoreiterIsValid
+        val clear = NativeGtk.TreeStoreclear
+        val iterDepth = NativeGtk.TreeStoreiterDepth
+        val isAncestor = NativeGtk.TreeStoreisAncestor
+        val append = NativeGtk.TreeStoreappend
+        val prepend = NativeGtk.TreeStoreprepend
+        val insertAfter = NativeGtk.TreeStoreinsertAfter
+        val insertBefore = NativeGtk.TreeStoreinsertBefore
+        val insert = NativeGtk.TreeStoreinsert
+        val remove = NativeGtk.TreeStoreremove
+        val set = NativeGtk.TreeStoreset
+        val setValue = NativeGtk.TreeStoresetValue
+        val setColumnTypes = NativeGtk.TreeStoresetColumnTypes
+        val getType = NativeGtk.TreeStoregetType
+        (* properties *)
+    end
+    structure TreeSelection =
+    struct
+        (* constructors *)
+        (* methods *)
+        val unselectRange = NativeGtk.TreeSelectionunselectRange
+        val selectRange = NativeGtk.TreeSelectionselectRange
+        val unselectAll = NativeGtk.TreeSelectionunselectAll
+        val selectAll = NativeGtk.TreeSelectionselectAll
+        val iterIsSelected = NativeGtk.TreeSelectioniterIsSelected
+        val pathIsSelected = NativeGtk.TreeSelectionpathIsSelected
+        val unselectIter = NativeGtk.TreeSelectionunselectIter
+        val selectIter = NativeGtk.TreeSelectionselectIter
+        val unselectPath = NativeGtk.TreeSelectionunselectPath
+        val selectPath = NativeGtk.TreeSelectionselectPath
+        val countSelectedRows = NativeGtk.TreeSelectioncountSelectedRows
+        val getSelectedRows = NativeGtk.TreeSelectiongetSelectedRows
+        val getSelected = NativeGtk.TreeSelectiongetSelected
+        val getTreeView = NativeGtk.TreeSelectiongetTreeView
+        val getUserData = NativeGtk.TreeSelectiongetUserData
+        val getMode = NativeGtk.TreeSelectiongetMode
+        val setMode = NativeGtk.TreeSelectionsetMode
+        val getType = NativeGtk.TreeSelectiongetType
+        (* properties *)
+    end
+    structure TreeModelSort =
+    struct
+        (* constructors *)
+        val newWithModel = NativeGtk.TreeModelSortnewWithModel
+        (* methods *)
+        val iterIsValid = NativeGtk.TreeModelSortiterIsValid
+        val clearCache = NativeGtk.TreeModelSortclearCache
+        val resetDefaultSortFunc = NativeGtk.TreeModelSortresetDefaultSortFunc
+        val convertIterToChildIter = NativeGtk.TreeModelSortconvertIterToChildIter
+        val convertPathToChildPath = NativeGtk.TreeModelSortconvertPathToChildPath
+        val convertChildIterToIter = NativeGtk.TreeModelSortconvertChildIterToIter
+        val convertChildPathToPath = NativeGtk.TreeModelSortconvertChildPathToPath
+        val getModel = NativeGtk.TreeModelSortgetModel
+        val getType = NativeGtk.TreeModelSortgetType
+        (* properties *)
+    end
+    structure TreeModelFilter =
+    struct
+        (* constructors *)
+        (* methods *)
+        val clearCache = NativeGtk.TreeModelFilterclearCache
+        val refilter = NativeGtk.TreeModelFilterrefilter
+        val convertPathToChildPath = NativeGtk.TreeModelFilterconvertPathToChildPath
+        val convertChildPathToPath = NativeGtk.TreeModelFilterconvertChildPathToPath
+        val convertIterToChildIter = NativeGtk.TreeModelFilterconvertIterToChildIter
+        val convertChildIterToIter = NativeGtk.TreeModelFilterconvertChildIterToIter
+        val getModel = NativeGtk.TreeModelFiltergetModel
+        val setVisibleColumn = NativeGtk.TreeModelFiltersetVisibleColumn
+        val setModifyFunc = NativeGtk.TreeModelFiltersetModifyFunc
+        val getType = NativeGtk.TreeModelFiltergetType
+        (* properties *)
+    end
+    structure Tooltips =
+    struct
+        (* constructors *)
+        val new = NativeGtk.Tooltipsnew
+        (* methods *)
+        val forceWindow = NativeGtk.TooltipsforceWindow
+        val dataGet = NativeGtk.TooltipsdataGet
+        val setTip = NativeGtk.TooltipssetTip
+        val disable = NativeGtk.Tooltipsdisable
+        val enable = NativeGtk.Tooltipsenable
+        val getType = NativeGtk.TooltipsgetType
+        val getFieldUseStickyDelay = NativeGtk.TooltipsgetFieldUseStickyDelay
+        val setFieldUseStickyDelay = NativeGtk.TooltipssetFieldUseStickyDelay
+        val getFieldTipsDataList = NativeGtk.TooltipsgetFieldTipsDataList
+        val setFieldTipsDataList = NativeGtk.TooltipssetFieldTipsDataList
+        val getFieldTipWindow = NativeGtk.TooltipsgetFieldTipWindow
+        val setFieldTipWindow = NativeGtk.TooltipssetFieldTipWindow
+        val getFieldTipLabel = NativeGtk.TooltipsgetFieldTipLabel
+        val setFieldTipLabel = NativeGtk.TooltipssetFieldTipLabel
+        val getFieldTimerTag = NativeGtk.TooltipsgetFieldTimerTag
+        val setFieldTimerTag = NativeGtk.TooltipssetFieldTimerTag
+        val getFieldEnabled = NativeGtk.TooltipsgetFieldEnabled
+        val setFieldEnabled = NativeGtk.TooltipssetFieldEnabled
+        val getFieldDelay = NativeGtk.TooltipsgetFieldDelay
+        val setFieldDelay = NativeGtk.TooltipssetFieldDelay
+        val getFieldActiveTipsData = NativeGtk.TooltipsgetFieldActiveTipsData
+        val setFieldActiveTipsData = NativeGtk.TooltipssetFieldActiveTipsData
+        (* properties *)
+    end
+    structure ToolItem =
+    struct
+        (* constructors *)
+        val new = NativeGtk.ToolItemnew
+        (* methods *)
+        val rebuildMenu = NativeGtk.ToolItemrebuildMenu
+        val getProxyMenuItem = NativeGtk.ToolItemgetProxyMenuItem
+        val setProxyMenuItem = NativeGtk.ToolItemsetProxyMenuItem
+        val retrieveProxyMenuItem = NativeGtk.ToolItemretrieveProxyMenuItem
+        val getReliefStyle = NativeGtk.ToolItemgetReliefStyle
+        val getToolbarStyle = NativeGtk.ToolItemgetToolbarStyle
+        val getOrientation = NativeGtk.ToolItemgetOrientation
+        val getIconSize = NativeGtk.ToolItemgetIconSize
+        val getIsImportant = NativeGtk.ToolItemgetIsImportant
+        val setIsImportant = NativeGtk.ToolItemsetIsImportant
+        val getVisibleVertical = NativeGtk.ToolItemgetVisibleVertical
+        val setVisibleVertical = NativeGtk.ToolItemsetVisibleVertical
+        val getVisibleHorizontal = NativeGtk.ToolItemgetVisibleHorizontal
+        val setVisibleHorizontal = NativeGtk.ToolItemsetVisibleHorizontal
+        val getUseDragWindow = NativeGtk.ToolItemgetUseDragWindow
+        val setUseDragWindow = NativeGtk.ToolItemsetUseDragWindow
+        val setTooltip = NativeGtk.ToolItemsetTooltip
+        val getExpand = NativeGtk.ToolItemgetExpand
+        val setExpand = NativeGtk.ToolItemsetExpand
+        val getHomogeneous = NativeGtk.ToolItemgetHomogeneous
+        val setHomogeneous = NativeGtk.ToolItemsetHomogeneous
+        val getType = NativeGtk.ToolItemgetType
+        (* properties *)
+    end
+    structure ToolButton =
+    struct
+        (* constructors *)
+        val new = NativeGtk.ToolButtonnew
+        (* methods *)
+        val getLabelWidget = NativeGtk.ToolButtongetLabelWidget
+        val setLabelWidget = NativeGtk.ToolButtonsetLabelWidget
+        val getIconWidget = NativeGtk.ToolButtongetIconWidget
+        val setIconWidget = NativeGtk.ToolButtonsetIconWidget
+        val getStockId = NativeGtk.ToolButtongetStockId
+        val setStockId = NativeGtk.ToolButtonsetStockId
+        val getUseUnderline = NativeGtk.ToolButtongetUseUnderline
+        val setUseUnderline = NativeGtk.ToolButtonsetUseUnderline
+        val getLabel = NativeGtk.ToolButtongetLabel
+        val setLabel = NativeGtk.ToolButtonsetLabel
+        val newFromStock = NativeGtk.ToolButtonnewFromStock
+        val getType = NativeGtk.ToolButtongetType
+        (* properties *)
+    end
+    structure Toolbar =
+    struct
+        (* constructors *)
+        val new = NativeGtk.Toolbarnew
+        (* methods *)
+        val getTooltips = NativeGtk.ToolbargetTooltips
+        val getIconSize = NativeGtk.ToolbargetIconSize
+        val getStyle = NativeGtk.ToolbargetStyle
+        val getOrientation = NativeGtk.ToolbargetOrientation
+        val unsetStyle = NativeGtk.ToolbarunsetStyle
+        val setTooltips = NativeGtk.ToolbarsetTooltips
+        val setStyle = NativeGtk.ToolbarsetStyle
+        val setOrientation = NativeGtk.ToolbarsetOrientation
+        val getReliefStyle = NativeGtk.ToolbargetReliefStyle
+        val getShowArrow = NativeGtk.ToolbargetShowArrow
+        val setShowArrow = NativeGtk.ToolbarsetShowArrow
+        val setDropHighlightItem = NativeGtk.ToolbarsetDropHighlightItem
+        val getDropIndex = NativeGtk.ToolbargetDropIndex
+        val getNthItem = NativeGtk.ToolbargetNthItem
+        val getNItems = NativeGtk.ToolbargetNItems
+        val getItemIndex = NativeGtk.ToolbargetItemIndex
+        val insert = NativeGtk.Toolbarinsert
+        val getType = NativeGtk.ToolbargetType
+        (* properties *)
+    end
+    structure ToggleToolButton =
+    struct
+        (* constructors *)
+        val new = NativeGtk.ToggleToolButtonnew
+        (* methods *)
+        val getActive = NativeGtk.ToggleToolButtongetActive
+        val setActive = NativeGtk.ToggleToolButtonsetActive
+        val newFromStock = NativeGtk.ToggleToolButtonnewFromStock
+        val getType = NativeGtk.ToggleToolButtongetType
+        (* properties *)
+    end
+    structure ToggleButton =
+    struct
+        (* constructors *)
+        val newWithMnemonic = NativeGtk.ToggleButtonnewWithMnemonic
+        val newWithLabel = NativeGtk.ToggleButtonnewWithLabel
+        val new = NativeGtk.ToggleButtonnew
+        (* methods *)
+        val getInconsistent = NativeGtk.ToggleButtongetInconsistent
+        val setInconsistent = NativeGtk.ToggleButtonsetInconsistent
+        val toggled = NativeGtk.ToggleButtontoggled
+        val getActive = NativeGtk.ToggleButtongetActive
+        val setActive = NativeGtk.ToggleButtonsetActive
+        val getMode = NativeGtk.ToggleButtongetMode
+        val setMode = NativeGtk.ToggleButtonsetMode
+        val getType = NativeGtk.ToggleButtongetType
+        val getFieldDrawIndicator = NativeGtk.ToggleButtongetFieldDrawIndicator
+        val setFieldDrawIndicator = NativeGtk.ToggleButtonsetFieldDrawIndicator
+        (* properties *)
+    end
+    structure ToggleAction =
+    struct
+        (* constructors *)
+        val new = NativeGtk.ToggleActionnew
+        (* methods *)
+        val getDrawAsRadio = NativeGtk.ToggleActiongetDrawAsRadio
+        val setDrawAsRadio = NativeGtk.ToggleActionsetDrawAsRadio
+        val getActive = NativeGtk.ToggleActiongetActive
+        val setActive = NativeGtk.ToggleActionsetActive
+        val toggled = NativeGtk.ToggleActiontoggled
+        val getType = NativeGtk.ToggleActiongetType
+        (* properties *)
+    end
+    structure TextView =
+    struct
+        (* constructors *)
+        val newWithBuffer = NativeGtk.TextViewnewWithBuffer
+        val new = NativeGtk.TextViewnew
+        (* methods *)
+        val getDefaultAttributes = NativeGtk.TextViewgetDefaultAttributes
+        val getTabs = NativeGtk.TextViewgetTabs
+        val setTabs = NativeGtk.TextViewsetTabs
+        val getIndent = NativeGtk.TextViewgetIndent
+        val setIndent = NativeGtk.TextViewsetIndent
+        val getRightMargin = NativeGtk.TextViewgetRightMargin
+        val setRightMargin = NativeGtk.TextViewsetRightMargin
+        val getLeftMargin = NativeGtk.TextViewgetLeftMargin
+        val setLeftMargin = NativeGtk.TextViewsetLeftMargin
+        val getJustification = NativeGtk.TextViewgetJustification
+        val setJustification = NativeGtk.TextViewsetJustification
+        val getPixelsInsideWrap = NativeGtk.TextViewgetPixelsInsideWrap
+        val setPixelsInsideWrap = NativeGtk.TextViewsetPixelsInsideWrap
+        val getPixelsBelowLines = NativeGtk.TextViewgetPixelsBelowLines
+        val setPixelsBelowLines = NativeGtk.TextViewsetPixelsBelowLines
+        val getPixelsAboveLines = NativeGtk.TextViewgetPixelsAboveLines
+        val setPixelsAboveLines = NativeGtk.TextViewsetPixelsAboveLines
+        val getAcceptsTab = NativeGtk.TextViewgetAcceptsTab
+        val setAcceptsTab = NativeGtk.TextViewsetAcceptsTab
+        val getOverwrite = NativeGtk.TextViewgetOverwrite
+        val setOverwrite = NativeGtk.TextViewsetOverwrite
+        val getEditable = NativeGtk.TextViewgetEditable
+        val setEditable = NativeGtk.TextViewsetEditable
+        val getWrapMode = NativeGtk.TextViewgetWrapMode
+        val setWrapMode = NativeGtk.TextViewsetWrapMode
+        val moveChild = NativeGtk.TextViewmoveChild
+        val addChildInWindow = NativeGtk.TextViewaddChildInWindow
+        val addChildAtAnchor = NativeGtk.TextViewaddChildAtAnchor
+        val moveVisually = NativeGtk.TextViewmoveVisually
+        val startsDisplayLine = NativeGtk.TextViewstartsDisplayLine
+        val backwardDisplayLineStart = NativeGtk.TextViewbackwardDisplayLineStart
+        val forwardDisplayLineEnd = NativeGtk.TextViewforwardDisplayLineEnd
+        val backwardDisplayLine = NativeGtk.TextViewbackwardDisplayLine
+        val forwardDisplayLine = NativeGtk.TextViewforwardDisplayLine
+        val getBorderWindowSize = NativeGtk.TextViewgetBorderWindowSize
+        val setBorderWindowSize = NativeGtk.TextViewsetBorderWindowSize
+        val getWindowType = NativeGtk.TextViewgetWindowType
+        val getWindow = NativeGtk.TextViewgetWindow
+        val windowToBufferCoords = NativeGtk.TextViewwindowToBufferCoords
+        val bufferToWindowCoords = NativeGtk.TextViewbufferToWindowCoords
+        val getLineAtY = NativeGtk.TextViewgetLineAtY
+        val getLineYrange = NativeGtk.TextViewgetLineYrange
+        val getIterAtPosition = NativeGtk.TextViewgetIterAtPosition
+        val getIterAtLocation = NativeGtk.TextViewgetIterAtLocation
+        val getIterLocation = NativeGtk.TextViewgetIterLocation
+        val getCursorVisible = NativeGtk.TextViewgetCursorVisible
+        val setCursorVisible = NativeGtk.TextViewsetCursorVisible
+        val getVisibleRect = NativeGtk.TextViewgetVisibleRect
+        val placeCursorOnscreen = NativeGtk.TextViewplaceCursorOnscreen
+        val moveMarkOnscreen = NativeGtk.TextViewmoveMarkOnscreen
+        val scrollMarkOnscreen = NativeGtk.TextViewscrollMarkOnscreen
+        val scrollToMark = NativeGtk.TextViewscrollToMark
+        val scrollToIter = NativeGtk.TextViewscrollToIter
+        val getBuffer = NativeGtk.TextViewgetBuffer
+        val setBuffer = NativeGtk.TextViewsetBuffer
+        val getType = NativeGtk.TextViewgetType
+        (* properties *)
+    end
+    structure TextTagTable =
+    struct
+        (* constructors *)
+        val new = NativeGtk.TextTagTablenew
+        (* methods *)
+        val getSize = NativeGtk.TextTagTablegetSize
+        val foreach = NativeGtk.TextTagTableforeach
+        val lookup = NativeGtk.TextTagTablelookup
+        val remove = NativeGtk.TextTagTableremove
+        val add = NativeGtk.TextTagTableadd
+        val getType = NativeGtk.TextTagTablegetType
+        (* properties *)
+    end
+    structure TextTag =
+    struct
+        (* constructors *)
+        val new = NativeGtk.TextTagnew
+        (* methods *)
+        val event = NativeGtk.TextTagevent
+        val setPriority = NativeGtk.TextTagsetPriority
+        val getPriority = NativeGtk.TextTaggetPriority
+        val getType = NativeGtk.TextTaggetType
+        (* properties *)
+        val weightSet = Prop.newProp ("weight-set",Value.bool,Value.toBool)
+        val weight = Prop.newProp ("weight",Value.int,Value.toInt)
+        val sizeSet = Prop.newProp ("size-set",Value.bool,Value.toBool)
+        val size = Prop.newProp ("size",Value.int,Value.toInt)
+        val styleSet = Prop.newProp ("style-set",Value.bool,Value.toBool)
+        val style = Prop.newProp ("style",(fn x => Value.enum (Pango.Style.toInt (x), Pango.Style.getType ())),(fn v => Pango.Style.fromInt (Value.toInt (v))))
+        val name = Prop.newProp ("name",Value.string,Value.toString)
+        val editableSet = Prop.newProp ("editable-set",Value.bool,Value.toBool)
+        val editable = Prop.newProp ("editable",Value.bool,Value.toBool)
+        val foregroundGdk = Prop.newProp ("foreground-gdk",Value.object,Value.toObject)
+        val foreground = Prop.newProp ("foreground",Value.string,Value.toString)
+        val fontDesc = Prop.newProp ("font-desc",Value.object,Value.toObject)
+        val font = Prop.newProp ("font",Value.string,Value.toString)
+        val backgroundGdk = Prop.newProp ("background-gdk",Value.object,Value.toObject)
+        val background = Prop.newProp ("background",Value.string,Value.toString)
+    end
+    structure TextMark =
+    struct
+        (* constructors *)
+        (* methods *)
+        val getLeftGravity = NativeGtk.TextMarkgetLeftGravity
+        val getBuffer = NativeGtk.TextMarkgetBuffer
+        val getDeleted = NativeGtk.TextMarkgetDeleted
+        val getName = NativeGtk.TextMarkgetName
+        val getVisible = NativeGtk.TextMarkgetVisible
+        val setVisible = NativeGtk.TextMarksetVisible
+        val getType = NativeGtk.TextMarkgetType
+        (* properties *)
+    end
+    structure TextChildAnchor =
+    struct
+        (* constructors *)
+        val new = NativeGtk.TextChildAnchornew
+        (* methods *)
+        val getDeleted = NativeGtk.TextChildAnchorgetDeleted
+        val getWidgets = NativeGtk.TextChildAnchorgetWidgets
+        val getType = NativeGtk.TextChildAnchorgetType
+        (* properties *)
+    end
+    structure TextBuffer =
+    struct
+        (* constructors *)
+        val new = NativeGtk.TextBuffernew
+        (* methods *)
+        val connectSpecialSignals = NativeGtk.TextBufferconnectSpecialSignals
+        val backspace = NativeGtk.TextBufferbackspace
+        val endUserAction = NativeGtk.TextBufferendUserAction
+        val beginUserAction = NativeGtk.TextBufferbeginUserAction
+        val deleteSelection = NativeGtk.TextBufferdeleteSelection
+        val getSelectionBounds = NativeGtk.TextBuffergetSelectionBounds
+        val pasteClipboard = NativeGtk.TextBufferpasteClipboard
+        val copyClipboard = NativeGtk.TextBuffercopyClipboard
+        val cutClipboard = NativeGtk.TextBuffercutClipboard
+        val removeSelectionClipboard = NativeGtk.TextBufferremoveSelectionClipboard
+        val addSelectionClipboard = NativeGtk.TextBufferaddSelectionClipboard
+        val setModified = NativeGtk.TextBuffersetModified
+        val getModified = NativeGtk.TextBuffergetModified
+        val getIterAtChildAnchor = NativeGtk.TextBuffergetIterAtChildAnchor
+        val getIterAtMark = NativeGtk.TextBuffergetIterAtMark
+        val getBounds = NativeGtk.TextBuffergetBounds
+        val getEndIter = NativeGtk.TextBuffergetEndIter
+        val getStartIter = NativeGtk.TextBuffergetStartIter
+        val getIterAtLine = NativeGtk.TextBuffergetIterAtLine
+        val getIterAtOffset = NativeGtk.TextBuffergetIterAtOffset
+        val getIterAtLineIndex = NativeGtk.TextBuffergetIterAtLineIndex
+        val getIterAtLineOffset = NativeGtk.TextBuffergetIterAtLineOffset
+        val createTag = NativeGtk.TextBuffercreateTag
+        val removeAllTags = NativeGtk.TextBufferremoveAllTags
+        val removeTagByName = NativeGtk.TextBufferremoveTagByName
+        val applyTagByName = NativeGtk.TextBufferapplyTagByName
+        val removeTag = NativeGtk.TextBufferremoveTag
+        val applyTag = NativeGtk.TextBufferapplyTag
+        val selectRange = NativeGtk.TextBufferselectRange
+        val placeCursor = NativeGtk.TextBufferplaceCursor
+        val getSelectionBound = NativeGtk.TextBuffergetSelectionBound
+        val getInsert = NativeGtk.TextBuffergetInsert
+        val deleteMarkByName = NativeGtk.TextBufferdeleteMarkByName
+        val moveMarkByName = NativeGtk.TextBuffermoveMarkByName
+        val getMark = NativeGtk.TextBuffergetMark
+        val deleteMark = NativeGtk.TextBufferdeleteMark
+        val moveMark = NativeGtk.TextBuffermoveMark
+        val createMark = NativeGtk.TextBuffercreateMark
+        val createChildAnchor = NativeGtk.TextBuffercreateChildAnchor
+        val insertChildAnchor = NativeGtk.TextBufferinsertChildAnchor
+        val insertPixbuf = NativeGtk.TextBufferinsertPixbuf
+        val getSlice = NativeGtk.TextBuffergetSlice
+        val getText = NativeGtk.TextBuffergetText
+        val deleteInteractive = NativeGtk.TextBufferdeleteInteractive
+        val delete = NativeGtk.TextBufferdelete
+        val insertWithTagsByName = NativeGtk.TextBufferinsertWithTagsByName
+        val insertWithTags = NativeGtk.TextBufferinsertWithTags
+        val insertRangeInteractive = NativeGtk.TextBufferinsertRangeInteractive
+        val insertRange = NativeGtk.TextBufferinsertRange
+        val insertInteractiveAtCursor = NativeGtk.TextBufferinsertInteractiveAtCursor
+        val insertInteractive = NativeGtk.TextBufferinsertInteractive
+        val insertAtCursor = NativeGtk.TextBufferinsertAtCursor
+        val insert = NativeGtk.TextBufferinsert
+        val setText = NativeGtk.TextBuffersetText
+        val getTagTable = NativeGtk.TextBuffergetTagTable
+        val getCharCount = NativeGtk.TextBuffergetCharCount
+        val getLineCount = NativeGtk.TextBuffergetLineCount
+        val getType = NativeGtk.TextBuffergetType
+        val getFieldTagTable = NativeGtk.TextBuffergetFieldTagTable
+        val setFieldTagTable = NativeGtk.TextBuffersetFieldTagTable
+        (* properties *)
+    end
+    structure TearoffMenuItem =
+    struct
+        (* constructors *)
+        val new = NativeGtk.TearoffMenuItemnew
+        (* methods *)
+        val getType = NativeGtk.TearoffMenuItemgetType
+        (* properties *)
+    end
+    structure Table =
+    struct
+        (* constructors *)
+        val new = NativeGtk.Tablenew
+        (* methods *)
+        val getHomogeneous = NativeGtk.TablegetHomogeneous
+        val setHomogeneous = NativeGtk.TablesetHomogeneous
+        val getDefaultColSpacing = NativeGtk.TablegetDefaultColSpacing
+        val setColSpacings = NativeGtk.TablesetColSpacings
+        val getDefaultRowSpacing = NativeGtk.TablegetDefaultRowSpacing
+        val setRowSpacings = NativeGtk.TablesetRowSpacings
+        val getColSpacing = NativeGtk.TablegetColSpacing
+        val setColSpacing = NativeGtk.TablesetColSpacing
+        val getRowSpacing = NativeGtk.TablegetRowSpacing
+        val setRowSpacing = NativeGtk.TablesetRowSpacing
+        val attachDefaults = NativeGtk.TableattachDefaults
+        val attach = NativeGtk.Tableattach
+        val resize = NativeGtk.Tableresize
+        val getType = NativeGtk.TablegetType
+        (* properties *)
+    end
+    structure Style =
+    struct
+        (* constructors *)
+        val new = NativeGtk.Stylenew
+        (* methods *)
+        val paintResizeGrip = NativeGtk.StylepaintResizeGrip
+        val paintLayout = NativeGtk.StylepaintLayout
+        val paintExpander = NativeGtk.StylepaintExpander
+        val paintHandle = NativeGtk.StylepaintHandle
+        val paintSlider = NativeGtk.StylepaintSlider
+        val paintFocus = NativeGtk.StylepaintFocus
+        val paintExtension = NativeGtk.StylepaintExtension
+        val paintBoxGap = NativeGtk.StylepaintBoxGap
+        val paintShadowGap = NativeGtk.StylepaintShadowGap
+        val paintTab = NativeGtk.StylepaintTab
+        val paintOption = NativeGtk.StylepaintOption
+        val paintCheck = NativeGtk.StylepaintCheck
+        val paintFlatBox = NativeGtk.StylepaintFlatBox
+        val paintBox = NativeGtk.StylepaintBox
+        val paintDiamond = NativeGtk.StylepaintDiamond
+        val paintArrow = NativeGtk.StylepaintArrow
+        val paintPolygon = NativeGtk.StylepaintPolygon
+        val paintShadow = NativeGtk.StylepaintShadow
+        val paintVLine = NativeGtk.StylepaintVLine
+        val paintHLine = NativeGtk.StylepaintHLine
+        val drawCheck = NativeGtk.StyledrawCheck
+        val renderIcon = NativeGtk.StylerenderIcon
+        val lookupIconSet = NativeGtk.StylelookupIconSet
+        val applyDefaultBackground = NativeGtk.StyleapplyDefaultBackground
+        val setBackground = NativeGtk.StylesetBackground
+        val detach = NativeGtk.Styledetach
+        val attach = NativeGtk.Styleattach
+        val copy = NativeGtk.Stylecopy
+        val getType = NativeGtk.StylegetType
+        (* properties *)
+    end
+    structure Statusbar =
+    struct
+        (* constructors *)
+        val new = NativeGtk.Statusbarnew
+        (* methods *)
+        val getHasResizeGrip = NativeGtk.StatusbargetHasResizeGrip
+        val setHasResizeGrip = NativeGtk.StatusbarsetHasResizeGrip
+        val remove = NativeGtk.Statusbarremove
+        val pop = NativeGtk.Statusbarpop
+        val push = NativeGtk.Statusbarpush
+        val getContextId = NativeGtk.StatusbargetContextId
+        val getType = NativeGtk.StatusbargetType
+        (* properties *)
+    end
+    structure SpinButton =
+    struct
+        (* constructors *)
+        val newWithRange = NativeGtk.SpinButtonnewWithRange
+        val new = NativeGtk.SpinButtonnew
+        (* methods *)
+        val update = NativeGtk.SpinButtonupdate
+        val getSnapToTicks = NativeGtk.SpinButtongetSnapToTicks
+        val setSnapToTicks = NativeGtk.SpinButtonsetSnapToTicks
+        val getWrap = NativeGtk.SpinButtongetWrap
+        val setWrap = NativeGtk.SpinButtonsetWrap
+        val spin = NativeGtk.SpinButtonspin
+        val getNumeric = NativeGtk.SpinButtongetNumeric
+        val setNumeric = NativeGtk.SpinButtonsetNumeric
+        val getUpdatePolicy = NativeGtk.SpinButtongetUpdatePolicy
+        val setUpdatePolicy = NativeGtk.SpinButtonsetUpdatePolicy
+        val setValue = NativeGtk.SpinButtonsetValue
+        val getValueAsInt = NativeGtk.SpinButtongetValueAsInt
+        val getValue = NativeGtk.SpinButtongetValue
+        val getRange = NativeGtk.SpinButtongetRange
+        val setRange = NativeGtk.SpinButtonsetRange
+        val getIncrements = NativeGtk.SpinButtongetIncrements
+        val setIncrements = NativeGtk.SpinButtonsetIncrements
+        val getDigits = NativeGtk.SpinButtongetDigits
+        val setDigits = NativeGtk.SpinButtonsetDigits
+        val getAdjustment = NativeGtk.SpinButtongetAdjustment
+        val setAdjustment = NativeGtk.SpinButtonsetAdjustment
+        val configure = NativeGtk.SpinButtonconfigure
+        val getType = NativeGtk.SpinButtongetType
+        (* properties *)
+    end
+    structure SizeGroup =
+    struct
+        (* constructors *)
+        val new = NativeGtk.SizeGroupnew
+        (* methods *)
+        val removeWidget = NativeGtk.SizeGroupremoveWidget
+        val addWidget = NativeGtk.SizeGroupaddWidget
+        val getMode = NativeGtk.SizeGroupgetMode
+        val setMode = NativeGtk.SizeGroupsetMode
+        val getType = NativeGtk.SizeGroupgetType
+        (* properties *)
+    end
+    structure Settings =
+    struct
+        (* constructors *)
+        (* methods *)
+        val setDoubleProperty = NativeGtk.SettingssetDoubleProperty
+        val setLongProperty = NativeGtk.SettingssetLongProperty
+        val setStringProperty = NativeGtk.SettingssetStringProperty
+        val setPropertyValue = NativeGtk.SettingssetPropertyValue
+        val installPropertyParser = NativeGtk.SettingsinstallPropertyParser
+        val installProperty = NativeGtk.SettingsinstallProperty
+        val getForScreen = NativeGtk.SettingsgetForScreen
+        val getDefault = NativeGtk.SettingsgetDefault
+        val getType = NativeGtk.SettingsgetType
+        (* properties *)
+    end
+    structure SeparatorToolItem =
+    struct
+        (* constructors *)
+        val new = NativeGtk.SeparatorToolItemnew
+        (* methods *)
+        val setDraw = NativeGtk.SeparatorToolItemsetDraw
+        val getDraw = NativeGtk.SeparatorToolItemgetDraw
+        val getType = NativeGtk.SeparatorToolItemgetType
+        (* properties *)
+    end
+    structure SeparatorMenuItem =
+    struct
+        (* constructors *)
+        val new = NativeGtk.SeparatorMenuItemnew
+        (* methods *)
+        val getType = NativeGtk.SeparatorMenuItemgetType
+        (* properties *)
+    end
+    structure Separator =
+    struct
+        (* constructors *)
+        (* methods *)
+        val getType = NativeGtk.SeparatorgetType
+        (* properties *)
+    end
+    structure ScrolledWindow =
+    struct
+        (* constructors *)
+        val new = NativeGtk.ScrolledWindownew
+        (* methods *)
+        val addWithViewport = NativeGtk.ScrolledWindowaddWithViewport
+        val getShadowType = NativeGtk.ScrolledWindowgetShadowType
+        val setShadowType = NativeGtk.ScrolledWindowsetShadowType
+        val getPlacement = NativeGtk.ScrolledWindowgetPlacement
+        val setPlacement = NativeGtk.ScrolledWindowsetPlacement
+        val getPolicy = NativeGtk.ScrolledWindowgetPolicy
+        val setPolicy = NativeGtk.ScrolledWindowsetPolicy
+        val getVadjustment = NativeGtk.ScrolledWindowgetVadjustment
+        val getHadjustment = NativeGtk.ScrolledWindowgetHadjustment
+        val setVadjustment = NativeGtk.ScrolledWindowsetVadjustment
+        val setHadjustment = NativeGtk.ScrolledWindowsetHadjustment
+        val getType = NativeGtk.ScrolledWindowgetType
+        (* properties *)
+    end
+    structure Scrollbar =
+    struct
+        (* constructors *)
+        (* methods *)
+        val getType = NativeGtk.ScrollbargetType
+        (* properties *)
+    end
+    structure Scale =
+    struct
+        (* constructors *)
+        (* methods *)
+        val getLayoutOffsets = NativeGtk.ScalegetLayoutOffsets
+        val getLayout = NativeGtk.ScalegetLayout
+        val getValuePos = NativeGtk.ScalegetValuePos
+        val setValuePos = NativeGtk.ScalesetValuePos
+        val getDrawValue = NativeGtk.ScalegetDrawValue
+        val setDrawValue = NativeGtk.ScalesetDrawValue
+        val getDigits = NativeGtk.ScalegetDigits
+        val setDigits = NativeGtk.ScalesetDigits
+        val getType = NativeGtk.ScalegetType
+        (* properties *)
+    end
+    structure Ruler =
+    struct
+        (* constructors *)
+        (* methods *)
+        val getRange = NativeGtk.RulergetRange
+        val getMetric = NativeGtk.RulergetMetric
+        val drawPos = NativeGtk.RulerdrawPos
+        val drawTicks = NativeGtk.RulerdrawTicks
+        val setRange = NativeGtk.RulersetRange
+        val setMetric = NativeGtk.RulersetMetric
+        val getType = NativeGtk.RulergetType
+        (* properties *)
+    end
+    structure RcStyle =
+    struct
+        (* constructors *)
+        (* methods *)
+        val unref = NativeGtk.RcStyleunref
+        val reference = NativeGtk.RcStylereference
+        val copy = NativeGtk.RcStylecopy
+        val getType = NativeGtk.RcStylegetType
+        (* properties *)
+    end
+    structure Range =
+    struct
+        (* constructors *)
+        (* methods *)
+        val getValue = NativeGtk.RangegetValue
+        val setValue = NativeGtk.RangesetValue
+        val setRange = NativeGtk.RangesetRange
+        val setIncrements = NativeGtk.RangesetIncrements
+        val getInverted = NativeGtk.RangegetInverted
+        val setInverted = NativeGtk.RangesetInverted
+        val getAdjustment = NativeGtk.RangegetAdjustment
+        val setAdjustment = NativeGtk.RangesetAdjustment
+        val getUpdatePolicy = NativeGtk.RangegetUpdatePolicy
+        val setUpdatePolicy = NativeGtk.RangesetUpdatePolicy
+        val getType = NativeGtk.RangegetType
+        (* properties *)
+    end
+    structure RadioToolButton =
+    struct
+        (* constructors *)
+        val newWithStockFromWidget = NativeGtk.RadioToolButtonnewWithStockFromWidget
+        val newFromWidget = NativeGtk.RadioToolButtonnewFromWidget
+        (* methods *)
+        val getGroup = NativeGtk.RadioToolButtongetGroup
+        val setGroup = NativeGtk.RadioToolButtonsetGroup
+        val getType = NativeGtk.RadioToolButtongetType
+        (* properties *)
+    end
+    structure RadioMenuItem =
+    struct
+        (* constructors *)
+        val newWithMnemonic = NativeGtk.RadioMenuItemnewWithMnemonic
+        val newWithLabel = NativeGtk.RadioMenuItemnewWithLabel
+        val new = NativeGtk.RadioMenuItemnew
+        (* methods *)
+        val setGroup = NativeGtk.RadioMenuItemsetGroup
+        val getGroup = NativeGtk.RadioMenuItemgetGroup
+        val newWithLabelFromWidget = NativeGtk.RadioMenuItemnewWithLabelFromWidget
+        val newWithMnemonicFromWidget = NativeGtk.RadioMenuItemnewWithMnemonicFromWidget
+        val newFromWidget = NativeGtk.RadioMenuItemnewFromWidget
+        val getType = NativeGtk.RadioMenuItemgetType
+        (* properties *)
+    end
+    structure RadioButton =
+    struct
+        (* constructors *)
+        val newWithMnemonicFromWidget = NativeGtk.RadioButtonnewWithMnemonicFromWidget
+        val newWithMnemonic = NativeGtk.RadioButtonnewWithMnemonic
+        val newWithLabelFromWidget = NativeGtk.RadioButtonnewWithLabelFromWidget
+        val newWithLabel = NativeGtk.RadioButtonnewWithLabel
+        val newFromWidget = NativeGtk.RadioButtonnewFromWidget
+        val new = NativeGtk.RadioButtonnew
+        (* methods *)
+        val setGroup = NativeGtk.RadioButtonsetGroup
+        val getGroup = NativeGtk.RadioButtongetGroup
+        val getType = NativeGtk.RadioButtongetType
+        (* properties *)
+    end
+    structure RadioAction =
+    struct
+        (* constructors *)
+        (* methods *)
+        (* properties *)
+    end
+    structure ProgressBar =
+    struct
+        (* constructors *)
+        val new = NativeGtk.ProgressBarnew
+        (* methods *)
+        val getEllipsize = NativeGtk.ProgressBargetEllipsize
+        val setEllipsize = NativeGtk.ProgressBarsetEllipsize
+        val getOrientation = NativeGtk.ProgressBargetOrientation
+        val getPulseStep = NativeGtk.ProgressBargetPulseStep
+        val getFraction = NativeGtk.ProgressBargetFraction
+        val getText = NativeGtk.ProgressBargetText
+        val setOrientation = NativeGtk.ProgressBarsetOrientation
+        val setPulseStep = NativeGtk.ProgressBarsetPulseStep
+        val setFraction = NativeGtk.ProgressBarsetFraction
+        val setText = NativeGtk.ProgressBarsetText
+        val pulse = NativeGtk.ProgressBarpulse
+        val getType = NativeGtk.ProgressBargetType
+        (* properties *)
+    end
+    structure Progress =
+    struct
+        (* constructors *)
+        (* methods *)
+        val getType = NativeGtk.ProgressgetType
+        (* properties *)
+    end
+    structure Preview =
+    struct
+        (* constructors *)
+        (* methods *)
+        val setExpand = NativeGtk.PreviewsetExpand
+        val drawRow = NativeGtk.PreviewdrawRow
+        val put = NativeGtk.Previewput
+        val size = NativeGtk.Previewsize
+        val getType = NativeGtk.PreviewgetType
+        (* properties *)
+    end
+    structure Pixmap =
+    struct
+        (* constructors *)
+        (* methods *)
+        (* properties *)
+    end
+    structure Paned =
+    struct
+        (* constructors *)
+        (* methods *)
+        val computePosition = NativeGtk.PanedcomputePosition
+        val getChild2 = NativeGtk.PanedgetChild2
+        val getChild1 = NativeGtk.PanedgetChild1
+        val setPosition = NativeGtk.PanedsetPosition
+        val getPosition = NativeGtk.PanedgetPosition
+        val pack2 = NativeGtk.Panedpack2
+        val pack1 = NativeGtk.Panedpack1
+        val add2 = NativeGtk.Panedadd2
+        val add1 = NativeGtk.Panedadd1
+        val getType = NativeGtk.PanedgetType
+        (* properties *)
+    end
+    structure OptionMenu =
+    struct
+        (* constructors *)
+        (* methods *)
+        val setHistory = NativeGtk.OptionMenusetHistory
+        val getHistory = NativeGtk.OptionMenugetHistory
+        val removeMenu = NativeGtk.OptionMenuremoveMenu
+        val setMenu = NativeGtk.OptionMenusetMenu
+        val getMenu = NativeGtk.OptionMenugetMenu
+        val getType = NativeGtk.OptionMenugetType
+        (* properties *)
+    end
+    structure OldEditable =
+    struct
+        (* constructors *)
+        (* methods *)
+        val changed = NativeGtk.OldEditablechanged
+        val claimSelection = NativeGtk.OldEditableclaimSelection
+        val getType = NativeGtk.OldEditablegetType
+        (* properties *)
+    end
+    structure Object =
+    struct
+        (* constructors *)
+        (* methods *)
+        val destroy = NativeGtk.Objectdestroy
+        val sink = NativeGtk.Objectsink
+        val new = NativeGtk.Objectnew
+        val getType = NativeGtk.ObjectgetType
+        (* properties *)
+    end
+    structure Notebook =
+    struct
+        (* constructors *)
+        val new = NativeGtk.Notebooknew
+        (* methods *)
+        val reorderChild = NativeGtk.NotebookreorderChild
+        val setTabLabelPacking = NativeGtk.NotebooksetTabLabelPacking
+        val queryTabLabelPacking = NativeGtk.NotebookqueryTabLabelPacking
+        val getMenuLabelText = NativeGtk.NotebookgetMenuLabelText
+        val setMenuLabelText = NativeGtk.NotebooksetMenuLabelText
+        val setMenuLabel = NativeGtk.NotebooksetMenuLabel
+        val getMenuLabel = NativeGtk.NotebookgetMenuLabel
+        val getTabLabelText = NativeGtk.NotebookgetTabLabelText
+        val setTabLabelText = NativeGtk.NotebooksetTabLabelText
+        val setTabLabel = NativeGtk.NotebooksetTabLabel
+        val getTabLabel = NativeGtk.NotebookgetTabLabel
+        val popupDisable = NativeGtk.NotebookpopupDisable
+        val popupEnable = NativeGtk.NotebookpopupEnable
+        val getScrollable = NativeGtk.NotebookgetScrollable
+        val setScrollable = NativeGtk.NotebooksetScrollable
+        val getTabPos = NativeGtk.NotebookgetTabPos
+        val setTabPos = NativeGtk.NotebooksetTabPos
+        val getShowTabs = NativeGtk.NotebookgetShowTabs
+        val setShowTabs = NativeGtk.NotebooksetShowTabs
+        val getShowBorder = NativeGtk.NotebookgetShowBorder
+        val setShowBorder = NativeGtk.NotebooksetShowBorder
+        val prevPage = NativeGtk.NotebookprevPage
+        val nextPage = NativeGtk.NotebooknextPage
+        val setCurrentPage = NativeGtk.NotebooksetCurrentPage
+        val pageNum = NativeGtk.NotebookpageNum
+        val getNPages = NativeGtk.NotebookgetNPages
+        val getNthPage = NativeGtk.NotebookgetNthPage
+        val getCurrentPage = NativeGtk.NotebookgetCurrentPage
+        val removePage = NativeGtk.NotebookremovePage
+        val insertPageMenu = NativeGtk.NotebookinsertPageMenu
+        val insertPage = NativeGtk.NotebookinsertPage
+        val prependPageMenu = NativeGtk.NotebookprependPageMenu
+        val prependPage = NativeGtk.NotebookprependPage
+        val appendPageMenu = NativeGtk.NotebookappendPageMenu
+        val appendPage = NativeGtk.NotebookappendPage
+        val getType = NativeGtk.NotebookgetType
+        val getFieldTabPos = NativeGtk.NotebookgetFieldTabPos
+        val setFieldTabPos = NativeGtk.NotebooksetFieldTabPos
+        (* properties *)
+    end
+    structure Misc =
+    struct
+        (* constructors *)
+        (* methods *)
+        val getPadding = NativeGtk.MiscgetPadding
+        val setPadding = NativeGtk.MiscsetPadding
+        val getAlignment = NativeGtk.MiscgetAlignment
+        val setAlignment = NativeGtk.MiscsetAlignment
+        val getType = NativeGtk.MiscgetType
+        (* properties *)
+    end
+    structure MessageDialog =
+    struct
+        (* constructors *)
+        val newWithMarkup = NativeGtk.MessageDialognewWithMarkup
+        val new = NativeGtk.MessageDialognew
+        (* methods *)
+        val formatSecondaryMarkup = NativeGtk.MessageDialogformatSecondaryMarkup
+        val formatSecondaryText = NativeGtk.MessageDialogformatSecondaryText
+        val setMarkup = NativeGtk.MessageDialogsetMarkup
+        val getType = NativeGtk.MessageDialoggetType
+        val getFieldLabel = NativeGtk.MessageDialoggetFieldLabel
+        val setFieldLabel = NativeGtk.MessageDialogsetFieldLabel
+        val getFieldImage = NativeGtk.MessageDialoggetFieldImage
+        val setFieldImage = NativeGtk.MessageDialogsetFieldImage
+        (* properties *)
+    end
+    structure MenuToolButton =
+    struct
+        (* constructors *)
+        val new = NativeGtk.MenuToolButtonnew
+        (* methods *)
+        val setArrowTooltip = NativeGtk.MenuToolButtonsetArrowTooltip
+        val getMenu = NativeGtk.MenuToolButtongetMenu
+        val setMenu = NativeGtk.MenuToolButtonsetMenu
+        val newFromStock = NativeGtk.MenuToolButtonnewFromStock
+        val getType = NativeGtk.MenuToolButtongetType
+        (* properties *)
+    end
+    structure MenuShell =
+    struct
+        (* constructors *)
+        (* methods *)
+        val cancel = NativeGtk.MenuShellcancel
+        val selectFirst = NativeGtk.MenuShellselectFirst
+        val activateItem = NativeGtk.MenuShellactivateItem
+        val deselect = NativeGtk.MenuShelldeselect
+        val selectItem = NativeGtk.MenuShellselectItem
+        val deactivate = NativeGtk.MenuShelldeactivate
+        val insert = NativeGtk.MenuShellinsert
+        val prepend = NativeGtk.MenuShellprepend
+        val append = NativeGtk.MenuShellappend
+        val getType = NativeGtk.MenuShellgetType
+        (* properties *)
+    end
+    structure MenuItem =
+    struct
+        (* constructors *)
+        val newWithMnemonic = NativeGtk.MenuItemnewWithMnemonic
+        val newWithLabel = NativeGtk.MenuItemnewWithLabel
+        val new = NativeGtk.MenuItemnew
+        (* methods *)
+        val setAccelPath = NativeGtk.MenuItemsetAccelPath
+        val getRightJustified = NativeGtk.MenuItemgetRightJustified
+        val setRightJustified = NativeGtk.MenuItemsetRightJustified
+        val toggleSizeAllocate = NativeGtk.MenuItemtoggleSizeAllocate
+        val toggleSizeRequest = NativeGtk.MenuItemtoggleSizeRequest
+        val activate = NativeGtk.MenuItemactivate
+        val deselect = NativeGtk.MenuItemdeselect
+        val select = NativeGtk.MenuItemselect
+        val removeSubmenu = NativeGtk.MenuItemremoveSubmenu
+        val getSubmenu = NativeGtk.MenuItemgetSubmenu
+        val setSubmenu = NativeGtk.MenuItemsetSubmenu
+        val getType = NativeGtk.MenuItemgetType
+        (* properties *)
+    end
+    structure MenuBar =
+    struct
+        (* constructors *)
+        val new = NativeGtk.MenuBarnew
+        (* methods *)
+        val getType = NativeGtk.MenuBargetType
+        (* properties *)
+    end
+    structure Menu =
+    struct
+        (* constructors *)
+        val new = NativeGtk.Menunew
+        (* methods *)
+        val setMonitor = NativeGtk.MenusetMonitor
+        val attach = NativeGtk.Menuattach
+        val setScreen = NativeGtk.MenusetScreen
+        val reorderChild = NativeGtk.MenureorderChild
+        val getTitle = NativeGtk.MenugetTitle
+        val setTitle = NativeGtk.MenusetTitle
+        val getTearoffState = NativeGtk.MenugetTearoffState
+        val setTearoffState = NativeGtk.MenusetTearoffState
+        val getAttachWidget = NativeGtk.MenugetAttachWidget
+        val detach = NativeGtk.Menudetach
+        val attachToWidget = NativeGtk.MenuattachToWidget
+        val setAccelPath = NativeGtk.MenusetAccelPath
+        val getAccelGroup = NativeGtk.MenugetAccelGroup
+        val setAccelGroup = NativeGtk.MenusetAccelGroup
+        val setActive = NativeGtk.MenusetActive
+        val getActive = NativeGtk.MenugetActive
+        val popdown = NativeGtk.Menupopdown
+        val reposition = NativeGtk.Menureposition
+        val popup = NativeGtk.Menupopup
+        val getType = NativeGtk.MenugetType
+        (* properties *)
+    end
+    structure ListStore =
+    struct
+        (* constructors *)
+        val newv = NativeGtk.ListStorenewv
+        (* methods *)
+        val moveBefore = NativeGtk.ListStoremoveBefore
+        val moveAfter = NativeGtk.ListStoremoveAfter
+        val swap = NativeGtk.ListStoreswap
+        val reorder = NativeGtk.ListStorereorder
+        val iterIsValid = NativeGtk.ListStoreiterIsValid
+        val clear = NativeGtk.ListStoreclear
+        val append = NativeGtk.ListStoreappend
+        val prepend = NativeGtk.ListStoreprepend
+        val insertWithValuesv = NativeGtk.ListStoreinsertWithValuesv
+        val insertWithValues = NativeGtk.ListStoreinsertWithValues
+        val insertAfter = NativeGtk.ListStoreinsertAfter
+        val insertBefore = NativeGtk.ListStoreinsertBefore
+        val insert = NativeGtk.ListStoreinsert
+        val remove = NativeGtk.ListStoreremove
+        val set = NativeGtk.ListStoreset
+        val setValue = NativeGtk.ListStoresetValue
+        val setColumnTypes = NativeGtk.ListStoresetColumnTypes
+        val getType = NativeGtk.ListStoregetType
+        (* properties *)
+    end
+    structure Layout =
+    struct
+        (* constructors *)
+        val new = NativeGtk.Layoutnew
+        (* methods *)
+        val thaw = NativeGtk.Layoutthaw
+        val freeze = NativeGtk.Layoutfreeze
+        val setVadjustment = NativeGtk.LayoutsetVadjustment
+        val setHadjustment = NativeGtk.LayoutsetHadjustment
+        val getVadjustment = NativeGtk.LayoutgetVadjustment
+        val getHadjustment = NativeGtk.LayoutgetHadjustment
+        val getSize = NativeGtk.LayoutgetSize
+        val setSize = NativeGtk.LayoutsetSize
+        val move = NativeGtk.Layoutmove
+        val put = NativeGtk.Layoutput
+        val getType = NativeGtk.LayoutgetType
+        val getFieldBinWindow = NativeGtk.LayoutgetFieldBinWindow
+        val setFieldBinWindow = NativeGtk.LayoutsetFieldBinWindow
+        (* properties *)
+    end
+    structure Label =
+    struct
+        (* constructors *)
+        val newWithMnemonic = NativeGtk.LabelnewWithMnemonic
+        val new = NativeGtk.Labelnew
+        (* methods *)
+        val getSingleLineMode = NativeGtk.LabelgetSingleLineMode
+        val setSingleLineMode = NativeGtk.LabelsetSingleLineMode
+        val getMaxWidthChars = NativeGtk.LabelgetMaxWidthChars
+        val setMaxWidthChars = NativeGtk.LabelsetMaxWidthChars
+        val getWidthChars = NativeGtk.LabelgetWidthChars
+        val setWidthChars = NativeGtk.LabelsetWidthChars
+        val getAngle = NativeGtk.LabelgetAngle
+        val setAngle = NativeGtk.LabelsetAngle
+        val getEllipsize = NativeGtk.LabelgetEllipsize
+        val setEllipsize = NativeGtk.LabelsetEllipsize
+        val getLayoutOffsets = NativeGtk.LabelgetLayoutOffsets
+        val getLayout = NativeGtk.LabelgetLayout
+        val getSelectionBounds = NativeGtk.LabelgetSelectionBounds
+        val selectRegion = NativeGtk.LabelselectRegion
+        val getSelectable = NativeGtk.LabelgetSelectable
+        val setSelectable = NativeGtk.LabelsetSelectable
+        val getLineWrap = NativeGtk.LabelgetLineWrap
+        val setLineWrap = NativeGtk.LabelsetLineWrap
+        val setPattern = NativeGtk.LabelsetPattern
+        val getJustify = NativeGtk.LabelgetJustify
+        val setJustify = NativeGtk.LabelsetJustify
+        val setTextWithMnemonic = NativeGtk.LabelsetTextWithMnemonic
+        val getMnemonicWidget = NativeGtk.LabelgetMnemonicWidget
+        val setMnemonicWidget = NativeGtk.LabelsetMnemonicWidget
+        val getMnemonicKeyval = NativeGtk.LabelgetMnemonicKeyval
+        val setMarkupWithMnemonic = NativeGtk.LabelsetMarkupWithMnemonic
+        val getUseUnderline = NativeGtk.LabelgetUseUnderline
+        val setUseUnderline = NativeGtk.LabelsetUseUnderline
+        val getUseMarkup = NativeGtk.LabelgetUseMarkup
+        val setUseMarkup = NativeGtk.LabelsetUseMarkup
+        val setMarkup = NativeGtk.LabelsetMarkup
+        val getLabel = NativeGtk.LabelgetLabel
+        val setLabel = NativeGtk.LabelsetLabel
+        val getAttributes = NativeGtk.LabelgetAttributes
+        val setAttributes = NativeGtk.LabelsetAttributes
+        val getText = NativeGtk.LabelgetText
+        val setText = NativeGtk.LabelsetText
+        val getType = NativeGtk.LabelgetType
+        (* properties *)
+    end
+    structure ItemFactory =
+    struct
+        (* constructors *)
+        (* methods *)
+        (* properties *)
+    end
+    structure Item =
+    struct
+        (* constructors *)
+        (* methods *)
+        val toggle = NativeGtk.Itemtoggle
+        val deselect = NativeGtk.Itemdeselect
+        val select = NativeGtk.Itemselect
+        val getType = NativeGtk.ItemgetType
+        (* properties *)
+    end
+    structure Invisible =
+    struct
+        (* constructors *)
+        val newForScreen = NativeGtk.InvisiblenewForScreen
+        val new = NativeGtk.Invisiblenew
+        (* methods *)
+        val getScreen = NativeGtk.InvisiblegetScreen
+        val setScreen = NativeGtk.InvisiblesetScreen
+        val getType = NativeGtk.InvisiblegetType
+        (* properties *)
+    end
+    structure InputDialog =
+    struct
+        (* constructors *)
+        val new = NativeGtk.InputDialognew
+        (* methods *)
+        val getType = NativeGtk.InputDialoggetType
+        (* properties *)
+    end
+    structure IMMulticontext =
+    struct
+        (* constructors *)
+        val new = NativeGtk.IMMulticontextnew
+        (* methods *)
+        val appendMenuitems = NativeGtk.IMMulticontextappendMenuitems
+        val getType = NativeGtk.IMMulticontextgetType
+        (* properties *)
+    end
+    structure IMContextSimple =
+    struct
+        (* constructors *)
+        val new = NativeGtk.IMContextSimplenew
+        (* methods *)
+        val addTable = NativeGtk.IMContextSimpleaddTable
+        val getType = NativeGtk.IMContextSimplegetType
+        (* properties *)
+    end
+    structure IMContext =
+    struct
+        (* constructors *)
+        (* methods *)
+        val deleteSurrounding = NativeGtk.IMContextdeleteSurrounding
+        val getSurrounding = NativeGtk.IMContextgetSurrounding
+        val setSurrounding = NativeGtk.IMContextsetSurrounding
+        val setUsePreedit = NativeGtk.IMContextsetUsePreedit
+        val setCursorLocation = NativeGtk.IMContextsetCursorLocation
+        val reset = NativeGtk.IMContextreset
+        val focusOut = NativeGtk.IMContextfocusOut
+        val focusIn = NativeGtk.IMContextfocusIn
+        val filterKeypress = NativeGtk.IMContextfilterKeypress
+        val getPreeditString = NativeGtk.IMContextgetPreeditString
+        val setClientWindow = NativeGtk.IMContextsetClientWindow
+        val getType = NativeGtk.IMContextgetType
+        (* properties *)
+    end
+    structure ImageMenuItem =
+    struct
+        (* constructors *)
+        val newFromStock = NativeGtk.ImageMenuItemnewFromStock
+        val newWithMnemonic = NativeGtk.ImageMenuItemnewWithMnemonic
+        val newWithLabel = NativeGtk.ImageMenuItemnewWithLabel
+        val new = NativeGtk.ImageMenuItemnew
+        (* methods *)
+        val getImage = NativeGtk.ImageMenuItemgetImage
+        val setImage = NativeGtk.ImageMenuItemsetImage
+        val getType = NativeGtk.ImageMenuItemgetType
+        (* properties *)
+    end
+    structure Image =
+    struct
+        (* constructors *)
+        val newFromStock = NativeGtk.ImagenewFromStock
+        val newFromPixbuf = NativeGtk.ImagenewFromPixbuf
+        val newFromFile = NativeGtk.ImagenewFromFile
+        val newFromImage = NativeGtk.ImagenewFromImage
+        val newFromPixmap = NativeGtk.ImagenewFromPixmap
+        val new = NativeGtk.Imagenew
+        (* methods *)
+        val getPixelSize = NativeGtk.ImagegetPixelSize
+        val getIconName = NativeGtk.ImagegetIconName
+        val setPixelSize = NativeGtk.ImagesetPixelSize
+        val setFromIconName = NativeGtk.ImagesetFromIconName
+        val newFromIconName = NativeGtk.ImagenewFromIconName
+        val getAnimation = NativeGtk.ImagegetAnimation
+        val getIconSet = NativeGtk.ImagegetIconSet
+        val getStock = NativeGtk.ImagegetStock
+        val getPixbuf = NativeGtk.ImagegetPixbuf
+        val getImage = NativeGtk.ImagegetImage
+        val getPixmap = NativeGtk.ImagegetPixmap
+        val getStorageType = NativeGtk.ImagegetStorageType
+        val setFromAnimation = NativeGtk.ImagesetFromAnimation
+        val setFromIconSet = NativeGtk.ImagesetFromIconSet
+        val setFromStock = NativeGtk.ImagesetFromStock
+        val setFromPixbuf = NativeGtk.ImagesetFromPixbuf
+        val setFromFile = NativeGtk.ImagesetFromFile
+        val setFromImage = NativeGtk.ImagesetFromImage
+        val setFromPixmap = NativeGtk.ImagesetFromPixmap
+        val newFromAnimation = NativeGtk.ImagenewFromAnimation
+        val newFromIconSet = NativeGtk.ImagenewFromIconSet
+        val getType = NativeGtk.ImagegetType
+        (* properties *)
+    end
+    structure IconView =
+    struct
+        (* constructors *)
+        val new = NativeGtk.IconViewnew
+        (* methods *)
+        val itemActivated = NativeGtk.IconViewitemActivated
+        val unselectAll = NativeGtk.IconViewunselectAll
+        val selectAll = NativeGtk.IconViewselectAll
+        val getSelectedItems = NativeGtk.IconViewgetSelectedItems
+        val pathIsSelected = NativeGtk.IconViewpathIsSelected
+        val unselectPath = NativeGtk.IconViewunselectPath
+        val selectPath = NativeGtk.IconViewselectPath
+        val getSelectionMode = NativeGtk.IconViewgetSelectionMode
+        val setSelectionMode = NativeGtk.IconViewsetSelectionMode
+        val getPathAtPos = NativeGtk.IconViewgetPathAtPos
+        val getMargin = NativeGtk.IconViewgetMargin
+        val setMargin = NativeGtk.IconViewsetMargin
+        val getColumnSpacing = NativeGtk.IconViewgetColumnSpacing
+        val setColumnSpacing = NativeGtk.IconViewsetColumnSpacing
+        val getRowSpacing = NativeGtk.IconViewgetRowSpacing
+        val setRowSpacing = NativeGtk.IconViewsetRowSpacing
+        val getSpacing = NativeGtk.IconViewgetSpacing
+        val setSpacing = NativeGtk.IconViewsetSpacing
+        val getItemWidth = NativeGtk.IconViewgetItemWidth
+        val setItemWidth = NativeGtk.IconViewsetItemWidth
+        val getColumns = NativeGtk.IconViewgetColumns
+        val setColumns = NativeGtk.IconViewsetColumns
+        val getOrientation = NativeGtk.IconViewgetOrientation
+        val setOrientation = NativeGtk.IconViewsetOrientation
+        val getPixbufColumn = NativeGtk.IconViewgetPixbufColumn
+        val setPixbufColumn = NativeGtk.IconViewsetPixbufColumn
+        val getMarkupColumn = NativeGtk.IconViewgetMarkupColumn
+        val setMarkupColumn = NativeGtk.IconViewsetMarkupColumn
+        val getTextColumn = NativeGtk.IconViewgetTextColumn
+        val setTextColumn = NativeGtk.IconViewsetTextColumn
+        val getModel = NativeGtk.IconViewgetModel
+        val setModel = NativeGtk.IconViewsetModel
+        val newWithModel = NativeGtk.IconViewnewWithModel
+        val getType = NativeGtk.IconViewgetType
+        (* properties *)
+    end
+    structure IconTheme =
+    struct
+        (* constructors *)
+        val new = NativeGtk.IconThemenew
+        (* methods *)
+        val addBuiltinIcon = NativeGtk.IconThemeaddBuiltinIcon
+        val rescanIfNeeded = NativeGtk.IconThemerescanIfNeeded
+        val getExampleIconName = NativeGtk.IconThemegetExampleIconName
+        val listIcons = NativeGtk.IconThemelistIcons
+        val loadIcon = NativeGtk.IconThemeloadIcon
+        val lookupIcon = NativeGtk.IconThemelookupIcon
+        val hasIcon = NativeGtk.IconThemehasIcon
+        val setCustomTheme = NativeGtk.IconThemesetCustomTheme
+        val prependSearchPath = NativeGtk.IconThemeprependSearchPath
+        val appendSearchPath = NativeGtk.IconThemeappendSearchPath
+        val setScreen = NativeGtk.IconThemesetScreen
+        val getForScreen = NativeGtk.IconThemegetForScreen
+        val getDefault = NativeGtk.IconThemegetDefault
+        val getType = NativeGtk.IconThemegetType
+        (* properties *)
+    end
+    structure IconFactory =
+    struct
+        (* constructors *)
+        val new = NativeGtk.IconFactorynew
+        (* methods *)
+        val lookupDefault = NativeGtk.IconFactorylookupDefault
+        val removeDefault = NativeGtk.IconFactoryremoveDefault
+        val addDefault = NativeGtk.IconFactoryaddDefault
+        val lookup = NativeGtk.IconFactorylookup
+        val add = NativeGtk.IconFactoryadd
+        val getType = NativeGtk.IconFactorygetType
+        (* properties *)
+    end
+    structure HSeparator =
+    struct
+        (* constructors *)
+        val new = NativeGtk.HSeparatornew
+        (* methods *)
+        val getType = NativeGtk.HSeparatorgetType
+        (* properties *)
+    end
+    structure HScrollbar =
+    struct
+        (* constructors *)
+        val new = NativeGtk.HScrollbarnew
+        (* methods *)
+        val getType = NativeGtk.HScrollbargetType
+        (* properties *)
+    end
+    structure HScale =
+    struct
+        (* constructors *)
+        val newWithRange = NativeGtk.HScalenewWithRange
+        val new = NativeGtk.HScalenew
+        (* methods *)
+        val getType = NativeGtk.HScalegetType
+        (* properties *)
+    end
+    structure HRuler =
+    struct
+        (* constructors *)
+        val new = NativeGtk.HRulernew
+        (* methods *)
+        val getType = NativeGtk.HRulergetType
+        (* properties *)
+    end
+    structure HPaned =
+    struct
+        (* constructors *)
+        val new = NativeGtk.HPanednew
+        (* methods *)
+        val getType = NativeGtk.HPanedgetType
+        (* properties *)
+    end
+    structure HButtonBox =
+    struct
+        (* constructors *)
+        val new = NativeGtk.HButtonBoxnew
+        (* methods *)
+        val getType = NativeGtk.HButtonBoxgetType
+        (* properties *)
+    end
+    structure HBox =
+    struct
+        (* constructors *)
+        val new = NativeGtk.HBoxnew
+        (* methods *)
+        val getType = NativeGtk.HBoxgetType
+        (* properties *)
+    end
+    structure HandleBox =
+    struct
+        (* constructors *)
+        val new = NativeGtk.HandleBoxnew
+        (* methods *)
+        val getSnapEdge = NativeGtk.HandleBoxgetSnapEdge
+        val setSnapEdge = NativeGtk.HandleBoxsetSnapEdge
+        val getHandlePosition = NativeGtk.HandleBoxgetHandlePosition
+        val setHandlePosition = NativeGtk.HandleBoxsetHandlePosition
+        val getShadowType = NativeGtk.HandleBoxgetShadowType
+        val setShadowType = NativeGtk.HandleBoxsetShadowType
+        val getType = NativeGtk.HandleBoxgetType
+        (* properties *)
+    end
+    structure GammaCurve =
+    struct
+        (* constructors *)
+        val new = NativeGtk.GammaCurvenew
+        (* methods *)
+        val getType = NativeGtk.GammaCurvegetType
+        val getFieldTable = NativeGtk.GammaCurvegetFieldTable
+        val setFieldTable = NativeGtk.GammaCurvesetFieldTable
+        val getFieldGammaText = NativeGtk.GammaCurvegetFieldGammaText
+        val setFieldGammaText = NativeGtk.GammaCurvesetFieldGammaText
+        val getFieldGammaDialog = NativeGtk.GammaCurvegetFieldGammaDialog
+        val setFieldGammaDialog = NativeGtk.GammaCurvesetFieldGammaDialog
+        val getFieldGamma = NativeGtk.GammaCurvegetFieldGamma
+        val setFieldGamma = NativeGtk.GammaCurvesetFieldGamma
+        val getFieldCurve = NativeGtk.GammaCurvegetFieldCurve
+        val setFieldCurve = NativeGtk.GammaCurvesetFieldCurve
+        (* properties *)
+    end
+    structure Frame =
+    struct
+        (* constructors *)
+        val new = NativeGtk.Framenew
+        (* methods *)
+        val getShadowType = NativeGtk.FramegetShadowType
+        val setShadowType = NativeGtk.FramesetShadowType
+        val getLabelAlign = NativeGtk.FramegetLabelAlign
+        val setLabelAlign = NativeGtk.FramesetLabelAlign
+        val getLabelWidget = NativeGtk.FramegetLabelWidget
+        val setLabelWidget = NativeGtk.FramesetLabelWidget
+        val getLabel = NativeGtk.FramegetLabel
+        val setLabel = NativeGtk.FramesetLabel
+        val getType = NativeGtk.FramegetType
+        (* properties *)
+    end
+    structure FontSelectionDialog =
+    struct
+        (* constructors *)
+        val new = NativeGtk.FontSelectionDialognew
+        (* methods *)
+        val setPreviewText = NativeGtk.FontSelectionDialogsetPreviewText
+        val getPreviewText = NativeGtk.FontSelectionDialoggetPreviewText
+        val setFontName = NativeGtk.FontSelectionDialogsetFontName
+        val getFont = NativeGtk.FontSelectionDialoggetFont
+        val getFontName = NativeGtk.FontSelectionDialoggetFontName
+        val getType = NativeGtk.FontSelectionDialoggetType
+        val getFieldOkButton = NativeGtk.FontSelectionDialoggetFieldOkButton
+        val setFieldOkButton = NativeGtk.FontSelectionDialogsetFieldOkButton
+        val getFieldMainVBox = NativeGtk.FontSelectionDialoggetFieldMainVBox
+        val setFieldMainVBox = NativeGtk.FontSelectionDialogsetFieldMainVBox
+        val getFieldFontsel = NativeGtk.FontSelectionDialoggetFieldFontsel
+        val setFieldFontsel = NativeGtk.FontSelectionDialogsetFieldFontsel
+        val getFieldCancelButton = NativeGtk.FontSelectionDialoggetFieldCancelButton
+        val setFieldCancelButton = NativeGtk.FontSelectionDialogsetFieldCancelButton
+        val getFieldApplyButton = NativeGtk.FontSelectionDialoggetFieldApplyButton
+        val setFieldApplyButton = NativeGtk.FontSelectionDialogsetFieldApplyButton
+        val getFieldActionArea = NativeGtk.FontSelectionDialoggetFieldActionArea
+        val setFieldActionArea = NativeGtk.FontSelectionDialogsetFieldActionArea
+        (* properties *)
+    end
+    structure FontSelection =
+    struct
+        (* constructors *)
+        val new = NativeGtk.FontSelectionnew
+        (* methods *)
+        val setPreviewText = NativeGtk.FontSelectionsetPreviewText
+        val getPreviewText = NativeGtk.FontSelectiongetPreviewText
+        val setFontName = NativeGtk.FontSelectionsetFontName
+        val getFont = NativeGtk.FontSelectiongetFont
+        val getFontName = NativeGtk.FontSelectiongetFontName
+        val getType = NativeGtk.FontSelectiongetType
+        (* properties *)
+    end
+    structure FontButton =
+    struct
+        (* constructors *)
+        val new = NativeGtk.FontButtonnew
+        (* methods *)
+        val setShowSize = NativeGtk.FontButtonsetShowSize
+        val getShowSize = NativeGtk.FontButtongetShowSize
+        val setShowStyle = NativeGtk.FontButtonsetShowStyle
+        val getShowStyle = NativeGtk.FontButtongetShowStyle
+        val setFontName = NativeGtk.FontButtonsetFontName
+        val getFontName = NativeGtk.FontButtongetFontName
+        val setUseSize = NativeGtk.FontButtonsetUseSize
+        val getUseSize = NativeGtk.FontButtongetUseSize
+        val setUseFont = NativeGtk.FontButtonsetUseFont
+        val getUseFont = NativeGtk.FontButtongetUseFont
+        val setTitle = NativeGtk.FontButtonsetTitle
+        val getTitle = NativeGtk.FontButtongetTitle
+        val newWithFont = NativeGtk.FontButtonnewWithFont
+        val getType = NativeGtk.FontButtongetType
+        (* properties *)
+    end
+    structure Fixed =
+    struct
+        (* constructors *)
+        val new = NativeGtk.Fixednew
+        (* methods *)
+        val getHasWindow = NativeGtk.FixedgetHasWindow
+        val setHasWindow = NativeGtk.FixedsetHasWindow
+        val move = NativeGtk.Fixedmove
+        val put = NativeGtk.Fixedput
+        val getType = NativeGtk.FixedgetType
+        (* properties *)
+    end
+    structure FileSelection =
+    struct
+        (* constructors *)
+        val new = NativeGtk.FileSelectionnew
+        (* methods *)
+        val getSelectMultiple = NativeGtk.FileSelectiongetSelectMultiple
+        val setSelectMultiple = NativeGtk.FileSelectionsetSelectMultiple
+        val getSelections = NativeGtk.FileSelectiongetSelections
+        val hideFileopButtons = NativeGtk.FileSelectionhideFileopButtons
+        val showFileopButtons = NativeGtk.FileSelectionshowFileopButtons
+        val complete = NativeGtk.FileSelectioncomplete
+        val getFilename = NativeGtk.FileSelectiongetFilename
+        val setFilename = NativeGtk.FileSelectionsetFilename
+        val getType = NativeGtk.FileSelectiongetType
+        val getFieldSelectionText = NativeGtk.FileSelectiongetFieldSelectionText
+        val setFieldSelectionText = NativeGtk.FileSelectionsetFieldSelectionText
+        val getFieldSelectionEntry = NativeGtk.FileSelectiongetFieldSelectionEntry
+        val setFieldSelectionEntry = NativeGtk.FileSelectionsetFieldSelectionEntry
+        val getFieldOkButton = NativeGtk.FileSelectiongetFieldOkButton
+        val setFieldOkButton = NativeGtk.FileSelectionsetFieldOkButton
+        val getFieldMainVBox = NativeGtk.FileSelectiongetFieldMainVBox
+        val setFieldMainVBox = NativeGtk.FileSelectionsetFieldMainVBox
+        val getFieldHistoryPulldown = NativeGtk.FileSelectiongetFieldHistoryPulldown
+        val setFieldHistoryPulldown = NativeGtk.FileSelectionsetFieldHistoryPulldown
+        val getFieldHistoryMenu = NativeGtk.FileSelectiongetFieldHistoryMenu
+        val setFieldHistoryMenu = NativeGtk.FileSelectionsetFieldHistoryMenu
+        val getFieldHelpButton = NativeGtk.FileSelectiongetFieldHelpButton
+        val setFieldHelpButton = NativeGtk.FileSelectionsetFieldHelpButton
+        val getFieldFileopRenFile = NativeGtk.FileSelectiongetFieldFileopRenFile
+        val setFieldFileopRenFile = NativeGtk.FileSelectionsetFieldFileopRenFile
+        val getFieldFileopFile = NativeGtk.FileSelectiongetFieldFileopFile
+        val setFieldFileopFile = NativeGtk.FileSelectionsetFieldFileopFile
+        val getFieldFileopEntry = NativeGtk.FileSelectiongetFieldFileopEntry
+        val setFieldFileopEntry = NativeGtk.FileSelectionsetFieldFileopEntry
+        val getFieldFileopDialog = NativeGtk.FileSelectiongetFieldFileopDialog
+        val setFieldFileopDialog = NativeGtk.FileSelectionsetFieldFileopDialog
+        val getFieldFileopDelFile = NativeGtk.FileSelectiongetFieldFileopDelFile
+        val setFieldFileopDelFile = NativeGtk.FileSelectionsetFieldFileopDelFile
+        val getFieldFileopCDir = NativeGtk.FileSelectiongetFieldFileopCDir
+        val setFieldFileopCDir = NativeGtk.FileSelectionsetFieldFileopCDir
+        val getFieldFileList = NativeGtk.FileSelectiongetFieldFileList
+        val setFieldFileList = NativeGtk.FileSelectionsetFieldFileList
+        val getFieldDirList = NativeGtk.FileSelectiongetFieldDirList
+        val setFieldDirList = NativeGtk.FileSelectionsetFieldDirList
+        val getFieldCancelButton = NativeGtk.FileSelectiongetFieldCancelButton
+        val setFieldCancelButton = NativeGtk.FileSelectionsetFieldCancelButton
+        val getFieldButtonArea = NativeGtk.FileSelectiongetFieldButtonArea
+        val setFieldButtonArea = NativeGtk.FileSelectionsetFieldButtonArea
+        val getFieldActionArea = NativeGtk.FileSelectiongetFieldActionArea
+        val setFieldActionArea = NativeGtk.FileSelectionsetFieldActionArea
+        (* properties *)
+    end
+    structure FileFilter =
+    struct
+        (* constructors *)
+        val new = NativeGtk.FileFilternew
+        (* methods *)
+        val filter = NativeGtk.FileFilterfilter
+        val getNeeded = NativeGtk.FileFiltergetNeeded
+        val addPixbufFormats = NativeGtk.FileFilteraddPixbufFormats
+        val addPattern = NativeGtk.FileFilteraddPattern
+        val addMimeType = NativeGtk.FileFilteraddMimeType
+        val getName = NativeGtk.FileFiltergetName
+        val setName = NativeGtk.FileFiltersetName
+        val getType = NativeGtk.FileFiltergetType
+        (* properties *)
+    end
+    structure FileChooserWidget =
+    struct
+        (* constructors *)
+        val new = NativeGtk.FileChooserWidgetnew
+        (* methods *)
+        val newWithBackend = NativeGtk.FileChooserWidgetnewWithBackend
+        val getType = NativeGtk.FileChooserWidgetgetType
+        (* properties *)
+    end
+    structure FileChooserDialog =
+    struct
+        (* constructors *)
+        val new = NativeGtk.FileChooserDialognew
+        (* methods *)
+        val newWithBackend = NativeGtk.FileChooserDialognewWithBackend
+        val getType = NativeGtk.FileChooserDialoggetType
+        (* properties *)
+    end
+    structure FileChooserButton =
+    struct
+        (* constructors *)
+        (* methods *)
+        val setWidthChars = NativeGtk.FileChooserButtonsetWidthChars
+        val getWidthChars = NativeGtk.FileChooserButtongetWidthChars
+        val setTitle = NativeGtk.FileChooserButtonsetTitle
+        val getTitle = NativeGtk.FileChooserButtongetTitle
+        val newWithDialog = NativeGtk.FileChooserButtonnewWithDialog
+        val getType = NativeGtk.FileChooserButtongetType
+        (* properties *)
+    end
+    structure Expander =
+    struct
+        (* constructors *)
+        val new = NativeGtk.Expandernew
+        (* methods *)
+        val getLabelWidget = NativeGtk.ExpandergetLabelWidget
+        val setLabelWidget = NativeGtk.ExpandersetLabelWidget
+        val getUseMarkup = NativeGtk.ExpandergetUseMarkup
+        val setUseMarkup = NativeGtk.ExpandersetUseMarkup
+        val getUseUnderline = NativeGtk.ExpandergetUseUnderline
+        val setUseUnderline = NativeGtk.ExpandersetUseUnderline
+        val getLabel = NativeGtk.ExpandergetLabel
+        val setLabel = NativeGtk.ExpandersetLabel
+        val getSpacing = NativeGtk.ExpandergetSpacing
+        val setSpacing = NativeGtk.ExpandersetSpacing
+        val getExpanded = NativeGtk.ExpandergetExpanded
+        val setExpanded = NativeGtk.ExpandersetExpanded
+        val newWithMnemonic = NativeGtk.ExpandernewWithMnemonic
+        val getType = NativeGtk.ExpandergetType
+        (* properties *)
+    end
+    structure EventBox =
+    struct
+        (* constructors *)
+        val new = NativeGtk.EventBoxnew
+        (* methods *)
+        val setAboveChild = NativeGtk.EventBoxsetAboveChild
+        val getAboveChild = NativeGtk.EventBoxgetAboveChild
+        val setVisibleWindow = NativeGtk.EventBoxsetVisibleWindow
+        val getVisibleWindow = NativeGtk.EventBoxgetVisibleWindow
+        val getType = NativeGtk.EventBoxgetType
+        (* properties *)
+    end
+    structure EntryCompletion =
+    struct
+        (* constructors *)
+        val new = NativeGtk.EntryCompletionnew
+        (* methods *)
+        val getPopupCompletion = NativeGtk.EntryCompletiongetPopupCompletion
+        val setPopupCompletion = NativeGtk.EntryCompletionsetPopupCompletion
+        val getInlineCompletion = NativeGtk.EntryCompletiongetInlineCompletion
+        val setInlineCompletion = NativeGtk.EntryCompletionsetInlineCompletion
+        val insertPrefix = NativeGtk.EntryCompletioninsertPrefix
+        val setTextColumn = NativeGtk.EntryCompletionsetTextColumn
+        val deleteAction = NativeGtk.EntryCompletiondeleteAction
+        val insertActionMarkup = NativeGtk.EntryCompletioninsertActionMarkup
+        val insertActionText = NativeGtk.EntryCompletioninsertActionText
+        val complete = NativeGtk.EntryCompletioncomplete
+        val getMinimumKeyLength = NativeGtk.EntryCompletiongetMinimumKeyLength
+        val setMinimumKeyLength = NativeGtk.EntryCompletionsetMinimumKeyLength
+        val getModel = NativeGtk.EntryCompletiongetModel
+        val setModel = NativeGtk.EntryCompletionsetModel
+        val getEntry = NativeGtk.EntryCompletiongetEntry
+        val getType = NativeGtk.EntryCompletiongetType
+        (* properties *)
+    end
+    structure Entry =
+    struct
+        (* constructors *)
+        val new = NativeGtk.Entrynew
+        (* methods *)
+        val setEditable = NativeGtk.EntrysetEditable
+        val selectRegion = NativeGtk.EntryselectRegion
+        val setPosition = NativeGtk.EntrysetPosition
+        val prependText = NativeGtk.EntryprependText
+        val getCompletion = NativeGtk.EntrygetCompletion
+        val setCompletion = NativeGtk.EntrysetCompletion
+        val getAlignment = NativeGtk.EntrygetAlignment
+        val setAlignment = NativeGtk.EntrysetAlignment
+        val getLayoutOffsets = NativeGtk.EntrygetLayoutOffsets
+        val getLayout = NativeGtk.EntrygetLayout
+        val getText = NativeGtk.EntrygetText
+        val setText = NativeGtk.EntrysetText
+        val getWidthChars = NativeGtk.EntrygetWidthChars
+        val setWidthChars = NativeGtk.EntrysetWidthChars
+        val getActivatesDefault = NativeGtk.EntrygetActivatesDefault
+        val setActivatesDefault = NativeGtk.EntrysetActivatesDefault
+        val getMaxLength = NativeGtk.EntrygetMaxLength
+        val setMaxLength = NativeGtk.EntrysetMaxLength
+        val getHasFrame = NativeGtk.EntrygetHasFrame
+        val setHasFrame = NativeGtk.EntrysetHasFrame
+        val getInvisibleChar = NativeGtk.EntrygetInvisibleChar
+        val setInvisibleChar = NativeGtk.EntrysetInvisibleChar
+        val getVisibility = NativeGtk.EntrygetVisibility
+        val setVisibility = NativeGtk.EntrysetVisibility
+        val getType = NativeGtk.EntrygetType
+        (* properties *)
+    end
+    structure DrawingArea =
+    struct
+        (* constructors *)
+        val new = NativeGtk.DrawingAreanew
+        (* methods *)
+        val getType = NativeGtk.DrawingAreagetType
+        (* properties *)
+    end
+    structure Dialog =
+    struct
+        (* constructors *)
+        val newWithButtons = NativeGtk.DialognewWithButtons
+        val new = NativeGtk.Dialognew
+        (* methods *)
+        val setAlternativeButtonOrderFromArray = NativeGtk.DialogsetAlternativeButtonOrderFromArray
+        val setAlternativeButtonOrder = NativeGtk.DialogsetAlternativeButtonOrder
+        val run = NativeGtk.Dialogrun
+        val response = NativeGtk.Dialogresponse
+        val getHasSeparator = NativeGtk.DialoggetHasSeparator
+        val setHasSeparator = NativeGtk.DialogsetHasSeparator
+        val setDefaultResponse = NativeGtk.DialogsetDefaultResponse
+        val setResponseSensitive = NativeGtk.DialogsetResponseSensitive
+        val addButtons = NativeGtk.DialogaddButtons
+        val addButton = NativeGtk.DialogaddButton
+        val addActionWidget = NativeGtk.DialogaddActionWidget
+        val getType = NativeGtk.DialoggetType
+        val getFieldVBox = NativeGtk.DialoggetFieldVBox
+        val setFieldVBox = NativeGtk.DialogsetFieldVBox
+        val getFieldActionArea = NativeGtk.DialoggetFieldActionArea
+        val setFieldActionArea = NativeGtk.DialogsetFieldActionArea
+        (* properties *)
+    end
+    structure Curve =
+    struct
+        (* constructors *)
+        val new = NativeGtk.Curvenew
+        (* methods *)
+        val setCurveType = NativeGtk.CurvesetCurveType
+        val setRange = NativeGtk.CurvesetRange
+        val setGamma = NativeGtk.CurvesetGamma
+        val reset = NativeGtk.Curvereset
+        val getType = NativeGtk.CurvegetType
+        (* properties *)
+    end
+    structure Container =
+    struct
+        (* constructors *)
+        val new = NativeGtk.Containernew
+        (* methods *)
+        val forall = NativeGtk.Containerforall
+        val childGetProperty = NativeGtk.ContainerchildGetProperty
+        val childSetProperty = NativeGtk.ContainerchildSetProperty
+        val childGet = NativeGtk.ContainerchildGet
+        val childSet = NativeGtk.ContainerchildSet
+        val addWithProperties = NativeGtk.ContaineraddWithProperties
+        val classListChildProperties = NativeGtk.ContainerclassListChildProperties
+        val classFindChildProperty = NativeGtk.ContainerclassFindChildProperty
+        val classInstallChildProperty = NativeGtk.ContainerclassInstallChildProperty
+        val childType = NativeGtk.ContainerchildType
+        val resizeChildren = NativeGtk.ContainerresizeChildren
+        val getFocusHadjustment = NativeGtk.ContainergetFocusHadjustment
+        val setFocusHadjustment = NativeGtk.ContainersetFocusHadjustment
+        val getFocusVadjustment = NativeGtk.ContainergetFocusVadjustment
+        val setFocusVadjustment = NativeGtk.ContainersetFocusVadjustment
+        val setFocusChild = NativeGtk.ContainersetFocusChild
+        val setReallocateRedraws = NativeGtk.ContainersetReallocateRedraws
+        val unsetFocusChain = NativeGtk.ContainerunsetFocusChain
+        val getFocusChain = NativeGtk.ContainergetFocusChain
+        val setFocusChain = NativeGtk.ContainersetFocusChain
+        val propagateExpose = NativeGtk.ContainerpropagateExpose
+        val getChildren = NativeGtk.ContainergetChildren
+        val foreach = NativeGtk.Containerforeach
+        val checkResize = NativeGtk.ContainercheckResize
+        val getResizeMode = NativeGtk.ContainergetResizeMode
+        val setResizeMode = NativeGtk.ContainersetResizeMode
+        val remove = NativeGtk.Containerremove
+        val add = NativeGtk.Containeradd
+        val getBorderWidth = NativeGtk.ContainergetBorderWidth
+        val setBorderWidth = NativeGtk.ContainersetBorderWidth
+        val getType = NativeGtk.ContainergetType
+        val getFieldResizeMode = NativeGtk.ContainergetFieldResizeMode
+        val setFieldResizeMode = NativeGtk.ContainersetFieldResizeMode
+        val getFieldReallocateRedraws = NativeGtk.ContainergetFieldReallocateRedraws
+        val setFieldReallocateRedraws = NativeGtk.ContainersetFieldReallocateRedraws
+        val getFieldNeedResize = NativeGtk.ContainergetFieldNeedResize
+        val setFieldNeedResize = NativeGtk.ContainersetFieldNeedResize
+        val getFieldHasFocusChain = NativeGtk.ContainergetFieldHasFocusChain
+        val setFieldHasFocusChain = NativeGtk.ContainersetFieldHasFocusChain
+        val getFieldFocusChild = NativeGtk.ContainergetFieldFocusChild
+        val setFieldFocusChild = NativeGtk.ContainersetFieldFocusChild
+        val getFieldBorderWidth = NativeGtk.ContainergetFieldBorderWidth
+        val setFieldBorderWidth = NativeGtk.ContainersetFieldBorderWidth
+        (* properties *)
+    end
+    structure ComboBoxEntry =
+    struct
+        (* constructors *)
+        val new = NativeGtk.ComboBoxEntrynew
+        (* methods *)
+        val newText = NativeGtk.ComboBoxEntrynewText
+        val getTextColumn = NativeGtk.ComboBoxEntrygetTextColumn
+        val setTextColumn = NativeGtk.ComboBoxEntrysetTextColumn
+        val newWithModel = NativeGtk.ComboBoxEntrynewWithModel
+        val getType = NativeGtk.ComboBoxEntrygetType
+        (* properties *)
+    end
+    structure ComboBox =
+    struct
+        (* constructors *)
+        val newWithModel = NativeGtk.ComboBoxnewWithModel
+        val new = NativeGtk.ComboBoxnew
+        (* methods *)
+        val getPopupAccessible = NativeGtk.ComboBoxgetPopupAccessible
+        val getActiveText = NativeGtk.ComboBoxgetActiveText
+        val setFocusOnClick = NativeGtk.ComboBoxsetFocusOnClick
+        val getFocusOnClick = NativeGtk.ComboBoxgetFocusOnClick
+        val setAddTearoffs = NativeGtk.ComboBoxsetAddTearoffs
+        val getColumnSpanColumn = NativeGtk.ComboBoxgetColumnSpanColumn
+        val getRowSpanColumn = NativeGtk.ComboBoxgetRowSpanColumn
+        val getWrapWidth = NativeGtk.ComboBoxgetWrapWidth
+        val popdown = NativeGtk.ComboBoxpopdown
+        val popup = NativeGtk.ComboBoxpopup
+        val removeText = NativeGtk.ComboBoxremoveText
+        val prependText = NativeGtk.ComboBoxprependText
+        val insertText = NativeGtk.ComboBoxinsertText
+        val appendText = NativeGtk.ComboBoxappendText
+        val newText = NativeGtk.ComboBoxnewText
+        val getModel = NativeGtk.ComboBoxgetModel
+        val setModel = NativeGtk.ComboBoxsetModel
+        val setActiveIter = NativeGtk.ComboBoxsetActiveIter
+        val getActiveIter = NativeGtk.ComboBoxgetActiveIter
+        val setActive = NativeGtk.ComboBoxsetActive
+        val getActive = NativeGtk.ComboBoxgetActive
+        val setColumnSpanColumn = NativeGtk.ComboBoxsetColumnSpanColumn
+        val setRowSpanColumn = NativeGtk.ComboBoxsetRowSpanColumn
+        val setWrapWidth = NativeGtk.ComboBoxsetWrapWidth
+        val getType = NativeGtk.ComboBoxgetType
+        (* properties *)
+    end
+    structure Combo =
+    struct
+        (* constructors *)
+        val new = NativeGtk.Combonew
+        (* methods *)
+        val getFieldList = NativeGtk.CombogetFieldList
+        val setFieldList = NativeGtk.CombosetFieldList
+        val getFieldEntry = NativeGtk.CombogetFieldEntry
+        val setFieldEntry = NativeGtk.CombosetFieldEntry
+        (* properties *)
+    end
+    structure ColorSelectionDialog =
+    struct
+        (* constructors *)
+        val new = NativeGtk.ColorSelectionDialognew
+        (* methods *)
+        val getType = NativeGtk.ColorSelectionDialoggetType
+        val getFieldOkButton = NativeGtk.ColorSelectionDialoggetFieldOkButton
+        val setFieldOkButton = NativeGtk.ColorSelectionDialogsetFieldOkButton
+        val getFieldHelpButton = NativeGtk.ColorSelectionDialoggetFieldHelpButton
+        val setFieldHelpButton = NativeGtk.ColorSelectionDialogsetFieldHelpButton
+        val getFieldColorsel = NativeGtk.ColorSelectionDialoggetFieldColorsel
+        val setFieldColorsel = NativeGtk.ColorSelectionDialogsetFieldColorsel
+        val getFieldCancelButton = NativeGtk.ColorSelectionDialoggetFieldCancelButton
+        val setFieldCancelButton = NativeGtk.ColorSelectionDialogsetFieldCancelButton
+        (* properties *)
+    end
+    structure ColorSelection =
+    struct
+        (* constructors *)
+        val new = NativeGtk.ColorSelectionnew
+        (* methods *)
+        val paletteToString = NativeGtk.ColorSelectionpaletteToString
+        val paletteFromString = NativeGtk.ColorSelectionpaletteFromString
+        val isAdjusting = NativeGtk.ColorSelectionisAdjusting
+        val getPreviousAlpha = NativeGtk.ColorSelectiongetPreviousAlpha
+        val getPreviousColor = NativeGtk.ColorSelectiongetPreviousColor
+        val setPreviousAlpha = NativeGtk.ColorSelectionsetPreviousAlpha
+        val setPreviousColor = NativeGtk.ColorSelectionsetPreviousColor
+        val getCurrentAlpha = NativeGtk.ColorSelectiongetCurrentAlpha
+        val getCurrentColor = NativeGtk.ColorSelectiongetCurrentColor
+        val setCurrentAlpha = NativeGtk.ColorSelectionsetCurrentAlpha
+        val setCurrentColor = NativeGtk.ColorSelectionsetCurrentColor
+        val setHasPalette = NativeGtk.ColorSelectionsetHasPalette
+        val getHasPalette = NativeGtk.ColorSelectiongetHasPalette
+        val setHasOpacityControl = NativeGtk.ColorSelectionsetHasOpacityControl
+        val getHasOpacityControl = NativeGtk.ColorSelectiongetHasOpacityControl
+        val getType = NativeGtk.ColorSelectiongetType
+        (* properties *)
+    end
+    structure ColorButton =
+    struct
+        (* constructors *)
+        val newWithColor = NativeGtk.ColorButtonnewWithColor
+        val new = NativeGtk.ColorButtonnew
+        (* methods *)
+        val getTitle = NativeGtk.ColorButtongetTitle
+        val setTitle = NativeGtk.ColorButtonsetTitle
+        val getUseAlpha = NativeGtk.ColorButtongetUseAlpha
+        val setUseAlpha = NativeGtk.ColorButtonsetUseAlpha
+        val getAlpha = NativeGtk.ColorButtongetAlpha
+        val getColor = NativeGtk.ColorButtongetColor
+        val setAlpha = NativeGtk.ColorButtonsetAlpha
+        val setColor = NativeGtk.ColorButtonsetColor
+        val getType = NativeGtk.ColorButtongetType
+        (* properties *)
+    end
+    structure Clipboard =
+    struct
+        (* constructors *)
+        val getForDisplay = NativeGtk.ClipboardgetForDisplay
+        (* methods *)
+        val waitForTargets = NativeGtk.ClipboardwaitForTargets
+        val waitIsTextAvailable = NativeGtk.ClipboardwaitIsTextAvailable
+        val waitForText = NativeGtk.ClipboardwaitForText
+        val waitForContents = NativeGtk.ClipboardwaitForContents
+        val setText = NativeGtk.ClipboardsetText
+        val clear = NativeGtk.Clipboardclear
+        val getOwner = NativeGtk.ClipboardgetOwner
+        val getDisplay = NativeGtk.ClipboardgetDisplay
+        val get = NativeGtk.Clipboardget
+        val getType = NativeGtk.ClipboardgetType
+        val store = NativeGtk.Clipboardstore
+        val setCanStore = NativeGtk.ClipboardsetCanStore
+        val waitIsTargetAvailable = NativeGtk.ClipboardwaitIsTargetAvailable
+        (* properties *)
+    end
+    structure CheckMenuItem =
+    struct
+        (* constructors *)
+        val newWithMnemonic = NativeGtk.CheckMenuItemnewWithMnemonic
+        val newWithLabel = NativeGtk.CheckMenuItemnewWithLabel
+        val new = NativeGtk.CheckMenuItemnew
+        (* methods *)
+        val getDrawAsRadio = NativeGtk.CheckMenuItemgetDrawAsRadio
+        val setDrawAsRadio = NativeGtk.CheckMenuItemsetDrawAsRadio
+        val getInconsistent = NativeGtk.CheckMenuItemgetInconsistent
+        val setInconsistent = NativeGtk.CheckMenuItemsetInconsistent
+        val toggled = NativeGtk.CheckMenuItemtoggled
+        val getActive = NativeGtk.CheckMenuItemgetActive
+        val setActive = NativeGtk.CheckMenuItemsetActive
+        val getType = NativeGtk.CheckMenuItemgetType
+        val getFieldActive = NativeGtk.CheckMenuItemgetFieldActive
+        val setFieldActive = NativeGtk.CheckMenuItemsetFieldActive
+        (* properties *)
+    end
+    structure CheckButton =
+    struct
+        (* constructors *)
+        val newWithMnemonic = NativeGtk.CheckButtonnewWithMnemonic
+        val newWithLabel = NativeGtk.CheckButtonnewWithLabel
+        val new = NativeGtk.CheckButtonnew
+        (* methods *)
+        val getType = NativeGtk.CheckButtongetType
+        (* properties *)
+    end
+    structure CellView =
+    struct
+        (* constructors *)
+        val new = NativeGtk.CellViewnew
+        (* methods *)
+        val getCellRenderers = NativeGtk.CellViewgetCellRenderers
+        val setBackgroundColor = NativeGtk.CellViewsetBackgroundColor
+        val getSizeOfRow = NativeGtk.CellViewgetSizeOfRow
+        val getDisplayedRow = NativeGtk.CellViewgetDisplayedRow
+        val setDisplayedRow = NativeGtk.CellViewsetDisplayedRow
+        val setModel = NativeGtk.CellViewsetModel
+        val newWithPixbuf = NativeGtk.CellViewnewWithPixbuf
+        val newWithMarkup = NativeGtk.CellViewnewWithMarkup
+        val newWithText = NativeGtk.CellViewnewWithText
+        val getType = NativeGtk.CellViewgetType
+        (* properties *)
+    end
+    structure CellRendererToggle =
+    struct
+        (* constructors *)
+        val new = NativeGtk.CellRendererTogglenew
+        (* methods *)
+        val setActive = NativeGtk.CellRendererTogglesetActive
+        val getActive = NativeGtk.CellRendererTogglegetActive
+        val setRadio = NativeGtk.CellRendererTogglesetRadio
+        val getRadio = NativeGtk.CellRendererTogglegetRadio
+        val getType = NativeGtk.CellRendererTogglegetType
+        (* properties *)
+    end
+    structure CellRendererText =
+    struct
+        (* constructors *)
+        val new = NativeGtk.CellRendererTextnew
+        (* methods *)
+        val setFixedHeightFromFont = NativeGtk.CellRendererTextsetFixedHeightFromFont
+        val getType = NativeGtk.CellRendererTextgetType
+        (* properties *)
+    end
+    structure CellRendererProgress =
+    struct
+        (* constructors *)
+        val new = NativeGtk.CellRendererProgressnew
+        (* methods *)
+        val getType = NativeGtk.CellRendererProgressgetType
+        (* properties *)
+    end
+    structure CellRendererPixbuf =
+    struct
+        (* constructors *)
+        val new = NativeGtk.CellRendererPixbufnew
+        (* methods *)
+        val getType = NativeGtk.CellRendererPixbufgetType
+        (* properties *)
+    end
+    structure CellRendererCombo =
+    struct
+        (* constructors *)
+        val new = NativeGtk.CellRendererCombonew
+        (* methods *)
+        val getType = NativeGtk.CellRendererCombogetType
+        (* properties *)
+    end
+    structure CellRenderer =
+    struct
+        (* constructors *)
+        (* methods *)
+        val stopEditing = NativeGtk.CellRendererstopEditing
+        val editingCanceled = NativeGtk.CellRenderereditingCanceled
+        val getFixedSize = NativeGtk.CellRenderergetFixedSize
+        val setFixedSize = NativeGtk.CellRenderersetFixedSize
+        val startEditing = NativeGtk.CellRendererstartEditing
+        val activate = NativeGtk.CellRendereractivate
+        val render = NativeGtk.CellRendererrender
+        val getSize = NativeGtk.CellRenderergetSize
+        val getType = NativeGtk.CellRenderergetType
+        (* properties *)
+        val pixbuf = Prop.newProp ("pixbuf",Value.object,Value.toObject)
+        val sizePoints = Prop.newProp ("size-points",Value.double,Value.toReal)
+        val size = Prop.newProp ("size",Value.int,Value.toInt)
+        val text = Prop.newProp ("text",Value.string,Value.toString)
+        val markup = Prop.newProp ("markup",Value.string,Value.toString)
+        val editableSet = Prop.newProp ("editable-set",Value.bool,Value.toBool)
+        val editable = Prop.newProp ("editable",Value.bool,Value.toBool)
+        val fontDesc = Prop.newProp ("font-desc",Value.object,Value.toObject)
+        val font = Prop.newProp ("font",Value.string,Value.toString)
+        val ypad = Prop.newProp ("ypad",Value.int,Value.toInt)
+        val yalign = Prop.newProp ("yalign",Value.float,Value.toReal)
+        val xpad = Prop.newProp ("xpad",Value.int,Value.toInt)
+        val xalign = Prop.newProp ("xalign",Value.float,Value.toReal)
+        val width = Prop.newProp ("width",Value.int,Value.toInt)
+        val visible = Prop.newProp ("visible",Value.bool,Value.toBool)
+        val sensitive = Prop.newProp ("sensitive",Value.bool,Value.toBool)
+        val mode = Prop.newProp ("mode",(fn x => Value.enum (CellRendererMode.toInt (x), CellRendererMode.getType ())),(fn v => CellRendererMode.fromInt (Value.toInt (v))))
+        val height = Prop.newProp ("height",Value.int,Value.toInt)
+        val cellBackgroundSet = Prop.newProp ("cell-background-set",Value.bool,Value.toBool)
+        val cellBackgroundGdk = Prop.newProp ("cell-background-gdk",Value.object,Value.toObject)
+        val cellBackground = Prop.newProp ("cell-background",Value.string,Value.toString)
+    end
+    structure Calendar =
+    struct
+        (* constructors *)
+        val new = NativeGtk.Calendarnew
+        (* methods *)
+        val thaw = NativeGtk.Calendarthaw
+        val freeze = NativeGtk.Calendarfreeze
+        val getDate = NativeGtk.CalendargetDate
+        val displayOptions = NativeGtk.CalendardisplayOptions
+        val getDisplayOptions = NativeGtk.CalendargetDisplayOptions
+        val setDisplayOptions = NativeGtk.CalendarsetDisplayOptions
+        val clearMarks = NativeGtk.CalendarclearMarks
+        val unmarkDay = NativeGtk.CalendarunmarkDay
+        val markDay = NativeGtk.CalendarmarkDay
+        val selectDay = NativeGtk.CalendarselectDay
+        val selectMonth = NativeGtk.CalendarselectMonth
+        val getType = NativeGtk.CalendargetType
+        (* properties *)
+    end
+    structure ButtonBox =
+    struct
+        (* constructors *)
+        (* methods *)
+        val setChildSecondary = NativeGtk.ButtonBoxsetChildSecondary
+        val getChildSecondary = NativeGtk.ButtonBoxgetChildSecondary
+        val setLayout = NativeGtk.ButtonBoxsetLayout
+        val getLayout = NativeGtk.ButtonBoxgetLayout
+        val getType = NativeGtk.ButtonBoxgetType
+        (* properties *)
+    end
+    structure Button =
+    struct
+        (* constructors *)
+        val newWithMnemonic = NativeGtk.ButtonnewWithMnemonic
+        val newFromStock = NativeGtk.ButtonnewFromStock
+        val newWithLabel = NativeGtk.ButtonnewWithLabel
+        val new = NativeGtk.Buttonnew
+        (* methods *)
+        val getImage = NativeGtk.ButtongetImage
+        val setImage = NativeGtk.ButtonsetImage
+        val getAlignment = NativeGtk.ButtongetAlignment
+        val setAlignment = NativeGtk.ButtonsetAlignment
+        val getFocusOnClick = NativeGtk.ButtongetFocusOnClick
+        val setFocusOnClick = NativeGtk.ButtonsetFocusOnClick
+        val getUseStock = NativeGtk.ButtongetUseStock
+        val setUseStock = NativeGtk.ButtonsetUseStock
+        val getUseUnderline = NativeGtk.ButtongetUseUnderline
+        val setUseUnderline = NativeGtk.ButtonsetUseUnderline
+        val getLabel = NativeGtk.ButtongetLabel
+        val setLabel = NativeGtk.ButtonsetLabel
+        val getRelief = NativeGtk.ButtongetRelief
+        val setRelief = NativeGtk.ButtonsetRelief
+        val leave = NativeGtk.Buttonleave
+        val enter = NativeGtk.Buttonenter
+        val clicked = NativeGtk.Buttonclicked
+        val released = NativeGtk.Buttonreleased
+        val pressed = NativeGtk.Buttonpressed
+        val getType = NativeGtk.ButtongetType
+        (* properties *)
+    end
+    structure Box =
+    struct
+        (* constructors *)
+        (* methods *)
+        val setChildPacking = NativeGtk.BoxsetChildPacking
+        val queryChildPacking = NativeGtk.BoxqueryChildPacking
+        val reorderChild = NativeGtk.BoxreorderChild
+        val getSpacing = NativeGtk.BoxgetSpacing
+        val setSpacing = NativeGtk.BoxsetSpacing
+        val getHomogeneous = NativeGtk.BoxgetHomogeneous
+        val setHomogeneous = NativeGtk.BoxsetHomogeneous
+        val packEndDefaults = NativeGtk.BoxpackEndDefaults
+        val packStartDefaults = NativeGtk.BoxpackStartDefaults
+        val packEnd = NativeGtk.BoxpackEnd
+        val packStart = NativeGtk.BoxpackStart
+        val getType = NativeGtk.BoxgetType
+        (* properties *)
+    end
+    structure Bin =
+    struct
+        (* constructors *)
+        val new = NativeGtk.Binnew
+        (* methods *)
+        val getChild = NativeGtk.BingetChild
+        val getType = NativeGtk.BingetType
+        val getFieldChild = NativeGtk.BingetFieldChild
+        val setFieldChild = NativeGtk.BinsetFieldChild
+        (* properties *)
+    end
+    structure AspectFrame =
+    struct
+        (* constructors *)
+        val new = NativeGtk.AspectFramenew
+        (* methods *)
+        val set = NativeGtk.AspectFrameset
+        val getType = NativeGtk.AspectFramegetType
+        (* properties *)
+    end
+    structure Arrow =
+    struct
+        (* constructors *)
+        val new = NativeGtk.Arrownew
+        (* methods *)
+        val set = NativeGtk.Arrowset
+        val getType = NativeGtk.ArrowgetType
+        (* properties *)
+    end
+    structure Alignment =
+    struct
+        (* constructors *)
+        val new = NativeGtk.Alignmentnew
+        (* methods *)
+        val getPadding = NativeGtk.AlignmentgetPadding
+        val setPadding = NativeGtk.AlignmentsetPadding
+        val set = NativeGtk.Alignmentset
+        val getType = NativeGtk.AlignmentgetType
+        (* properties *)
+    end
+    structure Adjustment =
+    struct
+        (* constructors *)
+        val new = NativeGtk.Adjustmentnew
+        (* methods *)
+        val setValue = NativeGtk.AdjustmentsetValue
+        val getValue = NativeGtk.AdjustmentgetValue
+        val clampPage = NativeGtk.AdjustmentclampPage
+        val valueChanged = NativeGtk.AdjustmentvalueChanged
+        val changed = NativeGtk.Adjustmentchanged
+        val getType = NativeGtk.AdjustmentgetType
+        val getFieldValue = NativeGtk.AdjustmentgetFieldValue
+        val setFieldValue = NativeGtk.AdjustmentsetFieldValue
+        val getFieldUpper = NativeGtk.AdjustmentgetFieldUpper
+        val setFieldUpper = NativeGtk.AdjustmentsetFieldUpper
+        val getFieldStepIncrement = NativeGtk.AdjustmentgetFieldStepIncrement
+        val setFieldStepIncrement = NativeGtk.AdjustmentsetFieldStepIncrement
+        val getFieldPageSize = NativeGtk.AdjustmentgetFieldPageSize
+        val setFieldPageSize = NativeGtk.AdjustmentsetFieldPageSize
+        val getFieldPageIncrement = NativeGtk.AdjustmentgetFieldPageIncrement
+        val setFieldPageIncrement = NativeGtk.AdjustmentsetFieldPageIncrement
+        val getFieldLower = NativeGtk.AdjustmentgetFieldLower
+        val setFieldLower = NativeGtk.AdjustmentsetFieldLower
+        (* properties *)
+    end
+    structure ActionGroup =
+    struct
+        (* constructors *)
+        val new = NativeGtk.ActionGroupnew
+        (* methods *)
+        val translateString = NativeGtk.ActionGrouptranslateString
+        val setTranslationDomain = NativeGtk.ActionGroupsetTranslationDomain
+        val removeAction = NativeGtk.ActionGroupremoveAction
+        val addActionWithAccel = NativeGtk.ActionGroupaddActionWithAccel
+        val addAction = NativeGtk.ActionGroupaddAction
+        val listActions = NativeGtk.ActionGrouplistActions
+        val getAction = NativeGtk.ActionGroupgetAction
+        val setVisible = NativeGtk.ActionGroupsetVisible
+        val getVisible = NativeGtk.ActionGroupgetVisible
+        val setSensitive = NativeGtk.ActionGroupsetSensitive
+        val getSensitive = NativeGtk.ActionGroupgetSensitive
+        val getName = NativeGtk.ActionGroupgetName
+        val getType = NativeGtk.ActionGroupgetType
+        (* properties *)
+    end
+    structure Action =
+    struct
+        (* constructors *)
+        val new = NativeGtk.Actionnew
+        (* methods *)
+        val setVisible = NativeGtk.ActionsetVisible
+        val setSensitive = NativeGtk.ActionsetSensitive
+        val setAccelGroup = NativeGtk.ActionsetAccelGroup
+        val setAccelPath = NativeGtk.ActionsetAccelPath
+        val unblockActivateFrom = NativeGtk.ActionunblockActivateFrom
+        val blockActivateFrom = NativeGtk.ActionblockActivateFrom
+        val getAccelPath = NativeGtk.ActiongetAccelPath
+        val disconnectAccelerator = NativeGtk.ActiondisconnectAccelerator
+        val connectAccelerator = NativeGtk.ActionconnectAccelerator
+        val getProxies = NativeGtk.ActiongetProxies
+        val disconnectProxy = NativeGtk.ActiondisconnectProxy
+        val connectProxy = NativeGtk.ActionconnectProxy
+        val createToolItem = NativeGtk.ActioncreateToolItem
+        val createMenuItem = NativeGtk.ActioncreateMenuItem
+        val createIcon = NativeGtk.ActioncreateIcon
+        val activate = NativeGtk.Actionactivate
+        val getVisible = NativeGtk.ActiongetVisible
+        val isVisible = NativeGtk.ActionisVisible
+        val getSensitive = NativeGtk.ActiongetSensitive
+        val isSensitive = NativeGtk.ActionisSensitive
+        val getName = NativeGtk.ActiongetName
+        val getType = NativeGtk.ActiongetType
+        (* properties *)
+    end
+    structure Accessible =
+    struct
+        (* constructors *)
+        (* methods *)
+        val connectWidgetDestroyed = NativeGtk.AccessibleconnectWidgetDestroyed
+        val getType = NativeGtk.AccessiblegetType
+        (* properties *)
+    end
+    structure AccelLabel =
+    struct
+        (* constructors *)
+        val new = NativeGtk.AccelLabelnew
+        (* methods *)
+        val refetch = NativeGtk.AccelLabelrefetch
+        val setAccelClosure = NativeGtk.AccelLabelsetAccelClosure
+        val setAccelWidget = NativeGtk.AccelLabelsetAccelWidget
+        val getAccelWidth = NativeGtk.AccelLabelgetAccelWidth
+        val getAccelWidget = NativeGtk.AccelLabelgetAccelWidget
+        val getType = NativeGtk.AccelLabelgetType
+        (* properties *)
+    end
+    structure AccelGroup =
+    struct
+        (* constructors *)
+        val new = NativeGtk.AccelGroupnew
+        (* methods *)
+        val query = NativeGtk.AccelGroupquery
+        val fromAccelClosure = NativeGtk.AccelGroupfromAccelClosure
+        val activate = NativeGtk.AccelGroupactivate
+        val disconnectKey = NativeGtk.AccelGroupdisconnectKey
+        val disconnect = NativeGtk.AccelGroupdisconnect
+        val connectByPath = NativeGtk.AccelGroupconnectByPath
+        val connect = NativeGtk.AccelGroupconnect
+        val unlock = NativeGtk.AccelGroupunlock
+        val lock = NativeGtk.AccelGrouplock
+        val getType = NativeGtk.AccelGroupgetType
+        (* properties *)
+    end
+    structure AboutDialog =
+    struct
+        (* constructors *)
+        val new = NativeGtk.AboutDialognew
+        (* methods *)
+        val setLogoIconName = NativeGtk.AboutDialogsetLogoIconName
+        val getLogoIconName = NativeGtk.AboutDialoggetLogoIconName
+        val setLogo = NativeGtk.AboutDialogsetLogo
+        val getLogo = NativeGtk.AboutDialoggetLogo
+        val setTranslatorCredits = NativeGtk.AboutDialogsetTranslatorCredits
+        val getTranslatorCredits = NativeGtk.AboutDialoggetTranslatorCredits
+        val setArtists = NativeGtk.AboutDialogsetArtists
+        val getArtists = NativeGtk.AboutDialoggetArtists
+        val setDocumenters = NativeGtk.AboutDialogsetDocumenters
+        val getDocumenters = NativeGtk.AboutDialoggetDocumenters
+        val setAuthors = NativeGtk.AboutDialogsetAuthors
+        val getAuthors = NativeGtk.AboutDialoggetAuthors
+        val setWebsiteLabel = NativeGtk.AboutDialogsetWebsiteLabel
+        val getWebsiteLabel = NativeGtk.AboutDialoggetWebsiteLabel
+        val setWebsite = NativeGtk.AboutDialogsetWebsite
+        val getWebsite = NativeGtk.AboutDialoggetWebsite
+        val setLicense = NativeGtk.AboutDialogsetLicense
+        val getLicense = NativeGtk.AboutDialoggetLicense
+        val setComments = NativeGtk.AboutDialogsetComments
+        val getComments = NativeGtk.AboutDialoggetComments
+        val setCopyright = NativeGtk.AboutDialogsetCopyright
+        val getCopyright = NativeGtk.AboutDialoggetCopyright
+        val setVersion = NativeGtk.AboutDialogsetVersion
+        val getVersion = NativeGtk.AboutDialoggetVersion
+        val setName = NativeGtk.AboutDialogsetName
+        val getName = NativeGtk.AboutDialoggetName
+        val getType = NativeGtk.AboutDialoggetType
+        (* properties *)
+    end
+    structure TreeSortable =
+    struct
+        (* constructors *)
+        (* methods *)
+        val hasDefaultSortFunc = NativeGtk.TreeSortablehasDefaultSortFunc
+        val setSortColumnId = NativeGtk.TreeSortablesetSortColumnId
+        val getSortColumnId = NativeGtk.TreeSortablegetSortColumnId
+        val sortColumnChanged = NativeGtk.TreeSortablesortColumnChanged
+        val getType = NativeGtk.TreeSortablegetType
+        (* properties *)
+    end
+    structure TreeModel =
+    struct
+        (* constructors *)
+        (* methods *)
+        val filterNew = NativeGtk.TreeModelfilterNew
+        val rowsReordered = NativeGtk.TreeModelrowsReordered
+        val rowDeleted = NativeGtk.TreeModelrowDeleted
+        val rowHasChildToggled = NativeGtk.TreeModelrowHasChildToggled
+        val rowInserted = NativeGtk.TreeModelrowInserted
+        val rowChanged = NativeGtk.TreeModelrowChanged
+        val get = NativeGtk.TreeModelget
+        val unrefNode = NativeGtk.TreeModelunrefNode
+        val refNode = NativeGtk.TreeModelrefNode
+        val iterParent = NativeGtk.TreeModeliterParent
+        val iterNthChild = NativeGtk.TreeModeliterNthChild
+        val iterNChildren = NativeGtk.TreeModeliterNChildren
+        val iterHasChild = NativeGtk.TreeModeliterHasChild
+        val iterChildren = NativeGtk.TreeModeliterChildren
+        val iterNext = NativeGtk.TreeModeliterNext
+        val getValue = NativeGtk.TreeModelgetValue
+        val getPath = NativeGtk.TreeModelgetPath
+        val getIterFirst = NativeGtk.TreeModelgetIterFirst
+        val getIterRoot = NativeGtk.TreeModelgetIterRoot
+        val getStringFromIter = NativeGtk.TreeModelgetStringFromIter
+        val getIterFromString = NativeGtk.TreeModelgetIterFromString
+        val getIter = NativeGtk.TreeModelgetIter
+        val getColumnType = NativeGtk.TreeModelgetColumnType
+        val getNColumns = NativeGtk.TreeModelgetNColumns
+        val getFlags = NativeGtk.TreeModelgetFlags
+        val getType = NativeGtk.TreeModelgetType
+        (* properties *)
+    end
+    structure TreeDragSource =
+    struct
+        (* constructors *)
+        (* methods *)
+        val dragDataGet = NativeGtk.TreeDragSourcedragDataGet
+        val dragDataDelete = NativeGtk.TreeDragSourcedragDataDelete
+        val rowDraggable = NativeGtk.TreeDragSourcerowDraggable
+        val getType = NativeGtk.TreeDragSourcegetType
+        (* properties *)
+    end
+    structure TreeDragDest =
+    struct
+        (* constructors *)
+        (* methods *)
+        val rowDropPossible = NativeGtk.TreeDragDestrowDropPossible
+        val dragDataReceived = NativeGtk.TreeDragDestdragDataReceived
+        val getType = NativeGtk.TreeDragDestgetType
+        (* properties *)
+    end
+    structure FileChooser =
+    struct
+        (* constructors *)
+        (* methods *)
+        val getShowHidden = NativeGtk.FileChoosergetShowHidden
+        val setShowHidden = NativeGtk.FileChoosersetShowHidden
+        val listShortcutFolderUris = NativeGtk.FileChooserlistShortcutFolderUris
+        val removeShortcutFolderUri = NativeGtk.FileChooserremoveShortcutFolderUri
+        val addShortcutFolderUri = NativeGtk.FileChooseraddShortcutFolderUri
+        val listShortcutFolders = NativeGtk.FileChooserlistShortcutFolders
+        val removeShortcutFolder = NativeGtk.FileChooserremoveShortcutFolder
+        val addShortcutFolder = NativeGtk.FileChooseraddShortcutFolder
+        val getFilter = NativeGtk.FileChoosergetFilter
+        val setFilter = NativeGtk.FileChoosersetFilter
+        val listFilters = NativeGtk.FileChooserlistFilters
+        val removeFilter = NativeGtk.FileChooserremoveFilter
+        val addFilter = NativeGtk.FileChooseraddFilter
+        val getExtraWidget = NativeGtk.FileChoosergetExtraWidget
+        val setExtraWidget = NativeGtk.FileChoosersetExtraWidget
+        val getPreviewUri = NativeGtk.FileChoosergetPreviewUri
+        val getPreviewFilename = NativeGtk.FileChoosergetPreviewFilename
+        val getUsePreviewLabel = NativeGtk.FileChoosergetUsePreviewLabel
+        val setUsePreviewLabel = NativeGtk.FileChoosersetUsePreviewLabel
+        val getPreviewWidgetActive = NativeGtk.FileChoosergetPreviewWidgetActive
+        val setPreviewWidgetActive = NativeGtk.FileChoosersetPreviewWidgetActive
+        val getPreviewWidget = NativeGtk.FileChoosergetPreviewWidget
+        val setPreviewWidget = NativeGtk.FileChoosersetPreviewWidget
+        val getCurrentFolderUri = NativeGtk.FileChoosergetCurrentFolderUri
+        val setCurrentFolderUri = NativeGtk.FileChoosersetCurrentFolderUri
+        val getUris = NativeGtk.FileChoosergetUris
+        val unselectUri = NativeGtk.FileChooserunselectUri
+        val selectUri = NativeGtk.FileChooserselectUri
+        val setUri = NativeGtk.FileChoosersetUri
+        val getUri = NativeGtk.FileChoosergetUri
+        val getCurrentFolder = NativeGtk.FileChoosergetCurrentFolder
+        val setCurrentFolder = NativeGtk.FileChoosersetCurrentFolder
+        val getFilenames = NativeGtk.FileChoosergetFilenames
+        val unselectAll = NativeGtk.FileChooserunselectAll
+        val selectAll = NativeGtk.FileChooserselectAll
+        val unselectFilename = NativeGtk.FileChooserunselectFilename
+        val selectFilename = NativeGtk.FileChooserselectFilename
+        val setFilename = NativeGtk.FileChoosersetFilename
+        val getFilename = NativeGtk.FileChoosergetFilename
+        val setCurrentName = NativeGtk.FileChoosersetCurrentName
+        val getSelectMultiple = NativeGtk.FileChoosergetSelectMultiple
+        val setSelectMultiple = NativeGtk.FileChoosersetSelectMultiple
+        val getLocalOnly = NativeGtk.FileChoosergetLocalOnly
+        val setLocalOnly = NativeGtk.FileChoosersetLocalOnly
+        val getAction = NativeGtk.FileChoosergetAction
+        val setAction = NativeGtk.FileChoosersetAction
+        val getType = NativeGtk.FileChoosergetType
+        (* properties *)
+    end
+    structure Editable =
+    struct
+        (* constructors *)
+        (* methods *)
+        val getEditable = NativeGtk.EditablegetEditable
+        val setEditable = NativeGtk.EditablesetEditable
+        val getPosition = NativeGtk.EditablegetPosition
+        val setPosition = NativeGtk.EditablesetPosition
+        val deleteSelection = NativeGtk.EditabledeleteSelection
+        val pasteClipboard = NativeGtk.EditablepasteClipboard
+        val copyClipboard = NativeGtk.EditablecopyClipboard
+        val cutClipboard = NativeGtk.EditablecutClipboard
+        val getChars = NativeGtk.EditablegetChars
+        val deleteText = NativeGtk.EditabledeleteText
+        val insertText = NativeGtk.EditableinsertText
+        val getSelectionBounds = NativeGtk.EditablegetSelectionBounds
+        val selectRegion = NativeGtk.EditableselectRegion
+        val getType = NativeGtk.EditablegetType
+        (* properties *)
+    end
+    structure CellLayout =
+    struct
+        (* constructors *)
+        (* methods *)
+        val reorder = NativeGtk.CellLayoutreorder
+        val clearAttributes = NativeGtk.CellLayoutclearAttributes
+        val addAttribute = NativeGtk.CellLayoutaddAttribute
+        val setAttributes = NativeGtk.CellLayoutsetAttributes
+        val clear = NativeGtk.CellLayoutclear
+        val packEnd = NativeGtk.CellLayoutpackEnd
+        val packStart = NativeGtk.CellLayoutpackStart
+        val getType = NativeGtk.CellLayoutgetType
+        (* properties *)
+    end
+    structure CellEditable =
+    struct
+        (* constructors *)
+        (* methods *)
+        val removeWidget = NativeGtk.CellEditableremoveWidget
+        val editingDone = NativeGtk.CellEditableeditingDone
+        val startEditing = NativeGtk.CellEditablestartEditing
+        val getType = NativeGtk.CellEditablegetType
+        (* properties *)
+    end
+    structure Quit=
+    struct
+        val removeByData = NativeGtk.QuitremoveByData
+        val remove = NativeGtk.Quitremove
+        val addFull = NativeGtk.QuitaddFull
+        val add = NativeGtk.Quitadd
+        val addDestroy = NativeGtk.QuitaddDestroy
+    end
+    structure Accel=
+    struct
+        val mapGet = NativeGtk.AccelmapGet
+        val mapGetType = NativeGtk.AccelmapGetType
+        val mapForeachUnfiltered = NativeGtk.AccelmapForeachUnfiltered
+        val mapAddFilter = NativeGtk.AccelmapAddFilter
+        val mapUnlockPath = NativeGtk.AccelmapUnlockPath
+        val mapLockPath = NativeGtk.AccelmapLockPath
+        val mapSaveFd = NativeGtk.AccelmapSaveFd
+        val mapLoadScanner = NativeGtk.AccelmapLoadScanner
+        val mapLoadFd = NativeGtk.AccelmapLoadFd
+        val mapForeach = NativeGtk.AccelmapForeach
+        val mapSave = NativeGtk.AccelmapSave
+        val mapLoad = NativeGtk.AccelmapLoad
+        val mapChangeEntry = NativeGtk.AccelmapChangeEntry
+        val mapLookupEntry = NativeGtk.AccelmapLookupEntry
+        val mapAddEntry = NativeGtk.AccelmapAddEntry
+        val groupsFromObject = NativeGtk.AccelgroupsFromObject
+        val groupsActivate = NativeGtk.AccelgroupsActivate
+    end
+    structure Init=
+    struct
+        val add = NativeGtk.Initadd
+        val check = NativeGtk.Initcheck
+    end
+    structure Check=
+    struct
+        val version = NativeGtk.Checkversion
+    end
+    structure Key=
+    struct
+        val snooperRemove = NativeGtk.KeysnooperRemove
+    end
+    structure Draw=
+    struct
+        val insertionCursor = NativeGtk.DrawinsertionCursor
+    end
+    structure Input=
+    struct
+        val remove = NativeGtk.Inputremove
+    end
+    structure Timeout=
+    struct
+        val remove = NativeGtk.Timeoutremove
+    end
+    structure Main=
+    struct
+        val iterationDo = NativeGtk.MainiterationDo
+        val iteration = NativeGtk.Mainiteration
+        val quit = NativeGtk.Mainquit
+        val level = NativeGtk.Mainlevel
+        val doEvent = NativeGtk.MaindoEvent
+    end
+    structure Idle=
+    struct
+        val removeByData = NativeGtk.IdleremoveByData
+        val remove = NativeGtk.Idleremove
+    end
+    structure Events=
+    struct
+        val pending = NativeGtk.Eventspending
+    end
+    structure GC=
+    struct
+        val release = NativeGtk.GCrelease
+        val get = NativeGtk.GCget
+    end
+    structure Bindings=
+    struct
+        val activateEvent = NativeGtk.BindingsactivateEvent
+        val activate = NativeGtk.Bindingsactivate
+    end
+    structure Binding=
+    struct
+        val parseBinding = NativeGtk.BindingparseBinding
+        val entryAddSignall = NativeGtk.BindingentryAddSignall
+        val entryRemove = NativeGtk.BindingentryRemove
+        val entryAddSignal = NativeGtk.BindingentryAddSignal
+        val entryClear = NativeGtk.BindingentryClear
+    end
+    structure Grab=
+    struct
+        val getCurrent = NativeGtk.GrabgetCurrent
+    end
+    structure Rc=
+    struct
+        val propertyParseBorder = NativeGtk.RcpropertyParseBorder
+        val propertyParseRequisition = NativeGtk.RcpropertyParseRequisition
+        val propertyParseFlags = NativeGtk.RcpropertyParseFlags
+        val propertyParseEnum = NativeGtk.RcpropertyParseEnum
+        val propertyParseColor = NativeGtk.RcpropertyParseColor
+        val parsePriority = NativeGtk.RcparsePriority
+        val parseState = NativeGtk.RcparseState
+        val parseColor = NativeGtk.RcparseColor
+        val getIMModuleFile = NativeGtk.RcgetIMModuleFile
+        val getIMModulePath = NativeGtk.RcgetIMModulePath
+        val getModuleDir = NativeGtk.RcgetModuleDir
+        val getThemeDir = NativeGtk.RcgetThemeDir
+        val findModuleInPath = NativeGtk.RcfindModuleInPath
+        val reparseAll = NativeGtk.RcreparseAll
+        val parseString = NativeGtk.RcparseString
+        val parse = NativeGtk.Rcparse
+        val findPixmapInPath = NativeGtk.RcfindPixmapInPath
+        val resetStyles = NativeGtk.RcresetStyles
+        val reparseAllForSettings = NativeGtk.RcreparseAllForSettings
+        val getStyleByPaths = NativeGtk.RcgetStyleByPaths
+        val getDefaultFiles = NativeGtk.RcgetDefaultFiles
+        val setDefaultFiles = NativeGtk.RcsetDefaultFiles
+        val addDefaultFile = NativeGtk.RcaddDefaultFile
+    end
+    structure Show=
+    struct
+        val aboutDialog = NativeGtk.ShowaboutDialog
+    end
+    structure Set=
+    struct
+        val locale = NativeGtk.Setlocale
+    end
+    structure Disable=
+    struct
+        val setlocale = NativeGtk.Disablesetlocale
+    end
+    structure Target=
+    struct
+        val listAddUriTargets = NativeGtk.TargetlistAddUriTargets
+        val listAddImageTargets = NativeGtk.TargetlistAddImageTargets
+        val listAddTextTargets = NativeGtk.TargetlistAddTextTargets
+    end
+    structure Accelerator=
+    struct
+        val getLabel = NativeGtk.AcceleratorgetLabel
+        val getDefaultModMask = NativeGtk.AcceleratorgetDefaultModMask
+        val setDefaultModMask = NativeGtk.AcceleratorsetDefaultModMask
+        val name = NativeGtk.Acceleratorname
+        val parse = NativeGtk.Acceleratorparse
+        val valid = NativeGtk.Acceleratorvalid
+    end
+    structure Get=
+    struct
+        val eventWidget = NativeGtk.GeteventWidget
+        val currentEventState = NativeGtk.GetcurrentEventState
+        val currentEventTime = NativeGtk.GetcurrentEventTime
+        val currentEvent = NativeGtk.GetcurrentEvent
+        val defaultLanguage = NativeGtk.GetdefaultLanguage
+    end
+    structure Selection=
+    struct
+        val ownerSetForDisplay = NativeGtk.SelectionownerSetForDisplay
+    end
+end

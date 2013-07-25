@@ -1,0 +1,247 @@
+import structure NativeLibs  from "NativeLibs"
+import structure Core        from "Core"
+import structure GLib	from "GLib"
+import structure Pango	from "Pango"
+import structure Atk	from "Atk"
+import structure Gdk	from "Gdk"
+import structure Gtk	from "Gtk"
+import signature CANVAS	from "CANVAS-sig"
+structure NativeCanvas = NativeLibs.NativeCanvas
+structure Canvas :> CANVAS =
+struct
+    open Core
+    structure Points =
+    struct
+        (* constructors *)
+        val new = NativeCanvas.Pointsnew
+        (* methods *)
+        val set = NativeCanvas.Pointsset
+    end
+    structure CanvasPathDef =
+    struct
+        (* constructors *)
+        (* methods *)
+        val new = NativeCanvas.CanvasPathDefnew
+    end
+    structure Widget =
+    struct
+        (* constructors *)
+        (* methods *)
+        val getType = NativeCanvas.WidgetgetType
+        (* properties *)
+    end
+    structure Text =
+    struct
+        (* constructors *)
+        (* methods *)
+        val getType = NativeCanvas.TextgetType
+        (* properties *)
+        val yOffset = Prop.newProp ("y-offset",Value.double,Value.toReal)
+        val y = Prop.newProp ("y",Value.double,Value.toReal)
+        val xOffset = Prop.newProp ("x-offset",Value.double,Value.toReal)
+        val x = Prop.newProp ("x",Value.double,Value.toReal)
+        val weightSet = Prop.newProp ("weight-set",Value.bool,Value.toBool)
+        val weight = Prop.newProp ("weight",Value.int,Value.toInt)
+        val variantSet = Prop.newProp ("variant-set",Value.bool,Value.toBool)
+        val variant = Prop.newProp ("variant",(fn x => Value.enum (Pango.Variant.toInt (x), Pango.Variant.getType ())),(fn v => Pango.Variant.fromInt (Value.toInt (v))))
+        val underlineSet = Prop.newProp ("underline-set",Value.bool,Value.toBool)
+        val underline = Prop.newProp ("underline",(fn x => Value.enum (Pango.Underline.toInt (x), Pango.Underline.getType ())),(fn v => Pango.Underline.fromInt (Value.toInt (v))))
+        val textWidth = Prop.newProp ("text-width",Value.double,Value.toReal)
+        val textHeight = Prop.newProp ("text-height",Value.double,Value.toReal)
+        val text = Prop.newProp ("text",Value.string,Value.toString)
+        val styleSet = Prop.newProp ("style-set",Value.bool,Value.toBool)
+        val style = Prop.newProp ("style",(fn x => Value.enum (Pango.Style.toInt (x), Pango.Style.getType ())),(fn v => Pango.Style.fromInt (Value.toInt (v))))
+        val strikethroughSet = Prop.newProp ("strikethrough-set",Value.bool,Value.toBool)
+        val strikethrough = Prop.newProp ("strikethrough",Value.bool,Value.toBool)
+        val stretchSet = Prop.newProp ("stretch-set",Value.bool,Value.toBool)
+        val stretch = Prop.newProp ("stretch",(fn x => Value.enum (Pango.Stretch.toInt (x), Pango.Stretch.getType ())),(fn v => Pango.Stretch.fromInt (Value.toInt (v))))
+        val sizeSet = Prop.newProp ("size-set",Value.bool,Value.toBool)
+        val sizePoints = Prop.newProp ("size-points",Value.double,Value.toReal)
+        val size = Prop.newProp ("size",Value.int,Value.toInt)
+        val scaleSet = Prop.newProp ("scale-set",Value.bool,Value.toBool)
+        val scale = Prop.newProp ("scale",Value.double,Value.toReal)
+        val riseSet = Prop.newProp ("rise-set",Value.bool,Value.toBool)
+        val rise = Prop.newProp ("rise",Value.int,Value.toInt)
+        val markup = Prop.newProp ("markup",Value.string,Value.toString)
+        val justification = Prop.newProp ("justification",(fn x => Value.enum (Gtk.Justification.toInt (x), Gtk.Justification.getType ())),(fn v => Gtk.Justification.fromInt (Value.toInt (v))))
+        val fontDesc = Prop.newProp ("font-desc",Value.object,Value.toObject)
+        val font = Prop.newProp ("font",Value.string,Value.toString)
+        val fillStipple = Prop.newProp ("fill-stipple",Value.object,Value.toObject)
+        val fillColorGdk = Prop.newProp ("fill-color-gdk",Value.object,Value.toObject)
+        val fillColor = Prop.newProp ("fill-color",Value.string,Value.toString)
+        val familySet = Prop.newProp ("family-set",Value.bool,Value.toBool)
+        val family = Prop.newProp ("family",Value.string,Value.toString)
+        val clipWidth = Prop.newProp ("clip-width",Value.int,Value.toInt)
+        val clipHeight = Prop.newProp ("clip-height",Value.int,Value.toInt)
+        val clip = Prop.newProp ("clip",Value.bool,Value.toBool)
+        val attributes = Prop.newProp ("attributes",Value.object,Value.toObject)
+        val anchor = Prop.newProp ("anchor",(fn x => Value.enum (Gtk.AnchorType.toInt (x), Gtk.AnchorType.getType ())),(fn v => Gtk.AnchorType.fromInt (Value.toInt (v))))
+    end
+    structure Bpath =
+    struct
+        (* constructors *)
+        (* methods *)
+        (* properties *)
+    end
+    structure Polygon =
+    struct
+        (* constructors *)
+        (* methods *)
+        val getType = NativeCanvas.PolygongetType
+        (* properties *)
+    end
+    structure Ellipse =
+    struct
+        (* constructors *)
+        (* methods *)
+        val getType = NativeCanvas.EllipsegetType
+        (* properties *)
+    end
+    structure Rect =
+    struct
+        (* constructors *)
+        (* methods *)
+        val getType = NativeCanvas.RectgetType
+        (* properties *)
+    end
+    structure RE =
+    struct
+        (* constructors *)
+        (* methods *)
+        (* properties *)
+        val y2 = Prop.newProp ("y2",Value.double,Value.toReal)
+        val y1 = Prop.newProp ("y1",Value.double,Value.toReal)
+        val x2 = Prop.newProp ("x2",Value.double,Value.toReal)
+        val x1 = Prop.newProp ("x1",Value.double,Value.toReal)
+    end
+    structure Shape =
+    struct
+        (* constructors *)
+        (* methods *)
+        (* properties *)
+        val wind = Prop.newProp ("wind",Value.int,Value.toInt)
+        val widthUnits = Prop.newProp ("width-units",Value.double,Value.toReal)
+        val widthPixels = Prop.newProp ("width-pixels",Value.int,Value.toInt)
+        val outlineStipple = Prop.newProp ("outline-stipple",Value.object,Value.toObject)
+        val outlineColorGdk = Prop.newProp ("outline-color-gdk",Value.object,Value.toObject)
+        val outlineColor = Prop.newProp ("outline-color",Value.string,Value.toString)
+        val miterlimit = Prop.newProp ("miterlimit",Value.double,Value.toReal)
+        val joinStyle = Prop.newProp ("join-style",(fn x => Value.enum (Gdk.JoinStyle.toInt (x), Gdk.JoinStyle.getType ())),(fn v => Gdk.JoinStyle.fromInt (Value.toInt (v))))
+        val fillStipple = Prop.newProp ("fill-stipple",Value.object,Value.toObject)
+        val fillColor = Prop.newProp ("fill-color",Value.string,Value.toString)
+        val fillColorGdk = Prop.newProp ("fill-color-gdk",Value.object,Value.toObject)
+        val capStyle = Prop.newProp ("cap-style",(fn x => Value.enum (Gdk.CapStyle.toInt (x), Gdk.CapStyle.getType ())),(fn v => Gdk.CapStyle.fromInt (Value.toInt (v))))
+    end
+    structure RichText =
+    struct
+        (* constructors *)
+        (* methods *)
+        val getType = NativeCanvas.RichTextgetType
+        (* properties *)
+    end
+    structure Pixbuf =
+    struct
+        (* constructors *)
+        (* methods *)
+        val getType = NativeCanvas.PixbufgetType
+        (* properties *)
+    end
+    structure Line =
+    struct
+        (* constructors *)
+        (* methods *)
+        val getType = NativeCanvas.LinegetType
+        (* properties *)
+        val points = Prop.newProp ("points",(fn points => 
+                let val pts = Points.new (List.length points)
+                in
+                    List.appi (fn (ndx, (a, b)) =>
+                                (Points.set (pts, ndx * 2, a);
+                                 Points.set (pts, ndx * 2 + 1, b))) points;
+                    Value.object pts
+                end),fn v => assert false)
+        val widthUnits = Prop.newProp ("width-units",Value.double,Value.toReal)
+        val widthPixels = Prop.newProp ("width-pixels",Value.int,Value.toInt)
+        val splineSteps = Prop.newProp ("spline-steps",Value.int,Value.toInt)
+        val smooth = Prop.newProp ("smooth",Value.bool,Value.toBool)
+        val capStyle = Prop.newProp ("cap-style",(fn x => Value.enum (Gdk.CapStyle.toInt (x), Gdk.CapStyle.getType ())),(fn v => Gdk.CapStyle.fromInt (Value.toInt (v))))
+        val lineStyle = Prop.newProp ("line-style",(fn x => Value.enum (Gdk.LineStyle.toInt (x), Gdk.LineStyle.getType ())),(fn v => Gdk.LineStyle.fromInt (Value.toInt (v))))
+        val joinStyle = Prop.newProp ("join-style",(fn x => Value.enum (Gdk.JoinStyle.toInt (x), Gdk.JoinStyle.getType ())),(fn v => Gdk.JoinStyle.fromInt (Value.toInt (v))))
+        val lastArrowhead = Prop.newProp ("last-arrowhead",Value.bool,Value.toBool)
+        val firstArrowhead = Prop.newProp ("first-arrowhead",Value.bool,Value.toBool)
+        val fillStipple = Prop.newProp ("fill-stipple",Value.object,Value.toObject)
+        val fillColor = Prop.newProp ("fill-color",Value.string,Value.toString)
+        val fillColorGdk = Prop.newProp ("fill-color-gdk",Value.object,Value.toObject)
+        val arrowShapeC = Prop.newProp ("arrow-shape-c",Value.double,Value.toReal)
+        val arrowShapeB = Prop.newProp ("arrow-shape-b",Value.double,Value.toReal)
+        val arrowShapeA = Prop.newProp ("arrow-shape-a",Value.double,Value.toReal)
+    end
+    structure Clipgroup =
+    struct
+        (* constructors *)
+        (* methods *)
+        (* properties *)
+    end
+    structure Group =
+    struct
+        (* constructors *)
+        val new = NativeCanvas.Groupnew
+        (* methods *)
+        val getType = NativeCanvas.GroupgetType
+        val add = NativeCanvas.Groupadd
+        val newItem = NativeCanvas.GroupnewItem
+        val getFieldItemList = NativeCanvas.GroupgetFieldItemList
+        val setFieldItemList = NativeCanvas.GroupsetFieldItemList
+        (* properties *)
+        val y = Prop.newProp ("y",Value.double,Value.toReal)
+        val x = Prop.newProp ("x",Value.double,Value.toReal)
+    end
+    structure Item =
+    struct
+        (* constructors *)
+        (* methods *)
+        val getBounds = NativeCanvas.ItemgetBounds
+        val grabFocus = NativeCanvas.ItemgrabFocus
+        val reparent = NativeCanvas.Itemreparent
+        val i2cAffine = NativeCanvas.Itemi2cAffine
+        val i2wAffine = NativeCanvas.Itemi2wAffine
+        val i2w = NativeCanvas.Itemi2w
+        val w2i = NativeCanvas.Itemw2i
+        val hide = NativeCanvas.Itemhide
+        val show = NativeCanvas.Itemshow
+        val lowerToBottom = NativeCanvas.ItemlowerToBottom
+        val raiseToTop = NativeCanvas.ItemraiseToTop
+        val lowerWindow = NativeCanvas.ItemlowerWindow
+        val raiseWindow = NativeCanvas.ItemraiseWindow
+        val affineAbsolute = NativeCanvas.ItemaffineAbsolute
+        val affineRelative = NativeCanvas.ItemaffineRelative
+        val move = NativeCanvas.Itemmove
+        val set = NativeCanvas.Itemset
+        val getType = NativeCanvas.ItemgetType
+        (* properties *)
+        val parent = Prop.newProp ("parent",Value.object,Value.toObject)
+    end
+    val newAa = NativeCanvas.GnomenewAa
+    val new = NativeCanvas.Gnomenew
+    val getDither = NativeCanvas.GnomegetDither
+    val setDither = NativeCanvas.GnomesetDither
+    val getColorPixel = NativeCanvas.GnomegetColorPixel
+    val getColor = NativeCanvas.GnomegetColor
+    val worldToWindow = NativeCanvas.GnomeworldToWindow
+    val windowToWorld = NativeCanvas.GnomewindowToWorld
+    val c2w = NativeCanvas.Gnomec2w
+    val w2cD = NativeCanvas.Gnomew2cD
+    val w2c = NativeCanvas.Gnomew2c
+    val w2cAffine = NativeCanvas.Gnomew2cAffine
+    val getItemAt = NativeCanvas.GnomegetItemAt
+    val updateNow = NativeCanvas.GnomeupdateNow
+    val getScrollOffsets = NativeCanvas.GnomegetScrollOffsets
+    val scrollTo = NativeCanvas.GnomescrollTo
+    val getScrollRegion = NativeCanvas.GnomegetScrollRegion
+    val setScrollRegion = NativeCanvas.GnomesetScrollRegion
+    val setCenterScrollRegion = NativeCanvas.GnomesetCenterScrollRegion
+    val setPixelsPerUnit = NativeCanvas.GnomesetPixelsPerUnit
+    val root = NativeCanvas.Gnomeroot
+    val getType = NativeCanvas.GnomegetType
+        (* properties *)
+end

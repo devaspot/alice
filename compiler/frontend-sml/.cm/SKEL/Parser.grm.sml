@@ -1,0 +1,2 @@
+Skeleton 5
+ae"MkLrVals"i3aä¢Token"gp1c"TOKEN"aä¢DerivedForms"gp1c"DERIVED_FORMS"f±ÿh2ad"ParserData"h7aä¢Header"h2egp1d"InputGrammar"egp1ÿ#aä¢LrTable"gp2ÿÿ‚Caÿgpÿbåçğ±ÿ‚f6d"Char"Cd"List"d"String"d"General"ÿ‚d"Array"Nbåçğ±ÿd2f6d"WideChar"Cd"Source"ä¢LargeInt"d"LargeReal"d"LargeWord"d"WideString"Naä¢MlyValue"è0ad"EC"h2ÿ‚bÿƒæ±ÿ„'ad"Actions"h2bÿƒf5Cd"Lab"d"VId"d"SCon"ÿƒ5ÿ‚Cd"SigId"d"StrId"d"TyCon"d"TyVar"ÿ„'Nÿ…Nad"Tokens"jÿ„2gp1c"Parser_TOKENS"

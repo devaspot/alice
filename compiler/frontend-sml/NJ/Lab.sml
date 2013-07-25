@@ -1,0 +1,31 @@
+val assert=General.assert;
+(*
+ * Author:
+ *   Andreas Rossberg <rossberg@ps.uni-sb.de>
+ *
+ * Copyright:
+ *   Andreas Rossberg, 2001
+ *
+ * Last change:
+ *   $Date: 2001-01-15 15:40:23 $ by $Author: rossberg $
+ *   $Revision: 1.6 $
+ *)
+
+(*
+ * Standard ML label identifiers
+ *
+ * Definition, section 2.4
+ *)
+
+
+
+structure Lab :> LAB =
+struct
+    type Lab = string
+    type t   = Lab
+
+    fun fromString s   = s
+    fun fromInt n      = Int.toString n
+    fun fromLargeInt n = LargeInt.toString n
+    fun toString s     = s
+end

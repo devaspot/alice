@@ -1,0 +1,25 @@
+(*
+ * Author:
+ *   Leif Kornstaedt <kornstae@ps.uni-sb.de>
+ *
+ * Copyright:
+ *   Leif Kornstaedt, 2001-2002
+ *
+ * Last change:
+ *   $Date: 2002-01-14 14:16:53 $ by $Author: kornstae $
+ *   $Revision: 1.4 $
+ *)
+
+import
+    structure MkBatchCompiler
+from "MkBatchCompiler"
+
+import
+    structure SMLToDotNetRecursiveCompiler
+from "SMLToDotNetRecursiveCompiler"
+
+structure SMLToDotNetBatchCompiler =
+    MkBatchCompiler(structure RecursiveCompiler =
+			SMLToDotNetRecursiveCompiler
+		    val executableHeader = ""
+		    val extension = "dll")

@@ -1,0 +1,322 @@
+gui/MAIN_WINDOW-sig.alc: \
+	/home/maxim/exp/alice/install/share/alice/lib/gtk/Gtk.alc
+
+gui/MkMainWindow.alc: \
+	/home/maxim/exp/alice/install/share/alice/lib/gtk/Gdk.alc \
+	/home/maxim/exp/alice/install/share/alice/lib/gtk/Gtk.alc \
+	/home/maxim/exp/alice/install/share/alice/lib/gtk/Canvas.alc \
+	Prefs.alc \
+	gui/MAIN_WINDOW-sig.alc
+
+gui/MkAboutWindow.alc: \
+	/home/maxim/exp/alice/install/share/alice/lib/gtk/Gtk.alc \
+	gui/MAIN_WINDOW-sig.alc \
+	/home/maxim/exp/alice/install/share/alice/lib/system/Config.alc
+
+gui/MkPrefsWindow.alc: \
+	/home/maxim/exp/alice/install/share/alice/lib/gtk/Gtk.alc \
+	Prefs.alc \
+	Common.alc \
+	HANDLERS-sig.alc
+
+gui/MkConnections.alc: \
+	/home/maxim/exp/alice/install/share/alice/lib/gtk/Gtk.alc \
+	HANDLERS-sig.alc \
+	gui/MkAboutWindow.alc \
+	gui/MkPrefsWindow.alc
+
+gui/CANVAS_DRIVER-sig.alc: \
+	/home/maxim/exp/alice/install/share/alice/lib/gtk/Gtk.alc \
+	Prefs.alc
+
+gui/MkCanvasDriver.alc: \
+	/home/maxim/exp/alice/install/share/alice/lib/gtk/Gdk.alc \
+	/home/maxim/exp/alice/install/share/alice/lib/gtk/Gtk.alc \
+	/home/maxim/exp/alice/install/share/alice/lib/gtk/Canvas.alc \
+	Prefs.alc \
+	gui/MAIN_WINDOW-sig.alc \
+	gui/CANVAS_DRIVER-sig.alc
+
+gui/BOARD-sig.alc: \
+	/home/maxim/exp/alice/install/share/alice/lib/gtk/Gtk.alc \
+	gui/CANVAS_DRIVER-sig.alc \
+	gui/GR_TREE-sig.alc \
+	gui/SELECTION-sig.alc \
+	gui/UPDATE-sig.alc \
+	gui/GrTypes.alc
+
+gui/MkBoard.alc: \
+	/home/maxim/exp/alice/install/share/alice/lib/gtk/Gtk.alc \
+	/home/maxim/exp/alice/install/share/alice/lib/gtk/Canvas.alc \
+	gui/MAIN_WINDOW-sig.alc \
+	gui/BOARD-sig.alc \
+	gui/MkCanvasDriver.alc \
+	gui/MkGrTree.alc \
+	gui/MkSelection.alc \
+	gui/MkUpdate.alc \
+	gui/GrTypes.alc \
+	Prefs.alc \
+	Common.alc \
+	AbsTree.alc \
+	gui/MkLayoutList.alc
+
+gui/GrTypes.alc: \
+	/home/maxim/exp/alice/install/share/alice/lib/gtk/GLib.alc \
+	/home/maxim/exp/alice/install/share/alice/lib/gtk/Gtk.alc \
+	/home/maxim/exp/alice/install/share/alice/lib/gtk/Canvas.alc \
+	Prefs.alc \
+	AbsTree.alc
+
+gui/LAYOUT-sig.alc: \
+	gui/GrTypes.alc
+
+gui/MkLayout.alc: \
+	Common.alc \
+	gui/LAYOUT-sig.alc \
+	gui/GrTypes.alc \
+	gui/CANVAS_DRIVER-sig.alc \
+	/home/maxim/exp/alice/install/share/alice/lib/gtk/Gtk.alc \
+	/home/maxim/exp/alice/install/share/alice/lib/gtk/GLib.alc
+
+gui/LAYOUT_LIST-sig.alc: \
+	AbsTree.alc \
+	gui/GrTypes.alc
+
+gui/MkLayoutList.alc: \
+	/home/maxim/exp/alice/install/share/alice/lib/gtk/Gtk.alc \
+	/home/maxim/exp/alice/install/share/alice/lib/system/Reflect.alc \
+	Common.alc \
+	AbsTree.alc \
+	gui/GrTypes.alc \
+	gui/GR_TREE-sig.alc \
+	gui/LAYOUT_LIST-sig.alc \
+	gui/CANVAS_DRIVER-sig.alc \
+	gui/UPDATE-sig.alc
+
+gui/GR_TREE-sig.alc: \
+	/home/maxim/exp/alice/install/share/alice/lib/gtk/Gtk.alc \
+	AbsTree.alc \
+	Prefs.alc \
+	gui/GrTypes.alc \
+	MONITORS-sig.alc \
+	gui/CANVAS_DRIVER-sig.alc \
+	gui/LAYOUT-sig.alc
+
+gui/MkGrTree.alc: \
+	/home/maxim/exp/alice/install/share/alice/lib/system/Reflect.alc \
+	/home/maxim/exp/alice/install/share/alice/lib/gtk/Gtk.alc \
+	Common.alc \
+	gui/CANVAS_DRIVER-sig.alc \
+	AbsTree.alc \
+	Prefs.alc \
+	gui/GR_TREE-sig.alc \
+	gui/GrTypes.alc \
+	MkMonitors.alc \
+	gui/MkLayout.alc
+
+gui/SELECTION-sig.alc: \
+	gui/GrTypes.alc
+
+gui/MkSelection.alc: \
+	gui/CANVAS_DRIVER-sig.alc \
+	gui/MAIN_WINDOW-sig.alc \
+	gui/SELECTION-sig.alc \
+	gui/GrTypes.alc \
+	Print.alc \
+	/home/maxim/exp/alice/install/share/alice/lib/gtk/Gdk.alc \
+	/home/maxim/exp/alice/install/share/alice/lib/gtk/Gtk.alc \
+	Common.alc \
+	AbsTree.alc \
+	/home/maxim/exp/alice/install/share/alice/lib/gtk/Canvas.alc
+
+gui/UPDATE-sig.alc: \
+	AbsTree.alc \
+	gui/GrTypes.alc \
+	gui/LAYOUT-sig.alc
+
+gui/MkUpdate.alc: \
+	/home/maxim/exp/alice/install/share/alice/lib/gtk/Gtk.alc \
+	/home/maxim/exp/alice/install/share/alice/lib/system/Reflect.alc \
+	gui/UPDATE-sig.alc \
+	gui/GR_TREE-sig.alc \
+	gui/GrTypes.alc \
+	Common.alc \
+	Prefs.alc \
+	AbsTree.alc \
+	TypeMappers.alc \
+	ModuleMapper.alc \
+	BuiltinTypeMappers.alc
+
+gui/MkTooltip.alc: \
+	/home/maxim/exp/alice/install/share/alice/lib/rtt/PPType.alc \
+	/home/maxim/exp/alice/install/share/alice/lib/rtt/PPInf.alc \
+	/home/maxim/exp/alice/install/share/alice/lib/utility/PrettyPrint.alc \
+	/home/maxim/exp/alice/install/share/alice/lib/gtk/Gdk.alc \
+	/home/maxim/exp/alice/install/share/alice/lib/gtk/Gtk.alc \
+	gui/MAIN_WINDOW-sig.alc \
+	gui/SELECTION-sig.alc \
+	Common.alc \
+	Prefs.alc \
+	AbsTree.alc \
+	gui/GrTypes.alc
+
+QUEUE-sig.alc:
+
+MkQueue.alc: \
+	/home/maxim/exp/alice/install/share/alice/lib/data/MkRedBlackImpSet.alc \
+	QUEUE-sig.alc
+
+Prefs.alc: \
+	/home/maxim/exp/alice/install/share/alice/lib/gtk/Gdk.alc
+
+Common.alc: \
+	/home/maxim/exp/alice/install/share/alice/lib/rtt/Inf.alc \
+	/home/maxim/exp/alice/install/share/alice/lib/rtt/Type.alc \
+	/home/maxim/exp/alice/install/share/alice/lib/system/Reflect.alc \
+	MkQueue.alc
+
+Cache.alc: \
+	/home/maxim/exp/alice/install/share/alice/lib/system/Reflect.alc \
+	/home/maxim/exp/alice/install/share/alice/lib/rtt/Type.alc \
+	AbsTree.alc \
+	Common.alc
+
+AbsTree.alc: \
+	/home/maxim/exp/alice/install/share/alice/lib/system/UnsafeValue.asig \
+	/home/maxim/exp/alice/install/share/alice/lib/system/Reflect.alc \
+	/home/maxim/exp/alice/install/share/alice/lib/rtt/Type.alc \
+	/home/maxim/exp/alice/install/share/alice/lib/rtt/Inf.alc \
+	/home/maxim/exp/alice/install/share/alice/lib/rtt/Label.alc \
+	/home/maxim/exp/alice/install/share/alice/lib/rtt/Path.alc \
+	/home/maxim/exp/alice/install/share/alice/lib/rtt/Fixity.alc \
+	Prefs.alc \
+	Common.alc
+
+BasicTypeMappers.alc: \
+	/home/maxim/exp/alice/install/share/alice/lib/system/UnsafeValue.asig \
+	/home/maxim/exp/alice/install/share/alice/lib/system/Reflect.alc \
+	/home/maxim/exp/alice/install/share/alice/lib/rtt/Label.alc \
+	/home/maxim/exp/alice/install/share/alice/lib/rtt/Type.alc \
+	/home/maxim/exp/alice/install/share/alice/lib/rtt/PervasiveType.alc \
+	AbsTree.alc \
+	Common.alc \
+	Prefs.alc \
+	Cache.alc
+
+ModuleMapper.alc: \
+	/home/maxim/exp/alice/install/share/alice/lib/rtt/Name.alc \
+	/home/maxim/exp/alice/install/share/alice/lib/system/UnsafeValue.asig \
+	/home/maxim/exp/alice/install/share/alice/lib/utility/PrettyPrint.alc \
+	/home/maxim/exp/alice/install/share/alice/lib/rtt/PPMisc.alc \
+	/home/maxim/exp/alice/install/share/alice/lib/rtt/Label.alc \
+	/home/maxim/exp/alice/install/share/alice/lib/rtt/Type.alc \
+	/home/maxim/exp/alice/install/share/alice/lib/rtt/PPType.alc \
+	/home/maxim/exp/alice/install/share/alice/lib/rtt/Inf.alc \
+	/home/maxim/exp/alice/install/share/alice/lib/rtt/Path.alc \
+	/home/maxim/exp/alice/install/share/alice/lib/rtt/Fixity.alc \
+	AbsTree.alc \
+	Common.alc \
+	Prefs.alc
+
+BuiltinTypeMappers.alc: \
+	/home/maxim/exp/alice/install/share/alice/lib/rtt/Type.alc \
+	/home/maxim/exp/alice/install/share/alice/lib/rtt/PervasiveType.alc \
+	/home/maxim/exp/alice/install/share/alice/lib/data/Atom.alc \
+	/home/maxim/exp/alice/install/share/alice/lib/system/Reflect.alc \
+	Common.alc \
+	AbsTree.alc \
+	Prefs.alc \
+	BasicTypeMappers.alc \
+	ModuleMapper.alc
+
+TypeMappers.alc: \
+	/home/maxim/exp/alice/install/share/alice/lib/system/UnsafeValue.asig \
+	/home/maxim/exp/alice/install/share/alice/lib/system/Reflect.alc \
+	/home/maxim/exp/alice/install/share/alice/lib/rtt/Name.alc \
+	/home/maxim/exp/alice/install/share/alice/lib/rtt/Type.alc \
+	/home/maxim/exp/alice/install/share/alice/lib/rtt/Path.alc \
+	/home/maxim/exp/alice/install/share/alice/lib/rtt/PathMap.alc \
+	Common.alc \
+	BasicTypeMappers.alc \
+	ModuleMapper.alc \
+	BuiltinTypeMappers.alc \
+	AbsTree.alc \
+	Prefs.alc \
+	Cache.alc \
+	StdExceptionMappers.alc
+
+StdExceptionMappers.alc: \
+	AbsTree.alc \
+	/home/maxim/exp/alice/install/share/alice/lib/system/Reflect.alc \
+	Common.alc \
+	/home/maxim/exp/alice/install/share/alice/lib/system/UnsafeValue.asig \
+	/home/maxim/exp/alice/install/share/alice/lib/rtt/Name.alc \
+	Prefs.alc \
+	/home/maxim/exp/alice/install/share/alice/lib/system/IO.alc \
+	/home/maxim/exp/alice/install/share/alice/lib/system/OS.alc \
+	/home/maxim/exp/alice/install/share/alice/lib/distribution/Remote.alc \
+	/home/maxim/exp/alice/install/share/alice/lib/system/Component.alc
+
+MONITORS-sig.alc: \
+	/home/maxim/exp/alice/install/share/alice/lib/system/Reflect.alc \
+	gui/GrTypes.alc \
+	AbsTree.alc
+
+MkMonitors.alc: \
+	/home/maxim/exp/alice/install/share/alice/lib/gtk/Gtk.alc \
+	/home/maxim/exp/alice/install/share/alice/lib/data/MkHashImpMap.alc \
+	/home/maxim/exp/alice/install/share/alice/lib/data/RefMap.alc \
+	/home/maxim/exp/alice/install/share/alice/lib/system/UnsafeValue.asig \
+	/home/maxim/exp/alice/install/share/alice/lib/system/Reflect.alc \
+	gui/GrTypes.alc \
+	MONITORS-sig.alc \
+	Common.alc \
+	Prefs.alc \
+	TypeMappers.alc \
+	AbsTree.alc
+
+Print.alc: \
+	gui/GrTypes.alc \
+	AbsTree.alc \
+	/home/maxim/exp/alice/install/share/alice/lib/utility/PrettyPrint.alc
+
+HANDLERS-sig.alc: \
+	/home/maxim/exp/alice/install/share/alice/lib/gtk/Gtk.alc \
+	Prefs.alc \
+	Common.alc \
+	gui/MAIN_WINDOW-sig.alc
+
+MkHandlers.alc: \
+	/home/maxim/exp/alice/install/share/alice/lib/gtk/Gdk.alc \
+	/home/maxim/exp/alice/install/share/alice/lib/gtk/Gtk.alc \
+	Prefs.alc \
+	Common.alc \
+	gui/MAIN_WINDOW-sig.alc \
+	gui/MkBoard.alc \
+	HANDLERS-sig.alc \
+	TypeMappers.alc \
+	AbsTree.alc \
+	Print.alc \
+	gui/MkTooltip.alc \
+	/home/maxim/exp/alice/install/share/alice/lib/system/Print.alc
+
+INSPECTOR-sig.alc: \
+	/home/maxim/exp/alice/install/share/alice/lib/rtt/Type.alc
+
+Inspector.alc: \
+	/home/maxim/exp/alice/install/share/alice/lib/system/Reflect.alc \
+	/home/maxim/exp/alice/install/share/alice/lib/rtt/Type.alc \
+	Common.alc \
+	gui/MkMainWindow.alc \
+	gui/MkConnections.alc \
+	MkHandlers.alc \
+	Prefs.alc \
+	AbsTree.alc \
+	TypeMappers.alc
+
+Test.alc: \
+	/home/maxim/exp/alice/install/share/alice/lib/data/Atom.alc \
+	Inspector.alc \
+	/home/maxim/exp/alice/install/share/alice/lib/gtk/GTK-sig.alc \
+	/home/maxim/exp/alice/install/share/alice/lib/rtt/PervasiveType.alc
+

@@ -1,0 +1,17 @@
+(*
+ * Author:
+ *   Leif Kornstaedt <kornstae@ps.uni-sb.de>
+ *
+ * Copyright:
+ *   Leif Kornstaedt, 2000-2001
+ *
+ * Last change:
+ *   $Date: 2001-03-05 19:46:06 $ by $Author: kornstae $
+ *   $Revision: 1.3 $
+ *)
+
+signature SKELETON =
+    sig
+	val module: string -> string
+	val externals: unit -> string
+    end

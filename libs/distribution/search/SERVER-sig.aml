@@ -1,0 +1,21 @@
+(*
+ * Authors:
+ *   Thorsten Brunklaus <brunklaus@ps.uni-sb.de>
+ *
+ * Copyright:
+ *   Thorsten Brunklaus, 2001
+ *
+ * Last Change:
+ *   $Date: 2001-05-03 07:39:35 $ by $Author: bruni $
+ *   $Revision: 1.2 $
+ *
+ *)
+
+signature SERVER =
+    sig
+	type lock
+
+	fun server : unit -> (unit -> 'a) -> unit
+	fun lock : unit -> lock
+	fun secure : lock * ('a -> 'b) -> 'a -> 'b
+    end

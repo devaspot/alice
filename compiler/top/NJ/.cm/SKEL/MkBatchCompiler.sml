@@ -1,0 +1,2 @@
+Skeleton 5
+d2f1d"General"ae"MkBatchCompiler"i2aä¢RecursiveCompiler"gp1c"RECURSIVE_COMPILER'"f8d"OS"d"Inf"d"Url"Cd"List"d"Pair"d"Time"d"String"d"TextIO"Cd"Vector"ÿ$d"Component"d"Resolver"d"Config"Njh1ad"OptionParser"jgp2ÿ$d"Switches"gp1e"MkOptionParser"gp1c"BATCH_COMPILER"

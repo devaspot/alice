@@ -1,0 +1,35 @@
+import structure NativeLibs  from "NativeLibs"
+import structure Core        from "Core"
+import signature GLIB	from "GLIB-sig"
+structure NativeGLib = NativeLibs.NativeGLib
+structure GLib :> GLIB =
+struct
+    open Core
+    structure TimeVal =
+    struct
+        (* constructors *)
+        val new = NativeGLib.TimeValnew
+        (* methods *)
+        val getFieldTvUsec = NativeGLib.TimeValgetFieldTvUsec
+        val setFieldTvUsec = NativeGLib.TimeValsetFieldTvUsec
+        val getFieldTvSec = NativeGLib.TimeValgetFieldTvSec
+        val setFieldTvSec = NativeGLib.TimeValsetFieldTvSec
+    end
+    structure PtrArray =
+    struct
+        (* constructors *)
+        val gPtrArrayNew = NativeGLib.PtrArraygPtrArrayNew
+        (* methods *)
+        val index = NativeGLib.PtrArrayindex
+        val getFieldLen = NativeGLib.PtrArraygetFieldLen
+        val setFieldLen = NativeGLib.PtrArraysetFieldLen
+    end
+    structure Object =
+    struct
+        (* constructors *)
+        (* methods *)
+        val getProperty = NativeGLib.ObjectgetProperty
+        val setProperty = NativeGLib.ObjectsetProperty
+        (* properties *)
+    end
+end

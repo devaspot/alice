@@ -1,0 +1,15 @@
+(*
+ * Authors:
+ *   Andreas Rossberg <rossberg@ps.uni-sb.de>
+ *
+ * Copyright:
+ *   Andreas Rossberg, 2002-2003
+ *
+ * Last change:
+ *   $Date: 2003-09-15 15:31:22 $ by $Author: rossberg $
+ *   $Revision: 1.2 $
+ *)
+
+import structure Atom from "Atom"
+
+structure WideAtom = Atom

@@ -1,0 +1,18 @@
+(*
+ * Author:
+ *   Andreas Rossberg <rossberg@ps.uni-sb.de>
+ *
+ * Copyright:
+ *   Andreas Rossberg, 2001
+ *
+ * Last change:
+ *   $Date: 2001-08-16 13:16:02 $ by $Author: rossberg $
+ *   $Revision: 1.1 $
+ *)
+
+import val addr from "UnsafeAddr"
+
+structure Addr =
+struct
+    val addr = addr
+end

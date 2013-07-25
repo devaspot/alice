@@ -1,0 +1,24 @@
+(*
+ * Authors:
+ *   Thorsten Brunklaus <brunklaus@ps.uni-sb.de>
+ *
+ * Copyright:
+ *   Thorsten Brunklaus, 2001
+ *
+ * Last Change:
+ *   $Date: 2001-04-26 15:38:44 $ by $Author: bruni $
+ *   $Revision: 1.1 $
+ *
+ *)
+
+import signature SCRIPT from "SCRIPT-sig"
+
+signature PAR_SEARCH =
+    sig
+	datatype mode = ONE | ALL | BEST
+	    
+	functor MkEngine(structure Script : SCRIPT) :
+	    sig
+		fun engine : string list * mode -> Script.sol list
+	    end
+    end

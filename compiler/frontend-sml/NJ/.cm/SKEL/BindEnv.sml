@@ -1,0 +1,2 @@
+Skeleton 5
+d2f6d"Lab"Cd"VId"d"List"d"Option"d"Source"d"String"Cd"General"d"StampMap"d"InputGrammar"d"Crash"d"Infix"Cd"SigId"d"Stamp"d"StrId"d"TyCon"d"TyVar"Nad"BindEnv"jh1ad"Map"jh0gp1e"MkHashScopedImpMap"gp1c"BIND_ENV"

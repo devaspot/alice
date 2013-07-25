@@ -1,0 +1,2 @@
+Skeleton 5
+d5Cf5Cä¢Inf"ä¢Url"ä¢Source"d"General"ä¢Reflect"Nad"InfLoader"è0ad"ModLoader"ÿ=ad"ImportLoader"ÿ=ae"MkRecursiveCompiler"i3aä¢ComponentManager"gp1c"COMPONENT_MANAGER"aä¢Compiler"gp1c"COMPILER"f5Cd"IO"d"OS"ÿd"Ref"ÿCd"List"d"Pair"d"Path"d"Type"d"Dependency"Cd"Option"ÿd"String"d"Target"d"TextIO"Cd"Vector"d"Component"ÿ:d"BinIO"d"Crash"Cd"Label"d"PPInf"d"Store"d"PathMap"d"PrettyPrint"Cd"VectorPair"d"Resolver"ÿ%d"Config"ÿ‚%Njh3aä¢Switches"gp2ÿ‚%ÿ†,aä¢Context"gp2ÿ‚%ÿ‡ad"UrlMap"jgp1ÿgp1e"MkHashImpMap"gp1c"RECURSIVE_COMPILER"N

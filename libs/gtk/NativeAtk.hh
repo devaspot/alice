@@ -1,0 +1,16 @@
+word AtkCoordTypetToWord(AtkCoordType v);
+AtkCoordType AtkCoordTypetFromWord(word w);
+word AtkKeyEventTypetToWord(AtkKeyEventType v);
+AtkKeyEventType AtkKeyEventTypetFromWord(word w);
+word AtkTextBoundarytToWord(AtkTextBoundary v);
+AtkTextBoundary AtkTextBoundarytFromWord(word w);
+word AtkTextAttributetToWord(AtkTextAttribute v);
+AtkTextAttribute AtkTextAttributetFromWord(word w);
+word AtkStateTypetToWord(AtkStateType v);
+AtkStateType AtkStateTypetFromWord(word w);
+word AtkRelationTypetToWord(AtkRelationType v);
+AtkRelationType AtkRelationTypetFromWord(word w);
+word AtkLayertToWord(AtkLayer v);
+AtkLayer AtkLayertFromWord(word w);
+word AtkRoletToWord(AtkRole v);
+AtkRole AtkRoletFromWord(word w);

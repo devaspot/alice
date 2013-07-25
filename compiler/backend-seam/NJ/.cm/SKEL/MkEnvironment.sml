@@ -1,0 +1,2 @@
+Skeleton 5
+d2f1d"General"ae"MkEnvironment"i2aä¢AbstractCodeGrammar"gp1c"ABSTRACT_CODE_GRAMMAR"f9d"List"d"Name"d"Type"d"String"Cd"Vector"d"FlatGrammar"d"StampMap"d"Crash"d"Stamp"Njh1aÿ"gp1ÿ"gp1c"ENVIRONMENT"

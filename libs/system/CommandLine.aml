@@ -1,0 +1,20 @@
+(*
+ * Author:
+ *   Leif Kornstaedt <kornstae@ps.uni-sb.de>
+ *
+ * Copyright:
+ *   Leif Kornstaedt, 2001
+ *
+ * Last change:
+ *   $Date: 2001-05-02 19:25:54 $ by $Author: kornstae $
+ *   $Revision: 1.1 $
+ *)
+
+import signature COMMAND_LINE      from "COMMAND_LINE-sig"
+import structure UnsafeCommandLine from "UnsafeCommandLine"
+
+structure CommandLine :> COMMAND_LINE =
+    struct
+	val name      = UnsafeCommandLine.name
+	val arguments = UnsafeCommandLine.arguments
+    end

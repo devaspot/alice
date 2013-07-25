@@ -1,0 +1,22 @@
+(*
+ * Author:
+ *   Leif Kornstaedt <kornstae@ps.uni-sb.de>
+ *
+ * Copyright:
+ *   Leif Kornstaedt, 2000
+ *
+ * Last change:
+ *   $Date: 2003-05-07 12:09:00 $ by $Author: rossberg $
+ *   $Revision: 1.3 $
+ *)
+
+import
+    signature IMP_MAP
+from "../data/IMP_MAP-sig"
+
+signature DEPTH_FIRST_SEARCH =
+    sig
+	structure Map: IMP_MAP
+
+	val search: Map.key list Map.t -> Map.key list list
+    end

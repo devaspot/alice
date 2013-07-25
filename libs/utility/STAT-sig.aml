@@ -1,0 +1,21 @@
+(*
+ * Authors:
+ *   Andreas Rossberg <rossberg@ps.uni-sb.de>
+ *
+ * Copyright:
+ *   Andreas Rossberg, 2001
+ *
+ * Last change:
+ *   $Date: 2001-06-06 12:29:26 $ by $Author: rossberg $
+ *   $Revision: 1.1 $
+ *)
+
+signature STAT =
+sig
+    type 'a stat
+
+    exception Remote
+
+    val stat :	'a -> 'a stat
+    val !! :	'a stat -> 'a			(* Remote *)
+end

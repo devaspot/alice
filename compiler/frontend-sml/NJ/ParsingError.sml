@@ -1,0 +1,103 @@
+val assert=General.assert;
+(*
+ * Author:
+ *   Andreas Rossberg <rossberg@ps.uni-sb.de>
+ *
+ * Copyright:
+ *   Andreas Rossberg, 2001-2006
+ *
+ * Last change:
+ *   $Date: 2006-07-06 15:11:00 $ by $Author: rossberg $
+ *   $Revision: 1.11 $
+ *)
+
+
+
+
+
+
+structure ParsingError :> PARSING_ERROR =
+struct
+
+  (* Pretty printer *)
+
+    open PrettyPrint
+    open PPMisc
+
+    infixr ^^ ^/^
+
+  (* Types *)
+
+    datatype error =
+	(* Lexer *)
+	  UnclosedComment
+	| InvalidChar		of char
+	| InvalidString
+	| IntTooLarge
+	| WordTooLarge
+	| RealTooLarge
+	| CharLengthInvalid	of string
+	| EscapeCharTooLarge	of bool
+	(* Parser *)
+	| SyntaxError		of string
+	(* Derived forms *)
+	| UpdExpInvalid
+	| ExpRowEllipses
+	| PatRowEllipses
+	| TyRowEllipses
+	| WithtypeInvalid
+	| WithtypeArityMismatch
+
+
+    type warning = unit		(* yet empty *)
+
+
+  (* Pretty printing *)
+
+    fun ppQuoted s	= "`" ^ s ^ "'"
+
+    fun ppError(UnclosedComment) =
+	  textpar["unclosed","comment"]
+      | ppError(InvalidChar c) =
+	  textpar["invalid","character",ppQuoted(Char.toString c)]
+      | ppError(InvalidString) =
+	  textpar["invalid","string","constant"]
+      | ppError(IntTooLarge) =
+	  textpar["integer","constant","too","large"]
+      | ppError(WordTooLarge) =
+	  textpar["word","constant","too","large"]
+      | ppError(RealTooLarge) =
+	  textpar["real","constant","too","large"]
+      | ppError(CharLengthInvalid "") =
+	  textpar["empty","character","constant"]
+      | ppError(CharLengthInvalid s) =
+	  textpar["multiple","characters","in","character","constant"]
+      | ppError(EscapeCharTooLarge uc) =
+	  textpar[if uc then "unicode" else "ASCII",
+		  "escape","character","too","large"]
+      (* Parser *)
+      | ppError(SyntaxError s) =
+	  textpar(String.tokens (fn c => c = #" ") s)
+      (* Derived forms *)
+      | ppError(UpdExpInvalid) =
+	  textpar["invalid","record","update","syntax"]
+      | ppError(ExpRowEllipses) =
+	  textpar["multiple","ellipses","in","record","expression"]
+      | ppError(PatRowEllipses) =
+	  textpar["multiple","ellipses","in","record","pattern"]
+      | ppError(TyRowEllipses) =
+	  textpar["multiple","ellipses","in","record","type"]
+      | ppError(WithtypeInvalid) =
+	  textpar["invalid","type","binding","inside","withtype"]
+      | ppError(WithtypeArityMismatch) =
+	  textpar["type","has","wrong","arity"]
+
+
+    fun ppWarning w = empty
+
+
+  (* Export *)
+
+    fun error(region, e)   = Error.error(region, ppError e)
+    fun warn(b, region, w) = Error.warn(b, region, ppWarning w)
+end

@@ -1,0 +1,195 @@
+MkExplorer.alc: \
+	/home/maxim/exp/alice/install/share/alice/lib/gecode/SPACE-sig.alc \
+	EXPLORER_INSPECT-sig.alc \
+	MkTypes.alc \
+	MkOptionsWindow.alc \
+	MkSaveWindow.alc \
+	MkTreeNode.alc \
+	MkGtkNode.alc \
+	MkVisualNode.alc \
+	MkExplorerNode.alc \
+	MkMenuManager.alc \
+	MkSearch.alc \
+	MkExplorerSearch.alc \
+	MkEventHandler.alc \
+	MkCanvasHelper.alc \
+	MkMainWindow.alc \
+	EXPLORER-sig.alc
+
+MkExplorerSearch.alc: \
+	/home/maxim/exp/alice/install/share/alice/lib/gecode/SPACE-sig.alc \
+	TYPES-sig.alc \
+	SEARCH-sig.alc \
+	EXPLORER_NODE-sig.alc \
+	MENU_MANAGER-sig.alc \
+	EXPLORER_SEARCH-sig.alc
+
+MkTreeNode.alc: \
+	Defaults.alc \
+	/home/maxim/exp/alice/install/share/alice/lib/gecode/SPACE-sig.alc \
+	TYPES-sig.alc \
+	TREE_NODE-sig.alc
+
+MkMainWindow.alc: \
+	/home/maxim/exp/alice/install/share/alice/lib/gtk/Gtk.alc \
+	Defaults.alc \
+	ExplorerGUI.alc \
+	AboutDialog.alc \
+	ExplorerGUISignals.alc \
+	/home/maxim/exp/alice/install/share/alice/lib/gecode/SPACE-sig.alc \
+	TYPES-sig.alc \
+	CANVAS_HELPER-sig.alc \
+	EVENT_HANDLER-sig.alc \
+	EXPLORER_NODE-sig.alc \
+	MAIN_WINDOW-sig.alc
+
+MkGtkNode.alc: \
+	/home/maxim/exp/alice/install/share/alice/lib/gtk/Gtk.alc \
+	/home/maxim/exp/alice/install/share/alice/lib/gtk/Gdk.alc \
+	/home/maxim/exp/alice/install/share/alice/lib/gtk/Canvas.alc \
+	/home/maxim/exp/alice/install/share/alice/lib/gecode/SPACE-sig.alc \
+	TYPES-sig.alc \
+	TREE_NODE-sig.alc \
+	GTK_NODE-sig.alc
+
+Defaults.alc:
+
+MkEventHandler.alc: \
+	/home/maxim/exp/alice/install/share/alice/lib/gtk/Gtk.alc \
+	/home/maxim/exp/alice/install/share/alice/lib/gtk/Gdk.alc \
+	/home/maxim/exp/alice/install/share/alice/lib/gtk/Canvas.alc \
+	Defaults.alc \
+	ExplorerGUI.alc \
+	/home/maxim/exp/alice/install/share/alice/lib/gecode/SPACE-sig.alc \
+	TYPES-sig.alc \
+	TREE_NODE-sig.alc \
+	VISUAL_NODE-sig.alc \
+	GTK_NODE-sig.alc \
+	EXPLORER_NODE-sig.alc \
+	EXPLORER_SEARCH-sig.alc \
+	OPTIONS_WINDOW-sig.alc \
+	SAVE_WINDOW-sig.alc \
+	MENU_MANAGER-sig.alc \
+	EVENT_HANDLER-sig.alc
+
+MkCanvasHelper.alc: \
+	/home/maxim/exp/alice/install/share/alice/lib/gtk/Gtk.alc \
+	/home/maxim/exp/alice/install/share/alice/lib/gtk/Canvas.alc \
+	Defaults.alc \
+	/home/maxim/exp/alice/install/share/alice/lib/gecode/SPACE-sig.alc \
+	TYPES-sig.alc \
+	GTK_NODE-sig.alc \
+	EVENT_HANDLER-sig.alc \
+	CANVAS_HELPER-sig.alc
+
+MkTypes.alc: \
+	/home/maxim/exp/alice/install/share/alice/lib/gtk/Gtk.alc \
+	/home/maxim/exp/alice/install/share/alice/lib/gecode/SPACE-sig.alc \
+	TYPES-sig.alc
+
+MkVisualNode.alc: \
+	/home/maxim/exp/alice/install/share/alice/lib/gecode/SPACE-sig.alc \
+	TYPES-sig.alc \
+	TREE_NODE-sig.alc \
+	GTK_NODE-sig.alc \
+	VISUAL_NODE-sig.alc
+
+MkSearch.alc: \
+	/home/maxim/exp/alice/install/share/alice/lib/gecode/SPACE-sig.alc \
+	TYPES-sig.alc \
+	EXPLORER_NODE-sig.alc \
+	TREE_NODE-sig.alc \
+	SEARCH-sig.alc
+
+MkExplorerNode.alc: \
+	/home/maxim/exp/alice/install/share/alice/lib/gecode/SPACE-sig.alc \
+	TYPES-sig.alc \
+	TREE_NODE-sig.alc \
+	VISUAL_NODE-sig.alc \
+	GTK_NODE-sig.alc \
+	EXPLORER_NODE-sig.alc
+
+MkOptionsWindow.alc: \
+	/home/maxim/exp/alice/install/share/alice/lib/gecode/SPACE-sig.alc \
+	/home/maxim/exp/alice/install/share/alice/lib/gtk/Gtk.alc \
+	TYPES-sig.alc \
+	OPTIONS_WINDOW-sig.alc
+
+ExplorerInspect.alc: \
+	/home/maxim/exp/alice/install/share/alice/lib/gecode/FD.alc \
+	/home/maxim/exp/alice/install/share/alice/lib/gecode/FS.alc \
+	/home/maxim/exp/alice/install/share/alice/lib/gecode/Space.alc \
+	/home/maxim/exp/alice/install/share/alice/lib/tools/Inspector.alc \
+	EXPLORER_INSPECT-sig.alc
+
+MkSaveWindow.alc: \
+	/home/maxim/exp/alice/install/share/alice/lib/gecode/SPACE-sig.alc \
+	/home/maxim/exp/alice/install/share/alice/lib/gtk/Gtk.alc \
+	/home/maxim/exp/alice/install/share/alice/lib/postscript/PS.alc \
+	TYPES-sig.alc \
+	SAVE_WINDOW-sig.alc
+
+MkMenuManager.alc: \
+	/home/maxim/exp/alice/install/share/alice/lib/gtk/Gtk.alc \
+	ExplorerGUI.alc \
+	/home/maxim/exp/alice/install/share/alice/lib/gecode/SPACE-sig.alc \
+	TYPES-sig.alc \
+	TREE_NODE-sig.alc \
+	EXPLORER_NODE-sig.alc \
+	MENU_MANAGER-sig.alc
+
+AboutDialog.alc: \
+	ExplorerGUI.alc \
+	/home/maxim/exp/alice/install/share/alice/lib/gtk/Gtk.alc \
+	/home/maxim/exp/alice/install/share/alice/lib/system/Config.alc
+
+EXPLORER_INSPECT-sig.alc: \
+	/home/maxim/exp/alice/install/share/alice/lib/rtt/Type.alc
+
+CANVAS_HELPER-sig.alc: \
+	/home/maxim/exp/alice/install/share/alice/lib/gtk/Gtk.alc
+
+EVENT_HANDLER-sig.alc: \
+	/home/maxim/exp/alice/install/share/alice/lib/gtk/Gtk.alc
+
+EXPLORER-sig.alc: \
+	/home/maxim/exp/alice/install/share/alice/lib/rtt/Type.alc
+
+EXPLORER_NODE-sig.alc:
+
+EXPLORER_SEARCH-sig.alc:
+
+GTK_NODE-sig.alc: \
+	/home/maxim/exp/alice/install/share/alice/lib/gtk/Gtk.alc
+
+MAIN_WINDOW-sig.alc:
+
+MENU_MANAGER-sig.alc: \
+	/home/maxim/exp/alice/install/share/alice/lib/gtk/Gtk.alc
+
+OPTIONS_WINDOW-sig.alc: \
+	/home/maxim/exp/alice/install/share/alice/lib/gtk/Gtk.alc
+
+SAVE_WINDOW-sig.alc: \
+	/home/maxim/exp/alice/install/share/alice/lib/gtk/Gtk.alc
+
+SEARCH-sig.alc:
+
+TREE_NODE-sig.alc:
+
+TYPES-sig.alc: \
+	/home/maxim/exp/alice/install/share/alice/lib/gtk/Gtk.alc
+
+VISUAL_NODE-sig.alc:
+
+ExplorerGUI.alc: \
+	/home/maxim/exp/alice/install/share/alice/lib/gtk/Gtk.alc \
+	/home/maxim/exp/alice/install/share/alice/lib/gtk/Gdk.alc \
+	/home/maxim/exp/alice/install/share/alice/lib/gtk/Key.alc
+
+ExplorerGUISignals.alc: \
+	/home/maxim/exp/alice/install/share/alice/lib/gtk/Gtk.alc \
+	/home/maxim/exp/alice/install/share/alice/lib/gtk/Gdk.alc \
+	/home/maxim/exp/alice/install/share/alice/lib/gtk/Key.alc \
+	ExplorerGUI.alc
+
