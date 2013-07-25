@@ -22,18 +22,18 @@ Directory Layout
     libs      -- Alice ML base libraries
 
 SEAM VM Authors
--------
+---------------
 
-Thorsten Brunklaus (core, gc, native)
-Leif Kornstaedt (core, io)
-Guido Tack (persistance, loader)
-Christian Mueller (bytecode)
-Jens Regenberg (debug)
+* Thorsten Brunklaus (core, gc, native)
+* Leif Kornstaedt (core, io)
+* Guido Tack (persistance, loader)
+* Christian Mueller (bytecode)
+* Jens Regenberg (debug)
 
 Alice ML Authors
 ----------------
 
-Andreas Rossberg
-Leif Kornstaedt
+* Andreas Rossberg
+* Leif Kornstaedt
 
 OM A HUM
