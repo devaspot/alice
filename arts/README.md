@@ -1,5 +1,5 @@
-Synrc ML
-========
+Alice Run-Time System
+=====================
 
 Directory Layout
 ----------------
