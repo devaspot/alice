@@ -6,13 +6,12 @@ Language Feature
 
 * Powerful and Fast SEAM Virtual Machine can execute Native, Bytecode
 * SEAM Supports JIT, GC
-* First-Class Modules
+* First-Class Modules and Powerful Type-System
 * Lazy Evaluation
 * Packages
 * Transparent Network Serialization (Pickling)
-* Lightweight Workers, Futures, Spawns
+* Concurrent Primitives: Lightweight Workers, Futures, Spawns
 * Constraint Programming
-* Powerful Type-System
 
 Directory Layout
 ----------------
